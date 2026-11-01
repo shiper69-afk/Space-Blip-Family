@@ -4,15 +4,15 @@ extends PopochiuHotspot
 
 func on_look() -> void:
 	await C.player.face_clicked()
-	await C.player.say("The captain chair. Proud. Lumpy. Slightly sticky.")
+	await C.player.say("The DADHOOD chair. Still warm. Still lumpy. Still mine.")
 
 
 func on_talk() -> void:
-	await C.player.say("I already sat through the briefing. The chair agrees.")
+	await C.player.say("The chair and I have an understanding. It holds. I sit. Later.")
 
 
 func on_interact() -> void:
-	await C.player.say("If I sit down now, the amber light wins.")
+	await C.player.say("If I sit down now, Grandma wins on posture alone.")
 
 
 func _on_click() -> void:

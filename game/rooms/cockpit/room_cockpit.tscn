@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://game/rooms/cockpit/room_cockpit.gd" id="1"]
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/walkable_areas/floor/walkable_area_floor.tscn" id="2"]
@@ -7,13 +7,16 @@
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/hotspots/captain_chair/hotspot_captain_chair.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/hotspots/coffee_mug/hotspot_coffee_mug.tscn" id="6"]
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/hotspots/aft_hatch/hotspot_aft_hatch.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://game/rooms/cockpit/hotspots/grandma_screen/hotspot_grandma_screen.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://game/rooms/cockpit/hotspots/red_button/hotspot_red_button.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://game/rooms/cockpit/countdown_hud.tscn" id="10"]
 
 [node name="RoomCockpit" type="Node2D"]
 script = ExtResource("1")
 script_name = "Cockpit"
 has_player = true
-width = 640
-height = 360
+width = 1024
+height = 576
 
 [node name="WalkableAreas" type="Node2D" parent="."]
 
@@ -25,32 +28,46 @@ height = 360
 
 [node name="Hotspots" type="Node2D" parent="."]
 
-[node name="CaptainChair" parent="Hotspots" instance=ExtResource("5")]
-position = Vector2(290, 250)
-walk_to_point = Vector2(0, 40)
+[node name="AftHatch" parent="Hotspots" instance=ExtResource("7")]
+position = Vector2(-92, 42)
+walk_to_point = Vector2(116, 226)
 look_at_point = Vector2(0, -20)
-interaction_polygon = PackedVector2Array(-40, -40, 40, -40, 40, 40, -40, 40)
+interaction_polygon = PackedVector2Array(-40, -90, 40, -90, 40, 90, -40, 90)
+
+[node name="CaptainChair" parent="Hotspots" instance=ExtResource("5")]
+position = Vector2(320, 92)
+walk_to_point = Vector2(0, 140)
+look_at_point = Vector2(0, -20)
+interaction_polygon = PackedVector2Array(-46, -50, 46, -50, 46, 50, -46, 50)
 
 [node name="CoffeeMug" parent="Hotspots" instance=ExtResource("6")]
-position = Vector2(210, 210)
-walk_to_point = Vector2(10, 70)
+position = Vector2(333, 60)
+walk_to_point = Vector2(-8, 172)
 look_at_point = Vector2(0, -10)
-interaction_polygon = PackedVector2Array(-16, -14, 16, -14, 16, 14, -16, 14)
+interaction_polygon = PackedVector2Array(-14, -12, 14, -12, 14, 12, -14, 12)
 
 [node name="AmberAlert" parent="Hotspots" instance=ExtResource("4")]
-position = Vector2(450, 192)
-walk_to_point = Vector2(0, 90)
+position = Vector2(263, -8)
+walk_to_point = Vector2(10, 228)
 look_at_point = Vector2(0, -10)
-interaction_polygon = PackedVector2Array(-40, -28, 80, -28, 80, 28, -40, 28)
+interaction_polygon = PackedVector2Array(-36, -22, 50, -22, 50, 22, -36, 22)
 
-[node name="AftHatch" parent="Hotspots" instance=ExtResource("7")]
-position = Vector2(610, 260)
-walk_to_point = Vector2(-40, 30)
-look_at_point = Vector2(10, -20)
-interaction_polygon = PackedVector2Array(-30, -70, 28, -70, 28, 70, -30, 70)
+[node name="GrandmaScreen" parent="Hotspots" instance=ExtResource("8")]
+position = Vector2(528, 7)
+walk_to_point = Vector2(-20, 230)
+look_at_point = Vector2(0, -10)
+interaction_polygon = PackedVector2Array(-90, -50, 90, -50, 90, 50, -90, 50)
+
+[node name="RedButton" parent="Hotspots" instance=ExtResource("9")]
+position = Vector2(748, 222)
+walk_to_point = Vector2(-120, 40)
+look_at_point = Vector2(0, -10)
+interaction_polygon = PackedVector2Array(-36, -28, 36, -28, 36, 28, -36, 28)
 
 [node name="Regions" type="Node2D" parent="."]
 
 [node name="Markers" type="Node2D" parent="."]
 
 [node name="Characters" type="Node2D" parent="."]
+
+[node name="CountdownHud" parent="." instance=ExtResource("10")]

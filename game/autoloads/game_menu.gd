@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if not GameFlow.in_game:
+	if GameFlow.in_intro or not GameFlow.in_game:
 		return
 	if not event.is_action_pressed("game-menu"):
 		return

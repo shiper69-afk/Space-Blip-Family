@@ -4,7 +4,7 @@ extends PopochiuHotspot
 
 func on_look() -> void:
 	await C.player.face_clicked()
-	await C.player.say("Coffee mug, welded to the console by entropy and optimism.")
+	await C.player.say("The mug flew, then stuck. Entropy and optimism. Classic.")
 
 
 func on_talk() -> void:
