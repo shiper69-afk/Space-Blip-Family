@@ -1,0 +1,42 @@
+{
+ "sprite": "door_open_NN.png",
+ "x": 180,
+ "y": 48,
+ "w": 59,
+ "h": 163,
+ "fps": 12,
+ "frames_open": [
+  "door_open_00.png",
+  "door_open_01.png",
+  "door_open_02.png",
+  "door_open_03.png",
+  "door_open_04.png",
+  "door_open_05.png",
+  "door_open_06.png",
+  "door_open_07.png"
+ ],
+ "frames_close": [
+  "door_close_00.png",
+  "door_close_01.png",
+  "door_close_02.png",
+  "door_close_03.png",
+  "door_close_04.png",
+  "door_close_05.png",
+  "door_close_06.png",
+  "door_close_07.png"
+ ],
+ "close_is_reverse_of_open": true,
+ "open_hold": "door_open_hold.png",
+ "fixed_trim": "frame ring + black latch are untouched bridge pixels outside the leaf rect",
+ "note": "door_open_00 = closed (original door + kid sticker). Pocket door slides LEFT into the wall. RGBA, alpha=rounded opening mask.",
+ "doorway_threshold_y": 219,
+ "walk_in_point": [
+  209,
+  225
+ ],
+ "walk_in_note": "character feet baseline just in front of the threshold; enter/exit through doorway centre x",
+ "walkable_spot_inside_room": [
+  229,
+  259
+ ]
+}

@@ -104,15 +104,14 @@ The Blip family is mid-trip aboard **The Millennium Mini Van** when a cascade of
 - Rationale: natural “captain survey the ship” walkthrough; talk trees introduce each family member; inventory comedy fits adult reach/authority without excluding kid-focused puzzles later.
 - Alternate options (see Open questions): Naomi; free character select; short prologue as DavDav then handoff.
 
-### Cold open *(implemented — follows canon script)*
-New Game plays the skippable intro in [intro-script.md](intro-script.md): Star Trek–style flyby of **The Millennium Mini Van** through several star systems, DavDav’s “Are we there yeeeet?” + record-scratch, crew tour, leftover Grandma message, then a title card.
+### Cold open *(implemented — follows canon scripts)*
+New Game plays the skippable space intro in [intro-script.md](intro-script.md), then the live Grandma call in [grandma-call-script.md](grandma-call-script.md).
 
-- **Title card (canon for the build):** **Are We There Yet? (Galaxy edition)** — not the script’s old SPACE BLIP FAMILY.
-- **Subtitle:** Episode 1: Grandma's Calling
-- Skip: click or Esc. Load Game does not replay the intro.
-- The leftover Grandma message is already on the screens. The crew has about **twenty seconds** before she calls live — **not** a 20:00 countdown.
-- When she calls, **DavDav runs over and presses the big red button**.
-- After the title card, the player gets **Alan** on the painted bridge. HUD says **any second now** (story urgency, does not tick).
+- **Title card (canon):** **Are We There Yet? (Galaxy edition)** / Episode 1: Grandma's Calling.
+- Skip: Esc skips the remaining cinematic. LMB / Space / Enter advances lines.
+- After the flyby + title: **Alan asleep** in the chair, **DavDav on the bridge**. ~10 seconds later **Chaya** calls live (only then on the main screen). DavDav hits the red button.
+- Door order: Naomi + coffee after “Every call is a gift”; Joe after “Kids! Bridge!”; DanDan + frying pan; Eithan in the script gap.
+- After the call, HUD **20:00 → 19:59** (story device, does not tick). Player controls Alan.
 
 ### First 15–20 minutes — beat sheet *(proposal)*
 
@@ -210,16 +209,16 @@ High-level, SQ6-inspired. Implementation: **Godot 4 + Popochiu** (see Implementa
 - Music: light adventure theme with “sitcom in space” energy; short stingers for fails.
 - Avoid: modern UI chrome that breaks SQ6 nostalgia unless user wants a hybrid.
 - **Owner frames (repainted):** 80 frames each for Alan (`dad_frames`), Naomi (`mom_frames`), Joe, DanDan, Eithan, DavDav, **Bela**, **Cookie**. Sprites 112×128 RGBA, smooth painted 90s style. Same filenames as the previous set; the PNGs were replaced in place. Ship: 32 frames in `ship_frames`. Originals live in `assets/art/originals/` (folder names kept as delivered, including the `Charechter` spelling). Alan and Joe copies under `game/characters/*/frames/` match those files so existing scene paths stay valid.
-- **Bridge source:** `assets/art/originals/bridge/` — `bridge_v5` cockpit background, 1024×576. Full-colour `bridge_v5_00.png` / `bridge_v5_01.png` (light blink), 256-colour indexed twins (`*_256.png`), and `bridge_v5_preview.png`. `.gdignore`d reference art. Playable copies of the blink frames live under `game/rooms/cockpit/props/background/`.
-- **Bridge source:** `assets/art/originals/bridge/` — `bridge_v5` cockpit background, 1024×576. Full-colour `bridge_v5_00.png` / `bridge_v5_01.png` (light blink), 256-colour indexed twins (`*_256.png`), and `bridge_v5_preview.png`. **Going forward the background is the mugless pair** `bridge_v5_00_nomug.png` / `bridge_v5_01_nomug.png` (and `*_nomug_256.png`). `bridge_v5_mugpatch.png` paints the armrest mug back at (500, 135). `bridge_v5_depth.json` is the feet-y scale curve. `bridge_depth_check.png` is the scale reference. `.gdignore`d. The cockpit scene still uses its 640×360 placeholder.
-- **Bridge door (source):** `assets/art/originals/door/` — sliding pocket door, `.gdignore`d. RGBA overlays `door_open_00`–`07`, `door_close_00`–`07`, `door_open_hold`, plus `door_mask`, `door_corridor_bg`, 256-colour full-frame renders, sheet, and gif. Layout in `door.json`: origin (180, 48), 59×163, 12 fps, threshold y=219, walk-in (209, 225).
-- **Alan chair intro (source):** `assets/art/originals/alan_sleep/` — `.gdignore`d. Alan asleep in the captain's chair for the Grandma-call intro (`sleep_chair` 8 frames @ 6 fps, `wake_jolt` 6 frames @ 10 fps), mug frames and path, zzz overlay, sheet, gif, zoom previews. Placement in `alan_sleep.json` is (462, 70). On "ALAN!" he jolts; the mug flies and sticks to the console. Line: "I'M AWAKE! I'M DRIVING!"
+- **Bridge source:** `assets/art/originals/bridge/` — `bridge_v5` cockpit background, 1024×576. Full-colour blink plus the **mugless pair** `bridge_v5_00_nomug.png` / `bridge_v5_01_nomug.png` (and `*_nomug_256.png`). `bridge_v5_mugpatch.png` paints the armrest mug back at (500, 135). `bridge_v5_depth.json` is the feet-y scale curve. `.gdignore`d. Playable cockpit uses the nomug blink under `game/rooms/cockpit/props/background/`.
+- **Jack Grandma-call pack:** `assets/art/originals/jack/` from `art.zip` (overrides older alan_sleep / door / nomug copies). Sleep/wake + mug + Z’s, pocket door, depth json. Playable: `game/intro/frames/alan_sleep/`, `game/rooms/cockpit/props/door/`, nomug `bridge_v5_00/01.png`. Also copied under `game/bridge/` for room-level props. Notes: [art-notes.md](art-notes.md).
+- **Bridge door (source):** `assets/art/originals/door/` and `assets/art/originals/jack/door/` — sliding pocket door, `.gdignore`d. Layout in `door.json`: origin (180, 48), 59×163, 12 fps, threshold y=219, walk-in (209, 225).
+- **Alan chair intro (source):** `assets/art/originals/alan_sleep/` and `assets/art/originals/jack/alan_sleep/` — Alan asleep in the chair (`sleep_chair` 8 @ 6 fps, `wake_jolt` 6 @ 10 fps). Placement (462, 70). Mug sticks at (598, 128).
 - **Sheets:** `assets/art/originals/sheets/` — character sheets, animation sheets, per-character `*_anims.json`, and `crew_overview.png` (also `.gdignore`d).
 - **Grandma (viewscreen only):** Masked 145×89 RGBA frames, top-left at **(599, 40)** on `bridge_v5` (1024×576). The glass is a trapezoid; the frames are already alpha-masked, so the sprite stays axis-aligned. Animations `talk_down` (8), `idle` (2), and `judge` (4) loop at 8 fps. Game files: `game/characters/grandma/frames/`, `grandma_sprite_frames.tres`, `grandma_viewscreen.tscn` (`AnimatedSprite2D`, `centered = false`). Source (1×, 2×, bust layers, mask, sheet, previews, `grandma_anims.json`) is in `assets/art/originals/grandma/` with `.gdignore`. She is not instanced into the 640×360 cockpit.
 
 ### Using the painted bridge
 
-The playable cockpit stays **640×360** with the placeholder background. Nothing in `room_cockpit.tscn` points at the new art. Hotspots, the walk polygon, and Alan's spawn are still in that small room, so swapping the background in place would mis-place every click. Wire it when those are retuned to 1024×576 bridge pixels.
+The playable cockpit is already **1024×576** with the nomug `bridge_v5` blink. New Game plays the space flyby, then the live Chaya call in `game/intro/grandma_call.tscn` (Jack sleep/door + Grandma viewscreen). `game/bridge/` keeps drop-in props for the room.
 
 | Piece | Ready to instance | What it does |
 |-------|-------------------|--------------|
@@ -255,15 +254,10 @@ The curve targets a **104px** puppet. The walk sprites in `game/characters/` are
 | Resolution / aspect | Slice uses **1024×576** (16:9, matches `bridge_v5` and startscreen frames). Stretch `canvas_items` + `keep`, nearest filter. Default window 1280×720. |
 | Art pipeline | Repainted owner PNG frames (112×128 RGBA, same paths) under `assets/art/originals/`. Alan/Joe copies under `game/characters/` match them. Painted bridge `bridge_v5` (1024×576, blink frames 00/01) is the playable cockpit background (`game/rooms/cockpit/props/background/`). Corridor BG is still a placeholder. Start-screen loop lives in `assets/art/originals/startscreen/` (not `.gdignore`d, so it exports). |
 | Start / title screen | First scene. Looping owner frames (360 × 12 fps). Title **Are We There Yet? (Galaxy edition)** is **overlay text**, not painted into the art. Buttons: New Game, Load Game (10 slots), Quit. **New Game → skippable intro → painted bridge.** |
-| Intro | Canon script in [docs/intro-script.md](intro-script.md). Ship uses `ship_frames`. Cast tour uses existing character sprites. No voice audio. LMB / Space / Enter advances (first press finishes a typing line). Esc skips the whole intro. |
+| Intro | Space flyby in [docs/intro-script.md](intro-script.md), then live Chaya call in [docs/grandma-call-script.md](grandma-call-script.md). Click-advance. Esc skips remaining cinematic. |
 | Save / load | 10 Popochiu slots (`user://save_%d.json`). Esc opens the in-game menu (save / load / title / quit). Esc still skips the intro and cutscenes. |
-| Repo structure | Godot project at repo root (`project.godot`). Game content in `game/`. Canon docs in `docs/project-context.md` and `docs/intro-script.md`. |
-| Resolution / aspect | Slice uses **640×360** (16:9), pixel-art filter, window 1280×720. Revisit if painted BGs want 4:3. |
-| Art pipeline | Repainted owner PNG frames (112×128 RGBA, same paths) under `assets/art/originals/`. Alan/Joe copies under `game/characters/` match them. Painted bridge source is `.gdignore`d under `assets/art/originals/bridge/`, `door/`, `alan_sleep/`, and `grandma/`. Game-usable copies and scenes are in `game/bridge/` (mugless background, door, Alan chair intro, depth scale) and `game/characters/grandma/` (viewscreen). The live cockpit background is still the 640×360 placeholder. Start-screen loop lives in `assets/art/originals/startscreen/` (not `.gdignore`d, so it exports). |
-| Grandma viewscreen | Ready to drop onto a `bridge_v5` room: `game/characters/grandma/grandma_viewscreen.tscn` plays `grandma_sprite_frames.tres` (`talk_down`, `idle`, `judge`, 8 fps) at (599, 40). `show_call()` / `hide_call()` toggle the video call. Source art is `.gdignore`d under `assets/art/originals/grandma/`. Not added to the current cockpit scene. |
-| Start / title screen | First scene. Looping owner frames (360 × 12 fps). Title **Are We There Yet? (Galaxy edition)** is **overlay text**, not painted into the art. Buttons: New Game, Load Game (10 slots), Quit. |
-| Save / load | 10 Popochiu slots (`user://save_%d.json`). Esc opens the in-game menu (save / load / title / quit). Esc still skips cutscenes. |
-| Repo structure | Godot project at repo root (`project.godot`). Game content in `game/`. Canon doc in `docs/project-context.md`. |
+| Grandma viewscreen | `game/characters/grandma/grandma_viewscreen.tscn` at (599, 40) on `bridge_v5`. `talk_down` / `idle` / `judge` @ 8 fps. Used in the live Chaya call. Source `.gdignore`d under `assets/art/originals/grandma/`. |
+| Repo structure | Godot project at repo root (`project.godot`). Game content in `game/`. Canon docs in `docs/project-context.md`, `docs/intro-script.md`, and `docs/grandma-call-script.md`. |
 
 ---
 
@@ -298,7 +292,7 @@ Record choices here so the living doc doesn’t argue with itself.
 | 2026-11-01 | Repainted characters + bridge source art | Eight characters × 80 frames replaced in place (smooth 90s paint, 112×128 RGBA), including Alan/Joe game copies. `bridge_v5` and sheets added under `assets/art/originals/`. |
 | 2026-11-01 | **Canon intro shipped** | New Game plays [intro-script.md](intro-script.md). LMB / Space / Enter advances (first press finishes a typing line). Esc skips the whole intro. Title card uses **Are We There Yet? (Galaxy edition)** + Episode 1: Grandma's Calling. |
 | 2026-11-01 | Painted bridge is the playable cockpit | `bridge_v5` 1024×576 blink frames. Hotspots and walkable area remapped. Player is Alan. |
-| 2026-11-01 | Grandma call is **~20 seconds**, not 20:00 | Leftover message is already on the screens. When she calls, DavDav runs and hits the red button. HUD: **any second now**. Does not tick. |
+| 2026-11-01 | Live Grandma call is **Chaya**, ~10s after arriving on the bridge | Canon [grandma-call-script.md](grandma-call-script.md). 20:00 after hangup is a non-ticking story device (shows 19:59). |
 | 2026-11-01 | Display locked to **1024×576** | Matches painted bridge and startscreen. Stretch keep + nearest. Sierra verb bar shrunk; `experimental_scale_gui` off. |
 | 2026-11-01 | Alan walk + intro quality pass | Walk clips no longer restart every physics frame. Intro is click-advanced, nearest-filtered, tweened flyby. |
 | 2026-11-01 | Repainted characters + bridge source art | Eight characters × 80 frames replaced in place (smooth 90s paint, 112×128 RGBA), including Alan/Joe game copies. `bridge_v5` and sheets added under `assets/art/originals/`. Cockpit scene still uses the placeholder background. |

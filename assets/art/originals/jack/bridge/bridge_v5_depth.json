@@ -1,0 +1,99 @@
+{
+ "model": "human_height_px = 0.12*feet_y + 104 ; scale = height/104 (native sprite height 104px), clamped [1.10,1.70]",
+ "scale_formula": {
+  "a": 0.0011538461538461537,
+  "b": 1.0,
+  "min": 1.1,
+  "max": 1.7
+ },
+ "anchors": {
+  "door_threshold_y219": 1.253,
+  "captain_chair_feet_y190": 1.219,
+  "mid_room_y330": 1.381,
+  "front_y560": 1.646
+ },
+ "curve": [
+  [
+   180,
+   1.208
+  ],
+  [
+   200,
+   1.231
+  ],
+  [
+   220,
+   1.254
+  ],
+  [
+   240,
+   1.277
+  ],
+  [
+   260,
+   1.3
+  ],
+  [
+   280,
+   1.323
+  ],
+  [
+   300,
+   1.346
+  ],
+  [
+   320,
+   1.369
+  ],
+  [
+   340,
+   1.392
+  ],
+  [
+   360,
+   1.415
+  ],
+  [
+   380,
+   1.438
+  ],
+  [
+   400,
+   1.462
+  ],
+  [
+   420,
+   1.485
+  ],
+  [
+   440,
+   1.508
+  ],
+  [
+   460,
+   1.531
+  ],
+  [
+   480,
+   1.554
+  ],
+  [
+   500,
+   1.577
+  ],
+  [
+   520,
+   1.6
+  ],
+  [
+   540,
+   1.623
+  ],
+  [
+   560,
+   1.646
+  ]
+ ],
+ "references": "door opening 171px (y48-219): adult 130px = 76%; captain chair back 87px tall at y~195 -> seated adult ~92px; front stations ~85px tall at y~560 -> ~half adult height (171px)",
+ "godot": "scale = clamp(0.0011538*position.y + 1.0, 1.10, 1.70) for a 104px-tall sprite; feet at origin"
+}

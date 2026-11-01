@@ -1,0 +1,138 @@
+**INT. COCKPIT, CONTINUOUS**
+
+*BOOP. The main screen fills with GRANDMA CHAYA'S face, much too close to her camera. All we see are huge reading glasses and one eyebrow.*
+
+CHAYA
+Hello? HELLO? Is this thing on? Naomi, your father set this up, and I don't trust it.
+
+*She leans back. Her living room is spotless: plastic covers on the furniture, a cat sitting perfectly upright.*
+
+DAVDAV (waving with both hands)
+Hi Grandma!
+
+CHAYA
+DavDav! My baby! *(squints)* Is that jam on your face?
+
+DAVDAV
+It's space jam.
+
+CHAYA
+Of course it is. Where is everybody? I haven't seen you children in... *(counts on her fingers, runs out)* ...forever.
+
+*ALAN snores in the captain's chair, a coffee mug rising and falling on his belly.*
+
+CHAYA
+Is that the Captain? ASLEEP at the wheel?
+
+DAVDAV
+He's resting his eyes.
+
+CHAYA
+He's been resting his eyes since the wedding. ALAN!
+
+*Alan jolts awake. The mug flies and sticks to the console.*
+
+ALAN
+I'M AWAKE! I'M DRIVING! *(sees the screen, freezes)* ...Chaya. What a wonderful surprise.
+
+CHAYA
+Is it, Alan?
+
+ALAN
+Every call is a gift.
+
+*NAOMI walks in holding her coffee. She sees the screen and stops cold.*
+
+NAOMI
+Hi, Mom.
+
+CHAYA
+Naomi, sweetheart. You look tired.
+
+NAOMI
+It's six in the morning.
+
+CHAYA
+I was up at four. I've cleaned the whole house twice. Where are my other grandchildren? Or have they forgotten they have a grandmother?
+
+ALAN (over intercom)
+Kids! Bridge! Grandma's on the line!
+
+*Thundering footsteps. JOE runs in first, half asleep.*
+
+JOE
+Who authorized an outside call? This is a breach of protocol!
+
+CHAYA
+Joseph. "Protocol." You used to cry when the toaster popped.
+
+JOE
+...That toaster was a threat.
+
+*DANDAN shuffles in holding a frying pan.*
+
+DANDAN
+Hi, Grandma. Did you eat? I'm ...AVDAV
+That's from Thursday!
+
+JOE
+It's evidence. Nobody touch it.
+
+CHAYA
+*(closes her eyes, deep breath)* Your grandfather flew a cargo hauler for forty years. You could eat off his dashboard. You could do surgery on his floor.
+
+DANDAN
+You can eat off our ceiling.
+
+*Naomi elbows him.*
+
+CHAYA
+Now you listen to me, all of you. Grandma is going to hang up. Grandma is going to make herself a nice cup of tea. And in twenty minutes, Grandma is calling back. When I do, I want to see a clean ship, a hot breakfast, and every one of you awake, combed, and SMILING.
+
+ALAN
+Twenty minutes. No problem. Easy. Piece of cake.
+
+DANDAN
+We don't have cake.
+
+CHAYA
+And Alan.
+
+ALAN
+Yes, Chaya?
+
+CHAYA
+Comb your hair. What's left of it.
+
+*She jabs at her screen.*
+
+CHAYA
+How do I hang up? Where's the... Frank! How do I hang up this thing? FRAAANK?
+
+*Her face freezes mid-shout. "CALL ENDED." A giant countdown fills every screen: 20:00.*
+
+SHIP COMPUTER (V.O., cheerful)
+Grandma will call back in twenty minutes! Have a wonderful day!
+
+*Every alarm goes off. Amber lights flash. Silence on the bridge. The whole family turns slowly to look at DavDav.*
+
+DAVDAV
+...Red means yes.
+
+NAOMI
+Okay. Joe, lock down the laundry. DanDan, breakfast. Eithan, figure out why the synthesizer sounds like it's dying. Alan—
+
+ALAN (heroic pose)
+Fear not, crew! Your Captain has everything under control!
+
+*He steps forward and trips over a toy rocket.*
+
+NARRATOR (V.O.)
+He does not have everything under control.
+
+*Freeze frame on Alan mid-fall.*
+
+**TITLE CARD: SPACE BLIP FAMILY**
+*Subtitle: "Episode 1: Grandma's Calling"*
+
+*Fade back in. The countdown reads 19:59. The family scatters. The player takes control of Alan.*
