@@ -24,7 +24,7 @@ A comedy point-and-click adventure about a dysfunctional-but-loving family stuck
 ### Style reference — Space Quest 6
 - **Graphics vibe:** Mid/late-90s adventure look — painted backgrounds, character sprites or puppets, exaggerated expressions, readable hotspots.
 - **Gameplay:** Classic Sierra 3rd-person point-and-click — walk, look, talk, use/give inventory items on hotspots and NPCs.
-- **Comedy:** Sci-fi parody, family chaos, dumb tech that thinks it’s smart, death/fail gags optional and never mean-spirited toward kids.
+- **Comedy:** Sci-fi parody, family chaos, dumb tech that thinks it’s smart. **Comic death is canon** (classic Sierra: always funny, instant restore, PG, never mean toward the kids).
 - **Tone guardrails:** Satire and slapstick over cruelty. DavDav (5) can cause trouble; never punch down. Keep PG–PG-13 unless the user hardens tone later.
 
 ### Design pillars *(proposal)*
@@ -87,8 +87,8 @@ The Blip family is mid-trip aboard **The Millennium Mini Van** when a cascade of
 - Little siblings as both problem and solution (DavDav)
 
 ### Open story decisions
-- What is the **inciting incident** beyond “systems acting up”? (sabotage? warranty voided? wrong destination?)
-- Is there a recurring antagonist (AI, cousin, space HOA, food synthesizer)?
+- **Act 1 → Act 2 hook:** open. Owner is still working on Act 1. Do not propose or lock a hook.
+- Is there a recurring antagonist? (unset)
 - Does the player stick to one PC or **swap crew members** for certain puzzles?
 
 ---
@@ -119,12 +119,12 @@ The Blip family is mid-trip aboard **The Millennium Mini Van** when a cascade of
 | 5 | Family cabin / play corner | **DavDav** “helping.” Has the Flavor Coil inside a toy rocket. Won’t trade without a **Funny Noise Thing** or playtime. | Fetch squeaky valve cap / rattle from corridor maintenance panel. |
 | 6 | Galley reprise | Install Flavor Coil; DanDan rewards with **Breakfast Brick** (usable later) or goodwill + hint. | Use coil on synthesizer. |
 | 7 | Meet Naomi | **Naomi** in engineering crawl / mid-ship. She’s the one who can clear the amber alert for real — but only after power + breakfast + Joe stand-down. | Multi-condition talk unlock; Naomi becomes Act 1 “quest hub.” |
-| 8 | Act 1 button | Full ship “morning green.” New objective appears (distress ping / destination wrong / mysterious thump in cargo). | Hook into Act 2 TBD. |
+| 8 | Act 1 button | Full ship “morning green.” **Act 1 → Act 2 hook is open** — owner is still working on Act 1. Do not lock or invent the hook. | Unlocked. |
 
-### Fail / death comedy *(proposal — optional toggle)*
-- Soft fails preferred: funny close-up, restore, keep inventory.
-- Examples: Alan tastes raw synthesizer paste; Joe “arrests” Alan for unauthorized mug placement; DavDav presses the big red button → lights out for 3 seconds and a quip.
-- Hard death (airlock, etc.) only if tone is approved and always comic + instant restore.
+### Fail / death comedy *(canon)*
+- **Classic Sierra comic death.** Always funny. Instant restore. **PG.** Never mean toward the kids.
+- Inventory and progress stay; the gag plays, then the player is back.
+- Example *shapes* (not locked gags): tasting something you shouldn’t, protocol “arrest,” a button that ends badly for Alan — punchlines land on the captain/tech, not on DavDav or the other kids.
 
 ### Who the player talks to first *(proposal order)*
 Alan (self-barks) → Joe → DanDan → Eithan → DavDav → Naomi (hub resolve).
@@ -187,7 +187,7 @@ High-level, SQ6-inspired. Implementation: **Godot 4 + Popochiu** (see Implementa
 ### UI *(proposal)*
 - Inventory tray / grid
 - Save/load early (classic adventure courtesy)
-- Optional death/fail toggle
+- Comic-death restore is **canon** (not a “soft fail only” toggle)
 - Subtitles for barks
 
 ### Accessibility / kindness *(proposal)*
@@ -224,12 +224,11 @@ High-level, SQ6-inspired. Implementation: **Godot 4 + Popochiu** (see Implementa
 Decisions that unblock sharper design:
 
 1. **Player character** — Confirm Alan-at-start, or Naomi / kid / swap system? (Slice currently plays as Alan.)
-2. **Tone hardness** — Soft fails only, or classic comic death?
-3. **Scope of Act 1** — Ship-only vertical slice, or include one exterior / station tease?
-4. **Inciting incident** — What’s the real Act 1 → Act 2 hook?
-5. **Art style fidelity** — Closest to SQ6 VGA/SVGA painted look, or a cleaner modern homage?
-6. **Multi-character puzzles** — Stay single-PC or allow temporary control of Eithan/Joe/etc.?
-7. **Bela / Cookie ages and distinct roles** — Canon family dogs; confirm ages and whether one is “Joe’s K9” vs galley mooch, or just both pets.
+2. **Scope of Act 1** — Ship-only vertical slice, or include one exterior / station tease?
+3. **Act 1 → Act 2 hook** — **Open.** Owner is still working on Act 1. Do not propose or lock a hook.
+4. **Art style fidelity** — Closest to SQ6 VGA/SVGA painted look, or a cleaner modern homage?
+5. **Multi-character puzzles** — Stay single-PC or allow temporary control of Eithan/Joe/etc.?
+6. **Bela / Cookie ages and distinct roles** — Canon family dogs; confirm ages and whether one is “Joe’s K9” vs galley mooch, or just both pets.
 
 ---
 
@@ -245,6 +244,8 @@ Record choices here so the living doc doesn’t argue with itself.
 | 2026-11-01 | **Game title locked** | **Are We There Yet? (Galaxy edition)**. GitHub repo may stay `Space-Blip-Family`. |
 | 2026-11-01 | **Tech locked** | **Godot 4 + Popochiu** (2D, SQ6-style verbs, inventory, dialogue). Target **Windows + web**. First slice: Godot 4.7 + Popochiu 2.2.1, Sierra High-Res verb bar. |
 | 2026-11-01 | **Bela and Cookie locked as family dogs** | Canon names + role. Sprite folders `bela_frames` / `cookie_frames` (bark/beg frames). Ages and personality remain **proposals** — owner should confirm. |
+| 2026-11-01 | **Fail style locked: comic death** | Classic Sierra. Always funny, instant restore, PG, never mean toward the kids. |
+| 2026-11-01 | Act 1 → Act 2 hook stays **open** | Owner still working on Act 1. No hook proposed or locked. |
 
 ---
 
