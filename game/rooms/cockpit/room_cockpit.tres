@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://game/rooms/cockpit/room_cockpit_state.gd" id="1"]
+
+[resource]
+resource_name = "Cockpit"
+script = ExtResource("1")
+script_name = "Cockpit"
+scene = "res://game/rooms/cockpit/room_cockpit.tscn"

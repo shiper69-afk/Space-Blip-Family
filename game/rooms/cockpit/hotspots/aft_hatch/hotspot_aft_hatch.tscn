@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://game/rooms/cockpit/hotspots/aft_hatch/hotspot_aft_hatch.gd" id="1_script"]
+
+[node name="AftHatch" type="Area2D"]
+script = ExtResource("1_script")
+script_name = "AftHatch"
+description = "Aft Hatch"
+cursor = 1
+interaction_polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
+
+[node name="InteractionPolygon" type="CollisionPolygon2D" parent="."]
+visible = false
+modulate = Color(1, 0, 1, 1)
+polygon = PackedVector2Array(-20, -20, 20, -20, 20, 20, -20, 20)
