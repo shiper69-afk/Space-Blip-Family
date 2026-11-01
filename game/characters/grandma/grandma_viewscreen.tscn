@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://gmlbswstfc0e"]
+
+[ext_resource type="SpriteFrames" uid="uid://qfqljffeb6mc" path="res://game/characters/grandma/grandma_sprite_frames.tres" id="1_frames"]
+[ext_resource type="Script" uid="uid://oxbp017asep6" path="res://game/characters/grandma/grandma_viewscreen.gd" id="2_script"]
+
+[node name="GrandmaViewscreen" type="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(599, 40)
+centered = false
+sprite_frames = ExtResource("1_frames")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("2_script")
