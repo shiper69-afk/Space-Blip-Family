@@ -8,6 +8,7 @@ The GitHub repository is still named **Space-Blip-Family**.
 ## Playable slice (this PR)
 
 - **Engine:** Godot **4.7** + [Popochiu](https://github.com/carenalgas/popochiu) **2.2.1**
+- **Display:** **1024×576** base (matches `bridge_v5` and startscreen), stretch `canvas_items` + keep aspect, nearest filter. Default window 1280×720.
 - **Rooms:** Cockpit (`R-COCKPIT`) and mid-ship corridor (`R-CORRIDOR`)
 - **Player:** Alan (Dad / Captain) using the owner `dad_frames`
 - **NPC:** Joe in the corridor using `joe_frames`

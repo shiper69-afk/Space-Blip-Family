@@ -14,6 +14,29 @@ var in_game := false
 var in_intro := false
 
 
+func cli_value(name: String) -> String:
+	var prefix := "--%s=" % name
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with(prefix):
+			return arg.substr(prefix.length())
+		if arg == "--%s" % name:
+			return "1"
+	return ""
+
+
+func maybe_capture_and_quit() -> void:
+	var path := cli_value("capture-png")
+	if path.is_empty():
+		return
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().create_timer(0.45).timeout
+	var image := get_viewport().get_texture().get_image()
+	if image:
+		image.save_png(path)
+	get_tree().quit()
+
+
 func hide_adventure_gui() -> void:
 	_apply_adventure_gui(false)
 	# E._ready yields a frame after instancing the GUI; hide again once that finishes.
@@ -22,6 +45,8 @@ func hide_adventure_gui() -> void:
 
 func show_adventure_gui() -> void:
 	_apply_adventure_gui(true)
+	# Win any deferred hide from the title screen when jumping straight to a room.
+	_apply_adventure_gui.call_deferred(true)
 
 
 func _apply_adventure_gui(show: bool) -> void:

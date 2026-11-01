@@ -2,10 +2,9 @@
 extends PopochiuRoom
 
 const Data := preload("room_cockpit_state.gd")
-## Painted bridge is 1024×576. Popochiu centers large rooms on the 640×360 viewport,
-## so image pixel (x, y) maps to room (x - 192, y - 108).
-const FROM_CORRIDOR := Vector2(24, 268)
-const AFTER_INTRO := Vector2(320, 272)
+## Painted bridge is 1024×576, matching the project viewport. Room coords = image coords.
+const FROM_CORRIDOR := Vector2(216, 376)
+const AFTER_INTRO := Vector2(512, 380)
 
 var state: Data = load("res://game/rooms/cockpit/room_cockpit.tres")
 
@@ -22,4 +21,11 @@ func _on_room_entered() -> void:
 func _on_room_transition_finished() -> void:
 	# Intro already told the leftover-message / twenty-seconds beat.
 	# No extra first-visit line — Popochiu speech clipped on the 1024×576 bridge.
-	pass
+	if GameFlow.cli_value("intro-beat") == "bridge" or not GameFlow.cli_value("capture-png").is_empty():
+		GameFlow.show_adventure_gui()
+		if is_instance_valid(PopochiuUtils.e.gui):
+			var menu := PopochiuUtils.e.gui.get_node_or_null("SierraMenu") as Control
+			if menu:
+				menu.show()
+				menu.set_process_input(false)
+		await GameFlow.maybe_capture_and_quit()

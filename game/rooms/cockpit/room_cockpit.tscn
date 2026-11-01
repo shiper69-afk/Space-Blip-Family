@@ -29,38 +29,38 @@ height = 576
 [node name="Hotspots" type="Node2D" parent="."]
 
 [node name="AftHatch" parent="Hotspots" instance=ExtResource("7")]
-position = Vector2(-92, 42)
+position = Vector2(100, 150)
 walk_to_point = Vector2(116, 226)
 look_at_point = Vector2(0, -20)
 interaction_polygon = PackedVector2Array(-40, -90, 40, -90, 40, 90, -40, 90)
 
 [node name="CaptainChair" parent="Hotspots" instance=ExtResource("5")]
-position = Vector2(320, 92)
-walk_to_point = Vector2(0, 140)
+position = Vector2(512, 200)
+walk_to_point = Vector2(0, 180)
 look_at_point = Vector2(0, -20)
 interaction_polygon = PackedVector2Array(-46, -50, 46, -50, 46, 50, -46, 50)
 
 [node name="CoffeeMug" parent="Hotspots" instance=ExtResource("6")]
-position = Vector2(333, 60)
-walk_to_point = Vector2(-8, 172)
+position = Vector2(525, 168)
+walk_to_point = Vector2(-8, 212)
 look_at_point = Vector2(0, -10)
 interaction_polygon = PackedVector2Array(-14, -12, 14, -12, 14, 12, -14, 12)
 
 [node name="AmberAlert" parent="Hotspots" instance=ExtResource("4")]
-position = Vector2(263, -8)
-walk_to_point = Vector2(10, 228)
+position = Vector2(455, 100)
+walk_to_point = Vector2(10, 268)
 look_at_point = Vector2(0, -10)
 interaction_polygon = PackedVector2Array(-36, -22, 50, -22, 50, 22, -36, 22)
 
 [node name="GrandmaScreen" parent="Hotspots" instance=ExtResource("8")]
-position = Vector2(528, 7)
-walk_to_point = Vector2(-20, 230)
+position = Vector2(720, 115)
+walk_to_point = Vector2(-20, 270)
 look_at_point = Vector2(0, -10)
 interaction_polygon = PackedVector2Array(-90, -50, 90, -50, 90, 50, -90, 50)
 
 [node name="RedButton" parent="Hotspots" instance=ExtResource("9")]
-position = Vector2(748, 222)
-walk_to_point = Vector2(-120, 40)
+position = Vector2(940, 330)
+walk_to_point = Vector2(-120, 50)
 look_at_point = Vector2(0, -10)
 interaction_polygon = PackedVector2Array(-36, -28, 36, -28, 36, 28, -36, 28)
 

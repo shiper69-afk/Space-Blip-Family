@@ -220,7 +220,7 @@ High-level, SQ6-inspired. Implementation: **Godot 4 + Popochiu** (see Implementa
 | Engine / framework | **Locked:** Godot 4 + [Popochiu](https://github.com/carenalgas/popochiu) (2D point-and-click). First slice uses **Godot 4.7** + **Popochiu 2.2.1**. |
 | Verbs / UI | Popochiu **Sierra High-Res** GUI: Walk / Look / Interact (Use) / Talk + inventory popup. SQ6-style. |
 | Target platforms | **Windows + web** export. |
-| Resolution / aspect | Slice uses **640×360** (16:9), pixel-art filter, window 1280×720. Revisit if painted BGs want 4:3. |
+| Resolution / aspect | Slice uses **1024×576** (16:9, matches `bridge_v5` and startscreen frames). Stretch `canvas_items` + `keep`, nearest filter. Default window 1280×720. |
 | Art pipeline | Repainted owner PNG frames (112×128 RGBA, same paths) under `assets/art/originals/`. Alan/Joe copies under `game/characters/` match them. Painted bridge `bridge_v5` (1024×576, blink frames 00/01) is the playable cockpit background (`game/rooms/cockpit/props/background/`). Corridor BG is still a placeholder. Start-screen loop lives in `assets/art/originals/startscreen/` (not `.gdignore`d, so it exports). |
 | Start / title screen | First scene. Looping owner frames (360 × 12 fps). Title **Are We There Yet? (Galaxy edition)** is **overlay text**, not painted into the art. Buttons: New Game, Load Game (10 slots), Quit. **New Game → skippable intro → painted bridge.** |
 | Intro | Canon script in [docs/intro-script.md](intro-script.md). Ship uses `ship_frames`. Cast tour uses existing character sprites. No voice audio. Click or Esc skips. |
@@ -261,6 +261,7 @@ Record choices here so the living doc doesn’t argue with itself.
 | 2026-11-01 | **Canon intro shipped** | New Game plays [intro-script.md](intro-script.md). Skippable (click/Esc). Title card uses **Are We There Yet? (Galaxy edition)** + Episode 1: Grandma's Calling. |
 | 2026-11-01 | Painted bridge is the playable cockpit | `bridge_v5` 1024×576 blink frames. Hotspots and walkable area remapped. Player is Alan. |
 | 2026-11-01 | Grandma call is **~20 seconds**, not 20:00 | Leftover message is already on the screens. When she calls, DavDav runs and hits the red button. HUD: **any second now**. Does not tick. |
+| 2026-11-01 | Display locked to **1024×576** | Matches painted bridge and startscreen. Stretch keep + nearest. Sierra verb bar shrunk; `experimental_scale_gui` off. |
 
 ---
 

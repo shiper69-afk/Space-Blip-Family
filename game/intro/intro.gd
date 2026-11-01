@@ -44,7 +44,7 @@ func _ready() -> void:
 	if _ship_frames.is_empty():
 		_ship_frames = Frames.load_seq(SHIP_DIR, "charge", 8)
 	_ship.texture = _ship_frames[0] if not _ship_frames.is_empty() else null
-	_ship.position = Vector2(-80, 200)
+	_ship.position = Vector2(-160, 300)
 	_hide_decor()
 	_title_card.visible = false
 	_grandma.visible = false
@@ -53,6 +53,15 @@ func _ready() -> void:
 	_vignette_caption.visible = false
 	_flash.modulate.a = 0.0
 	_fade.modulate.a = 1.0
+	var beat := GameFlow.cli_value("intro-beat")
+	if beat == "flyby":
+		await _hold_flyby()
+		await GameFlow.maybe_capture_and_quit()
+		return
+	if beat == "title":
+		await _hold_title()
+		await GameFlow.maybe_capture_and_quit()
+		return
 	_play()
 
 
@@ -164,8 +173,8 @@ func _show_ship_coughing() -> void:
 		_ship_frames = jump
 	_ship_cough = true
 	_ship.visible = true
-	_ship.position = Vector2(70, 190)
-	_ship.scale = Vector2(2.4, 2.4)
+	_ship.position = Vector2(180, 300)
+	_ship.scale = Vector2(1.5, 1.5)
 	var wobble := create_tween()
 	wobble.set_loops(4)
 	wobble.tween_property(_ship, "rotation_degrees", 6.0, 0.12)
@@ -180,8 +189,8 @@ func _fly_ship_across() -> void:
 		_ship_frames = idle
 	_ship.rotation_degrees = 0.0
 	var tween := create_tween()
-	tween.tween_property(_ship, "position", Vector2(720, 130), 3.4)
-	tween.parallel().tween_property(_ship, "scale", Vector2(1.4, 1.4), 3.4)
+	tween.tween_property(_ship, "position", Vector2(1180, 200), 3.4)
+	tween.parallel().tween_property(_ship, "scale", Vector2(0.75, 0.75), 3.4)
 	await tween.finished
 
 
@@ -193,27 +202,27 @@ func _tour() -> void:
 	await _say("NARRATOR", "Stardate: Tuesday. Day 47 of a trip that was supposed to take three days. The crew rests.", 4.0)
 	if _skipped:
 		return
-	_show_cast("joe", Vector2(320, 200), "idle_down", "SECURTY", "sleeps standing at attention")
+	_show_cast("joe", Vector2(512, 320), "idle_down", "SECURTY", "sleeps standing at attention")
 	await _say("JOE (sleep-talking)", "Halt... state your snack...", 3.2)
 	if _skipped:
 		return
 	_clear_cast()
-	_show_cast("dandan", Vector2(320, 200), "idle_down", "frying pan (hug)", "sleeps hugging a frying pan")
+	_show_cast("dandan", Vector2(512, 320), "idle_down", "frying pan (hug)", "sleeps hugging a frying pan")
 	await _say("DANDAN (mumbling)", "A pinch of nebula... no... two pinches...", 3.4)
 	if _skipped:
 		return
 	_clear_cast()
-	_show_cast("eithan", Vector2(320, 200), "idle_down", "Page 900 of 3,000", "asleep under the ship manual")
+	_show_cast("eithan", Vector2(512, 320), "idle_down", "Page 900 of 3,000", "asleep under the ship manual")
 	await _say("NARRATOR", "Eithan sleeps with a ship manual open on his face.", 3.0)
 	if _skipped:
 		return
 	_clear_cast()
-	_show_cast("naomi", Vector2(320, 200), "idle_down", "warning light: 6 days", "already up. coffee. not today.")
+	_show_cast("naomi", Vector2(512, 320), "idle_down", "warning light: 6 days", "already up. coffee. not today.")
 	await _say("NAOMI", "Not today. I am not reading you today.", 3.2)
 	if _skipped:
 		return
 	_clear_cast()
-	_show_cast("alan", Vector2(320, 200), "idle_right", "mug: balanced", "snores in the captain's chair")
+	_show_cast("alan", Vector2(512, 320), "idle_right", "mug: balanced", "snores in the captain's chair")
 	await _say("NARRATOR", "Alan snores in the captain's chair, one hand on the steering yoke, a coffee mug balanced on his belly.", 4.0)
 	if _skipped:
 		return
@@ -242,7 +251,7 @@ func _cockpit_beats() -> void:
 	if _skipped:
 		return
 	_clear_cast()
-	_show_cast("alan", Vector2(260, 210), "surprised", "", "jolts awake. mug sticks to the console.")
+	_show_cast("alan", Vector2(416, 336), "surprised", "", "jolts awake. mug sticks to the console.")
 	await _say("ALAN", "I'M AWAKE! I'M DRIVING! Who's driving?!", 2.6)
 	if _skipped:
 		return
@@ -270,9 +279,9 @@ func _cockpit_beats() -> void:
 	await _say("SHIP COMPUTER", "Incoming. Grandma is calling.", 1.8)
 	if _skipped:
 		return
-	var dav := _show_cast("davdav", Vector2(40, 230), "walk_right", "DO NOT PRESS. SERIOUSLY. — MOM.", "sprints to the big red button", false)
+	var dav := _show_cast("davdav", Vector2(64, 368), "walk_right", "DO NOT PRESS. SERIOUSLY. — MOM.", "sprints to the big red button", false)
 	var run := create_tween()
-	run.tween_property(dav, "position", Vector2(430, 205), 1.3)
+	run.tween_property(dav, "position", Vector2(688, 328), 1.3)
 	await run.finished
 	if _skipped:
 		return
@@ -288,16 +297,47 @@ func _cockpit_beats() -> void:
 
 
 func _title() -> void:
+	_show_title_card()
+	await _wait(3.2)
+
+
+func _hold_flyby() -> void:
+	_starfield.system = _starfield.SYSTEM_CLUSTER
+	_show_ship_coughing()
+	_ship_cough = false
+	var idle := Frames.load_seq(SHIP_DIR, "idle", 8)
+	if not idle.is_empty():
+		_ship_frames = idle
+		_ship.texture = idle[0]
+	_ship.rotation_degrees = 0.0
+	_ship.position = Vector2(420, 250)
+	_ship.scale = Vector2(1.15, 1.15)
+	_sticker_a.visible = true
+	_sticker_b.visible = true
+	_dice.visible = true
+	_dialog.visible = true
+	_speaker.text = "NARRATOR"
+	_line.text = "These are the voyages of The Millennium Mini Van."
+	await _fade_to(0.0, 0.2)
+
+
+func _hold_title() -> void:
+	_show_title_card()
+	await _fade_to(0.0, 0.2)
+
+
+func _show_title_card() -> void:
 	_dialog.visible = false
 	_grandma.visible = false
 	_countdown.visible = false
 	_interior.visible = false
 	_clear_cast()
 	_starfield.visible = false
+	_ship.visible = false
+	_hide_decor()
 	_title_card.visible = true
 	%TitleMain.text = GameFlow.TITLE
 	%TitleEpisode.text = GameFlow.EPISODE
-	await _wait(3.2)
 
 
 func _end_intro() -> void:
@@ -344,7 +384,7 @@ func _show_cast(who: String, at: Vector2, anim: String, badge: String, caption: 
 	var sprite := Sprite2D.new()
 	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	sprite.position = at
-	sprite.scale = Vector2(2.2, 2.2)
+	sprite.scale = Vector2(2.0, 2.0)
 	sprite.name = who
 	_cast_layer.add_child(sprite)
 	var frames := _frames_for(who, anim)
