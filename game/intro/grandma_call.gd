@@ -18,7 +18,7 @@ const DOOR_POS := Vector2(180, 48)
 const WALK_IN := Vector2(209, 225)
 const INSIDE := Vector2(229, 259)
 const BUTTON := Vector2(860, 368)
-const DAV_START := Vector2(620, 430)
+const DAV_START := Vector2(400, 305)
 const CHAYA_DIR := "res://game/characters/grandma/frames"
 const CHAYA_POS := Vector2(599, 40)
 const CHAYA_FPS := 8.0
@@ -45,6 +45,7 @@ var _bg_frames: Array[Texture2D] = []
 var _bg_i := 0
 var _bg_accum := 0.0
 var _amber := false
+var _incoming := false
 var _chaya_talk: Array[Texture2D] = []
 var _chaya_idle: Array[Texture2D] = []
 var _chaya_judge: Array[Texture2D] = []
@@ -85,6 +86,7 @@ var _mug_wake: Array = [
 @onready var _fade: ColorRect = %Fade
 @onready var _placeholder: Label = %PlaceholderTag
 @onready var _amber_flash: ColorRect = %AmberFlash
+@onready var _incoming_alert: Control = %IncomingAlert
 
 
 func _ready() -> void:
@@ -131,6 +133,7 @@ func _ready() -> void:
 	_dialog.visible = false
 	_continue.visible = false
 	_placeholder.visible = false
+	_incoming_alert.visible = false
 	_flash.modulate.a = 0.0
 	_amber_flash.modulate.a = 0.0
 	_fade.modulate.a = 1.0
@@ -148,6 +151,8 @@ func _process(delta: float) -> void:
 		_continue.modulate.a = 0.45 + 0.55 * absf(sin(Time.get_ticks_msec() * 0.005))
 	if _amber:
 		_amber_flash.modulate.a = 0.08 + 0.16 * absf(sin(Time.get_ticks_msec() * 0.008))
+	if _incoming:
+		_incoming_alert.modulate.a = 0.55 + 0.45 * absf(sin(Time.get_ticks_msec() * 0.007))
 	if _bg_frames.size() >= 2:
 		_bg_accum += delta
 		if _bg_accum >= 0.48:
@@ -229,21 +234,19 @@ func _play() -> void:
 	var wait_s := float(GameFlow.cli_value("call-wait"))
 	if wait_s <= 0.0:
 		wait_s = 10.0
+	_show_incoming()
 	await _wait(wait_s)
 	if _skipped:
 		return
-	_flash.color = Color(1, 0.35, 0.28, 1)
-	_flash.modulate.a = 0.55
-	var boop := create_tween()
-	boop.tween_property(_flash, "modulate:a", 0.0, 0.28)
 	await _davdav_hits_button()
 	if _skipped:
 		return
+	_hide_incoming()
 	_show_chaya()
 	await _say("CHAYA", "Hello? HELLO? Is this thing on? Naomi, your father set this up, and I don't trust it.")
 	if _skipped:
 		return
-	await _say("CHAYA", "…")
+	await _wait(0.45)
 	if _skipped:
 		return
 	_wave_davdav()
@@ -313,16 +316,55 @@ func _play() -> void:
 	await _enter("dandan", Vector2(430, 400), "frying pan  [placeholder]")
 	if _skipped:
 		return
-	await _say("DANDAN", "Hi, Grandma. Did you eat? I'm …AVDAV")
+	await _say("DANDAN", "Hi, Grandma. Did you eat? I'm working on a nebula omelet.")
 	if _skipped:
 		return
-	_placeholder.visible = true
-	_placeholder.text = "[PLACEHOLDER — script gap]"
-	await _enter("eithan", Vector2(250, 310), "")
+	await _say("CHAYA", "DanDan, you're too thin. Are they feeding you?")
 	if _skipped:
 		return
-	await _say("DANDAN  [PLACEHOLDER — script gap]", "That's from Thursday!")
-	_placeholder.visible = false
+	await _say("DANDAN", "I'm the one who feeds THEM.")
+	if _skipped:
+		return
+	await _say("CHAYA", "The thirteen-year-old does the cooking.")
+	if _skipped:
+		return
+	await _say("NAOMI", "He likes cooking.")
+	if _skipped:
+		return
+	await _say("CHAYA", "I didn't say anything.")
+	if _skipped:
+		return
+	await _say("NAOMI", "You said it with your eyebrow.")
+	if _skipped:
+		return
+	await _enter("eithan", Vector2(250, 310), "manual  [placeholder]")
+	if _skipped:
+		return
+	await _say("EITHAN", "Status update. Call quality is sixty-two percent. Grandma's camera is pointed at the ceiling.")
+	if _skipped:
+		return
+	await _say("CHAYA", "It is not. Eithan, put that book down and look at your grandmother.")
+	if _skipped:
+		return
+	await _say("EITHAN", "Hi, Grandma.")
+	if _skipped:
+		return
+	await _say("CHAYA", "Look at all of you. Pale. Skinny. Half asleep at six in the morning.")
+	if _skipped:
+		return
+	await _say("ALAN", "That's... a normal time to be asleep.")
+	if _skipped:
+		return
+	await _say("CHAYA", "Alan. Is that a SOCK on the navigation screen?")
+	if _skipped:
+		return
+	await _say("ALAN", "It cuts the glare.")
+	if _skipped:
+		return
+	await _say("CHAYA", "And the sandwich on the ceiling?")
+	if _skipped:
+		return
+	await _say("DAVDAV", "That's from Thursday!")
 	if _skipped:
 		return
 	await _say("JOE", "It's evidence. Nobody touch it.")
@@ -400,6 +442,18 @@ func _davdav_hits_button() -> void:
 	hit.tween_property(_flash, "modulate:a", 0.0, 0.25)
 	await _wait(0.28)
 	_swap("davdav", "idle_down")
+
+
+func _show_incoming() -> void:
+	_incoming = true
+	_incoming_alert.visible = true
+	_incoming_alert.modulate.a = 1.0
+
+
+func _hide_incoming() -> void:
+	_incoming = false
+	_incoming_alert.visible = false
+	_incoming_alert.modulate.a = 1.0
 
 
 func _show_chaya() -> void:
@@ -538,6 +592,7 @@ func _title_and_handoff() -> void:
 	_zzz.visible = false
 	_chaya.visible = false
 	_chaya_face.visible = false
+	_hide_incoming()
 	_amber = false
 	_amber_flash.modulate.a = 0.0
 	_placeholder.visible = false

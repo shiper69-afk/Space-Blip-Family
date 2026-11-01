@@ -21,5 +21,6 @@ Playable copies live under `game/`. Full zip tree under `assets/art/originals/ja
 - Depth: `scale = clamp(0.0011538 * feet_y + 1.0, 1.10, 1.70)` for a **104px** sprite. Game sprites are 112×128, so that scale is multiplied by `104/128`.
 
 ## Placeholders (no unique anim / prop art yet)
-Coffee cup, frying pan, toy-rocket trip, and unique walk-in clothes still missing.
+Coffee cup, frying pan, toy-rocket trip, Eithan’s manual, and unique walk-in clothes still missing.
 Chaya uses the viewscreen frames (`talk_down` / `idle` / `judge` at (599, 40)).
+Canon dialogue is complete in [grandma-call-script.md](grandma-call-script.md) (DanDan/Eithan gap filled).

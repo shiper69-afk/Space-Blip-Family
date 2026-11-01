@@ -2,8 +2,11 @@
 > **Are We There Yet? (Galaxy edition)** (not the script’s old SPACE BLIP FAMILY).
 > Subtitle stays **"Episode 1: Grandma's Calling"**.
 > Live call is canon in [grandma-call-script.md](grandma-call-script.md) (Grandma = **Chaya**).
-> After the flyby + title, the player arrives on the bridge: Alan asleep, DavDav
-> present. ~10 seconds later she calls live; DavDav hits the red button.
+> After the flyby, cut **straight to the bridge** (no crew tour, no recorded
+> leftover message, no title before the call). Alan asleep, DavDav next to him,
+> incoming-call alert. ~10 seconds later DavDav hits the red button. Live call
+> is canon in [grandma-call-script.md](grandma-call-script.md) (Grandma = **Chaya**).
+> **Title card last:** Are We There Yet? (Galaxy edition) / Episode 1: Grandma's Calling.
 > After the call, **20:00** is a non-ticking story device (gags to **19:59**).
 
 **SPACE BLIP FAMILY: INTRO**
@@ -25,7 +28,7 @@ NARRATOR (V.O.)
 NARRATOR (V.O.)
 These are the voyages of The Millennium Mini Van. Her ongoing mission: to explore strange new worlds, to seek out clean bathrooms, and to boldly go wherever Dad swears is "a shortcut."
 
-**INT. MINI VAN, A QUICK TOUR**
+**INT. MINI VAN, A QUICK TOUR** *(cut — not in the New Game path)*
 
 NARRATOR (V.O.)
 Stardate: Tuesday. Day 47 of a trip that was supposed to take three days. The crew rests.
@@ -59,15 +62,14 @@ NARRATOR (V.O.)
 
 **INT. COCKPIT / LIVE CALL**
 
-*After the flyby + title, cut to the painted bridge. Alan is asleep in the
-captain's chair. DavDav is already on the floor. Grandma is **not** on the
-screens yet.*
+*Cut from flyby to the painted bridge. Alan is asleep in the captain's chair.
+DavDav stands next to him. Incoming-call alert on the main screen. Grandma is
+**not** on the screens yet.*
 
-*~10 seconds later the live call starts. DavDav hits the red button.*
+*~10 seconds later DavDav runs to the red button. BOOP. Live call.*
 
 Canon line-by-line from here: [grandma-call-script.md](grandma-call-script.md)
-(Grandma = **Chaya**). Recorded leftover message / “incoming in ~20 seconds”
-beats are retired.
+(Grandma = **Chaya**).
 
-After hang-up: **CALL ENDED**, giant **20:00**, then player control with HUD
-**19:59** (story device, does not tick).
+**Title card last** after freeze-frame: Are We There Yet? (Galaxy edition) /
+Episode 1: Grandma's Calling. Then player control; HUD **19:59** (does not tick).

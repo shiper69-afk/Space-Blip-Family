@@ -109,8 +109,9 @@ New Game plays the skippable space intro in [intro-script.md](intro-script.md), 
 
 - **Title card (canon):** **Are We There Yet? (Galaxy edition)** / Episode 1: Grandma's Calling.
 - Skip: Esc skips the remaining cinematic. LMB / Space / Enter advances lines.
-- After the flyby + title: **Alan asleep** in the chair, **DavDav on the bridge**. ~10 seconds later **Chaya** calls live (only then on the main screen). DavDav hits the red button.
-- Door order: Naomi + coffee after “Every call is a gift”; Joe after “Kids! Bridge!”; DanDan + frying pan; Eithan in the script gap.
+- After the flyby, cut **straight to the bridge** (no crew tour, no recorded leftover, no title before the call): **Alan asleep**, **DavDav next to him**, incoming-call alert. ~10 seconds later DavDav hits the red button; **Chaya** appears only then.
+- Door order: Naomi + coffee after “Every call is a gift”; Joe after “Kids! Bridge!”; DanDan + frying pan; Eithan after Naomi’s eyebrow line (full script, no gap).
+- **Title card last:** Are We There Yet? (Galaxy edition) / Episode 1: Grandma's Calling.
 - After the call, HUD **20:00 → 19:59** (story device, does not tick). Player controls Alan.
 
 ### First 15–20 minutes — beat sheet *(proposal)*

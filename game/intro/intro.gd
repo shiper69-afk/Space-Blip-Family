@@ -144,9 +144,7 @@ func _play() -> void:
 	await _opening()
 	if _skipped:
 		return
-	await _crossfade(_title)
-	if _skipped:
-		return
+	# Flyby cuts straight to the bridge. Title card is last, after the call.
 	_end_intro()
 
 
