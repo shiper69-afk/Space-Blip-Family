@@ -7,7 +7,7 @@
 > incoming-call alert. ~10 seconds later DavDav hits the red button. Live call
 > is canon in [grandma-call-script.md](grandma-call-script.md) (Grandma = **Chaya**).
 > **Title card last:** Are We There Yet? (Galaxy edition) / Episode 1: Grandma's Calling.
-> After the call, **20:00** is a non-ticking story device (gags to **19:59**).
+> No 20:00 countdown / HUD. Grandma calling back is a later beat.
 
 **SPACE BLIP FAMILY: INTRO**
 
@@ -72,4 +72,4 @@ Canon line-by-line from here: [grandma-call-script.md](grandma-call-script.md)
 (Grandma = **Chaya**).
 
 **Title card last** after freeze-frame: Are We There Yet? (Galaxy edition) /
-Episode 1: Grandma's Calling. Then player control; HUD **19:59** (does not tick).
+Episode 1: Grandma's Calling. Then player control of Alan. No countdown HUD.

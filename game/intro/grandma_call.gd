@@ -22,6 +22,13 @@ const DAV_START := Vector2(400, 305)
 const CHAYA_DIR := "res://game/characters/grandma/frames"
 const CHAYA_POS := Vector2(599, 40)
 const CHAYA_FPS := 8.0
+const PROP_DIR := "res://game/props"
+const PROP_LOCAL := 128.0 / 104.0
+const PROP_OFFSET := {
+	"coffee": Vector2(18, -50),
+	"manual": Vector2(16, -62),
+	"frying_pan": Vector2(26, -32),
+}
 
 var _skipped := false
 var _finished := false
@@ -80,11 +87,9 @@ var _mug_wake: Array = [
 @onready var _continue: Label = %ContinueHint
 @onready var _skip_hint: Label = %SkipHint
 @onready var _title_card: Control = %TitleCard
-@onready var _giant: Label = %GiantCountdown
 @onready var _ended: Label = %CallEnded
 @onready var _flash: ColorRect = %Flash
 @onready var _fade: ColorRect = %Fade
-@onready var _placeholder: Label = %PlaceholderTag
 @onready var _amber_flash: ColorRect = %AmberFlash
 @onready var _incoming_alert: Control = %IncomingAlert
 
@@ -128,11 +133,9 @@ func _ready() -> void:
 	_zzz.texture = _zzz_frames[0] if not _zzz_frames.is_empty() else null
 	_chaya.visible = false
 	_title_card.visible = false
-	_giant.visible = false
 	_ended.visible = false
 	_dialog.visible = false
 	_continue.visible = false
-	_placeholder.visible = false
 	_incoming_alert.visible = false
 	_flash.modulate.a = 0.0
 	_amber_flash.modulate.a = 0.0
@@ -398,9 +401,6 @@ func _play() -> void:
 	if _skipped:
 		return
 	_end_call_screen()
-	await _say("SHIP COMPUTER", "Grandma will call back in twenty minutes! Have a wonderful day!")
-	if _skipped:
-		return
 	_amber = true
 	_look_at_davdav()
 	await _say("DAVDAV", "...Red means yes.")
@@ -463,7 +463,7 @@ func _show_chaya() -> void:
 		_play_chaya("talk")
 	else:
 		_chaya.visible = true
-		%ChayaCaption.text = "CHAYA\n(too close to camera) [placeholder]"
+		%ChayaCaption.text = "CHAYA\n(too close to camera)"
 
 
 func _play_chaya(kind: String) -> void:
@@ -484,11 +484,8 @@ func _play_chaya(kind: String) -> void:
 func _end_call_screen() -> void:
 	_ended.visible = true
 	_ended.text = "CALL ENDED"
-	_giant.visible = true
-	_giant.text = "20:00"
 	_chaya.visible = false
 	_chaya_face.visible = false
-	GameFlow.story_countdown = "20:00"
 
 
 func _wave_davdav() -> void:
@@ -521,7 +518,7 @@ func _enter(who: String, dest: Vector2, extra: String, speed := 0.85) -> void:
 		return
 	var sprite := _spawn(who, WALK_IN, "walk_right")
 	if extra != "":
-		_badge(sprite, extra)
+		_attach_prop(sprite, extra)
 	var walk := create_tween()
 	walk.set_trans(Tween.TRANS_SINE)
 	walk.set_ease(Tween.EASE_IN_OUT)
@@ -566,13 +563,6 @@ func _trip() -> void:
 	var alan := _cast.get_node_or_null("alan") as Sprite2D
 	if alan == null:
 		return
-	_placeholder.visible = true
-	_placeholder.text = "[PLACEHOLDER — toy rocket / trip]"
-	var rocket := Label.new()
-	rocket.text = "🚀"
-	rocket.position = Vector2(760, 390)
-	rocket.add_theme_font_size_override("font_size", 22)
-	_cast.add_child(rocket)
 	var step := create_tween()
 	step.tween_property(alan, "position", Vector2(740, 390), 0.55)
 	await step.finished
@@ -580,7 +570,6 @@ func _trip() -> void:
 		return
 	_swap("alan", "fall_right")
 	await _wait(0.45)
-	_placeholder.visible = false
 
 
 func _title_and_handoff() -> void:
@@ -595,8 +584,6 @@ func _title_and_handoff() -> void:
 	_hide_incoming()
 	_amber = false
 	_amber_flash.modulate.a = 0.0
-	_placeholder.visible = false
-	_giant.visible = false
 	_ended.visible = false
 	await _fade_to(1.0, 0.35)
 	if _skipped:
@@ -605,9 +592,6 @@ func _title_and_handoff() -> void:
 	await _fade_to(0.0, 0.35)
 	await _wait(1.6)
 	await _wait_for_advance()
-	GameFlow.story_countdown = "19:59"
-	_giant.text = "19:59"
-	_giant.visible = true
 	await _fade_to(1.0, 0.4)
 	_finish()
 
@@ -618,8 +602,6 @@ func _finish() -> void:
 	_finished = true
 	_skipped = true
 	GameFlow.mug_stuck = true
-	if GameFlow.story_countdown == "any second now":
-		GameFlow.story_countdown = "19:59"
 	await _fade_to(1.0, 0.25)
 	GameFlow.begin_gameplay()
 
@@ -671,27 +653,23 @@ func _depth(sprite: Sprite2D) -> void:
 	sprite.z_index = clampi(int(feet_y / 24.0), 1, 22)
 
 
-## Painted hand props (game/props). Base PNGs are sized for depth 1.0 next to the
-## 104 px character, so undo the 104/128 frame factor the parent sprite carries.
-const PROP_DIR := "res://game/props"
-const PROP_HAND := {
-	"coffee": Vector2(30, -58),
-	"manual": Vector2(26, -62),
-	"frying_pan": Vector2(34, -52),
-}
-
-
-func _badge(sprite: Sprite2D, prop: String) -> void:
+func _attach_prop(holder: Sprite2D, prop: String) -> void:
+	if holder.get_node_or_null("HeldProp") != null:
+		return
 	var tex := Frames.load_png("%s/%s.png" % [PROP_DIR, prop])
 	if tex == null:
 		return
-	var item := Sprite2D.new()
-	item.name = "Prop"
-	item.texture = tex
-	item.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	item.position = PROP_HAND.get(prop, Vector2(28, -56))
-	item.scale = Vector2.ONE * (128.0 / 104.0)
-	sprite.add_child(item)
+	var spr := Sprite2D.new()
+	spr.name = "HeldProp"
+	spr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	spr.centered = true
+	spr.texture = tex
+	spr.z_index = 1
+	# Props are painted for a 104px sprite at depth 1.0. Characters use that
+	# curve times 104/128, so local 128/104 makes world scale = clamp only.
+	spr.scale = Vector2(PROP_LOCAL, PROP_LOCAL)
+	spr.position = PROP_OFFSET.get(prop, Vector2(16, -48))
+	holder.add_child(spr)
 
 
 func _frames_for(who: String, anim: String) -> Array[Texture2D]:

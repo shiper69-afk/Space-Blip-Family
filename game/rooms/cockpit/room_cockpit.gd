@@ -32,7 +32,6 @@ func _place_stuck_mug() -> void:
 
 
 func _on_room_transition_finished() -> void:
-	# Live Chaya call already played. HUD shows 19:59 and does not tick.
 	var beat := GameFlow.cli_value("intro-beat")
 	if beat == "walk":
 		await _demo_walk()

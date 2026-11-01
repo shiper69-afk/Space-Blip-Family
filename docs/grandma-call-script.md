@@ -1,5 +1,6 @@
 # Grandma Chaya call script (full, from Shiper)
 NOTE: Title card in game must be "Are We There Yet? (Galaxy edition)" / "Episode 1: Grandma's Calling" (not SPACE BLIP FAMILY).
+NOTE: No 20:00 / 19:59 countdown and no Ship Computer “Grandma will call back in twenty minutes.” Grandma calling back is a later beat.
 
 INT. COCKPIT, CONTINUOUS
 
@@ -81,9 +82,9 @@ CHAYA: Comb your hair. What's left of it.
 
 CHAYA: How do I hang up? Where's the... Frank! How do I hang up this thing? FRAAANK?
 
-*Her face freezes mid-shout. "CALL ENDED." A giant countdown fills every screen: 20:00.*
+*Her face freezes mid-shout. "CALL ENDED."*
 
-SHIP COMPUTER (V.O., cheerful): Grandma will call back in twenty minutes! Have a wonderful day!
+(Production: no 20:00 countdown, no Ship Computer VO. Grandma calling back is a later beat.)
 
 *Every alarm goes off. Amber lights flash. Silence on the bridge. The whole family turns slowly to look at DavDav.*
 
@@ -100,4 +101,4 @@ NARRATOR (V.O.): He does not have everything under control.
 TITLE CARD: Are We There Yet? (Galaxy edition)
 Subtitle: "Episode 1: Grandma's Calling"
 
-*Fade back in. The countdown reads 19:59. The family scatters. The player takes control of Alan.*
+*Fade back in. The family scatters. The player takes control of Alan.*

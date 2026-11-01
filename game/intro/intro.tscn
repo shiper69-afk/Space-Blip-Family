@@ -132,27 +132,9 @@ vertical_alignment = 1
 layout_mode = 2
 theme_override_font_sizes/font_size = 9
 text = "GRANDMA
-(too close to camera)
-placeholder still"
+(too close to camera)"
 horizontal_alignment = 1
 autowrap_mode = 3
-
-[node name="BigCountdown" type="Label" parent="."]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -70.0
-offset_top = 52.0
-offset_right = 70.0
-offset_bottom = 96.0
-theme_override_colors/font_color = Color(1, 0.35, 0.2, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 36
-text = ""
-horizontal_alignment = 1
 
 [node name="DialogueBox" type="PanelContainer" parent="."]
 unique_name_in_owner = true

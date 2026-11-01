@@ -32,7 +32,6 @@ var _advance_lock := 0.0
 @onready var _dialog: PanelContainer = %DialogueBox
 @onready var _title_card: Control = %TitleCard
 @onready var _grandma: Control = %GrandmaCard
-@onready var _countdown: Label = %BigCountdown
 @onready var _interior: ColorRect = %Interior
 @onready var _vignette_caption: Label = %VignetteCaption
 @onready var _skip_hint: Label = %SkipHint
@@ -58,7 +57,6 @@ func _ready() -> void:
 	_hide_decor()
 	_title_card.visible = false
 	_grandma.visible = false
-	_countdown.visible = false
 	_interior.visible = false
 	_vignette_caption.visible = false
 	_dialog.visible = false
@@ -297,7 +295,6 @@ func _hold_title() -> void:
 func _show_title_card() -> void:
 	_dialog.visible = false
 	_grandma.visible = false
-	_countdown.visible = false
 	_interior.visible = false
 	_clear_cast()
 	_starfield.visible = false

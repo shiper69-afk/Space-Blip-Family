@@ -5,7 +5,7 @@ extends PopochiuHotspot
 func on_look() -> void:
 	await C.player.walk_to_clicked()
 	await C.player.face_clicked()
-	await C.player.say("Chaya hung up mid-FRAAANK. The clock says %s and it is not moving. That's worse." % GameFlow.story_countdown)
+	await C.player.say("Chaya hung up mid-FRAAANK. The screen is still frozen on her face. That's worse.")
 
 
 func on_talk() -> void:

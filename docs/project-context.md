@@ -112,7 +112,8 @@ New Game plays the skippable space intro in [intro-script.md](intro-script.md), 
 - After the flyby, cut **straight to the bridge** (no crew tour, no recorded leftover, no title before the call): **Alan asleep**, **DavDav next to him**, incoming-call alert. ~10 seconds later DavDav hits the red button; **Chaya** appears only then.
 - Door order: Naomi + coffee after “Every call is a gift”; Joe after “Kids! Bridge!”; DanDan + frying pan; Eithan after Naomi’s eyebrow line (full script, no gap).
 - **Title card last:** Are We There Yet? (Galaxy edition) / Episode 1: Grandma's Calling.
-- After the call, HUD **20:00 → 19:59** (story device, does not tick). Player controls Alan.
+- After the call: CALL ENDED, alarms, DavDav “Red means yes”, Naomi’s orders, Alan trips. **No 20:00 countdown / HUD.** Grandma calling back is a later beat. Player controls Alan.
+- Walk-in props (Jack): Naomi holds coffee, Eithan the manual, DanDan the frying pan. Props stay attached while they move.
 
 ### First 15–20 minutes — beat sheet *(proposal)*
 
@@ -293,7 +294,7 @@ Record choices here so the living doc doesn’t argue with itself.
 | 2026-11-01 | Repainted characters + bridge source art | Eight characters × 80 frames replaced in place (smooth 90s paint, 112×128 RGBA), including Alan/Joe game copies. `bridge_v5` and sheets added under `assets/art/originals/`. |
 | 2026-11-01 | **Canon intro shipped** | New Game plays [intro-script.md](intro-script.md). LMB / Space / Enter advances (first press finishes a typing line). Esc skips the whole intro. Title card uses **Are We There Yet? (Galaxy edition)** + Episode 1: Grandma's Calling. |
 | 2026-11-01 | Painted bridge is the playable cockpit | `bridge_v5` 1024×576 blink frames. Hotspots and walkable area remapped. Player is Alan. |
-| 2026-11-01 | Live Grandma call is **Chaya**, ~10s after arriving on the bridge | Canon [grandma-call-script.md](grandma-call-script.md). 20:00 after hangup is a non-ticking story device (shows 19:59). |
+| 2026-11-01 | Live Grandma call is **Chaya**, ~10s after arriving on the bridge | Canon [grandma-call-script.md](grandma-call-script.md). No 20:00 countdown; Grandma calling back is a later beat. |
 | 2026-11-01 | Display locked to **1024×576** | Matches painted bridge and startscreen. Stretch keep + nearest. Sierra verb bar shrunk; `experimental_scale_gui` off. |
 | 2026-11-01 | Alan walk + intro quality pass | Walk clips no longer restart every physics frame. Intro is click-advanced, nearest-filtered, tweened flyby. |
 | 2026-11-01 | Repainted characters + bridge source art | Eight characters × 80 frames replaced in place (smooth 90s paint, 112×128 RGBA), including Alan/Joe game copies. `bridge_v5` and sheets added under `assets/art/originals/`. Cockpit scene still uses the placeholder background. |

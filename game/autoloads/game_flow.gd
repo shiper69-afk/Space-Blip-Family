@@ -8,8 +8,6 @@ const GRANDMA_CALL_SCENE := "res://game/intro/grandma_call.tscn"
 const COCKPIT_SCENE := "res://game/rooms/cockpit/room_cockpit.tscn"
 const TITLE := "Are We There Yet? (Galaxy edition)"
 const EPISODE := "Episode 1: Grandma's Calling"
-## After the live call: 20:00 is a story device and does not tick.
-var story_countdown := "19:59"
 var mug_stuck := false
 
 var in_game := false
