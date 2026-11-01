@@ -16,11 +16,22 @@ func _on_room_entered() -> void:
 	else:
 		C.player.position = AFTER_INTRO
 		C.player.face_right()
+	if GameFlow.mug_stuck:
+		_place_stuck_mug()
+
+
+func _place_stuck_mug() -> void:
+	var Frames := preload("res://game/intro/png_frames.gd")
+	var mug := Sprite2D.new()
+	mug.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	mug.centered = false
+	mug.position = Vector2(598, 128)
+	mug.z_index = 12
+	mug.texture = Frames.load_png("res://game/intro/frames/alan_sleep/mug_stuck_console.png")
+	add_child(mug)
 
 
 func _on_room_transition_finished() -> void:
-	# Intro already told the leftover-message / twenty-seconds beat.
-	# No extra first-visit line — Popochiu speech clipped on the 1024×576 bridge.
 	var beat := GameFlow.cli_value("intro-beat")
 	if beat == "walk":
 		await _demo_walk()

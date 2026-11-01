@@ -1,23 +1,17 @@
 extends Control
 ## Skippable New Game intro. Follows docs/intro-script.md.
-## LMB / Space / Enter advances dialogue. Esc skips the rest and starts gameplay.
+## LMB / Space / Enter advances dialogue. Esc skips to the live Grandma-call.
 
 const Frames := preload("res://game/intro/png_frames.gd")
 const SHIP_DIR := "res://game/intro/frames/ship"
-const CAST := "res://game/intro/frames"
 const SHIP_FPS := 10.0
-const CAST_FPS := 8.0
 const TYPE_CPS := 48.0
-const CAST_SCALE := Vector2(2.0, 2.0)
-const CAST_FEET := Vector2(512, 400)
 
 var _skipped := false
 var _finished := false
 var _ship_frames: Array[Texture2D] = []
 var _ship_index := 0
 var _ship_accum := 0.0
-var _cast_anim: Dictionary = {}
-var _amber := false
 var _typing := false
 var _line_ready := false
 var _advance := false
@@ -38,7 +32,6 @@ var _advance_lock := 0.0
 @onready var _dialog: PanelContainer = %DialogueBox
 @onready var _title_card: Control = %TitleCard
 @onready var _grandma: Control = %GrandmaCard
-@onready var _countdown: Label = %BigCountdown
 @onready var _interior: ColorRect = %Interior
 @onready var _vignette_caption: Label = %VignetteCaption
 @onready var _skip_hint: Label = %SkipHint
@@ -64,7 +57,6 @@ func _ready() -> void:
 	_hide_decor()
 	_title_card.visible = false
 	_grandma.visible = false
-	_countdown.visible = false
 	_interior.visible = false
 	_vignette_caption.visible = false
 	_dialog.visible = false
@@ -92,16 +84,6 @@ func _process(delta: float) -> void:
 			_ship_index = (_ship_index + 1) % _ship_frames.size()
 			_ship.texture = _ship_frames[_ship_index]
 	_ship.position = _logical_ship.round()
-	for name: String in _cast_anim.keys():
-		var data: Dictionary = _cast_anim[name]
-		data.accum += delta
-		if data.accum >= 1.0 / CAST_FPS:
-			data.accum -= 1.0 / CAST_FPS
-			data.index = (data.index + 1) % data.frames.size()
-			(data.node as Sprite2D).texture = data.frames[data.index]
-	if _amber and _interior.visible:
-		var pulse: float = 0.62 + 0.28 * absf(sin(Time.get_ticks_msec() * 0.006))
-		_interior.color = Color(0.16 * pulse, 0.07, 0.04, 1)
 	if _continue.visible:
 		_continue.modulate.a = 0.45 + 0.55 * absf(sin(Time.get_ticks_msec() * 0.005))
 	if _advance_lock > 0.0:
@@ -160,15 +142,7 @@ func _play() -> void:
 	await _opening()
 	if _skipped:
 		return
-	await _crossfade(_tour)
-	if _skipped:
-		return
-	await _crossfade(_cockpit_beats)
-	if _skipped:
-		return
-	await _crossfade(_title)
-	if _skipped:
-		return
+	# Flyby cuts straight to the bridge. Title card is last, after the call.
 	_end_intro()
 
 
@@ -280,117 +254,6 @@ func _fly_ship_across() -> void:
 	await ease_out.finished
 
 
-func _tour() -> void:
-	_hide_decor()
-	_ship.visible = false
-	_starfield.visible = false
-	_interior.visible = true
-	_interior.color = Color(0.07, 0.06, 0.1, 1)
-	_clear_cast()
-	await _fade_to(0.0, 0.4)
-	if _skipped:
-		return
-	await _say("NARRATOR", "Stardate: Tuesday. Day 47 of a trip that was supposed to take three days. The crew rests.")
-	if _skipped:
-		return
-	_show_cast("joe", CAST_FEET, "idle_down", "SECURTY", "sleeps standing at attention", true, false)
-	await _say("JOE (sleep-talking)", "Halt... state your snack...")
-	if _skipped:
-		return
-	_show_cast("dandan", CAST_FEET, "idle_down", "frying pan (hug)", "sleeps hugging a frying pan", true, false)
-	await _say("DANDAN (mumbling)", "A pinch of nebula... no... two pinches...")
-	if _skipped:
-		return
-	_show_cast("eithan", CAST_FEET, "idle_down", "Page 900 of 3,000", "asleep under the ship manual", true, false)
-	await _say("NARRATOR", "Eithan sleeps with a ship manual open on his face.")
-	if _skipped:
-		return
-	_show_cast("naomi", CAST_FEET, "idle_down", "warning light: 6 days", "already up. coffee. not today.")
-	await _say("NAOMI", "Not today. I am not reading you today.")
-	if _skipped:
-		return
-	_show_cast("alan", CAST_FEET, "idle_down", "mug: balanced", "snores in the captain's chair", true, false)
-	await _say("NARRATOR", "Alan snores in the captain's chair, one hand on the steering yoke, a coffee mug balanced on his belly.")
-	if _skipped:
-		return
-	_clear_cast()
-	_vignette_caption.text = "Empty bed. Blanket fort. Cookie crumbs leading out the door."
-	_vignette_caption.visible = true
-	await _say("NARRATOR", "And the youngest crew member, DavDav, is safely tucked in his...")
-	if _skipped:
-		return
-	await _say("NARRATOR", "...Hm.")
-	_vignette_caption.visible = false
-
-
-func _cockpit_beats() -> void:
-	_interior.visible = true
-	_interior.color = Color(0.08, 0.07, 0.12, 1)
-	_starfield.visible = false
-	_ship.visible = false
-	_clear_cast()
-	_grandma.visible = true
-	_countdown.visible = false
-	_vignette_caption.text = "A message was left. The crew sees it."
-	_vignette_caption.visible = true
-	await _fade_to(0.0, 0.4)
-	if _skipped:
-		return
-	await _say("GRANDMA (recorded)", "Hello, my darlings! I want to see a clean ship, a hot breakfast, and everyone dressed and SMILING. Especially you, Alan. Grandma always knows.")
-	if _skipped:
-		return
-	await _say("SHIP COMPUTER", "Incoming live call. Grandma will be with you in about twenty seconds. There is no countdown clock. Please use this time to \"get presentable.\"")
-	if _skipped:
-		return
-	_vignette_caption.visible = false
-	_show_cast("alan", Vector2(380, 400), "surprised", "", "jolts awake. mug sticks to the console.")
-	await _say("ALAN", "I'M AWAKE! I'M DRIVING! Who's driving?!")
-	if _skipped:
-		return
-	await _say("ALAN", "Oh no. Oh no no no. Not your mother. Not the GRANDMA CALL.")
-	if _skipped:
-		return
-	await _say("NAOMI (intercom)", "Alan. My mother left a message. She is calling in about twenty seconds. The ship is a disaster, nobody's dressed, and the breakfast synthesizer is making that noise again.")
-	if _skipped:
-		return
-	await _say("NARRATOR", "A sad bloop... bloop... ploink from the galley.")
-	if _skipped:
-		return
-	await _say("NAOMI", "You're the Captain. Captain something.")
-	if _skipped:
-		return
-	_swap_cast("alan", "thumbs_up")
-	await _say("ALAN", "Fear not, crew! Your Captain has everything under control!")
-	if _skipped:
-		return
-	_swap_cast("alan", "fall_right")
-	await _say("NARRATOR", "He does not have everything under control.")
-	if _skipped:
-		return
-	_amber = true
-	await _say("SHIP COMPUTER", "Incoming. Grandma is calling.")
-	if _skipped:
-		return
-	var dav := _show_cast("davdav", Vector2(140, 400), "walk_right", "DO NOT PRESS. SERIOUSLY. — MOM.", "sprints to the big red button", false)
-	var run := create_tween()
-	run.set_trans(Tween.TRANS_SINE)
-	run.set_ease(Tween.EASE_IN_OUT)
-	run.tween_property(dav, "position", Vector2(700, 400), 1.5)
-	await run.finished
-	if _skipped:
-		return
-	dav.position = Vector2(700, 400)
-	_swap_cast("davdav", "reach_up_right")
-	await _say("DAVDAV", "Hi Grandma!")
-	if _skipped:
-		return
-	_flash.color = Color(1, 0.3, 0.25, 1)
-	_flash.modulate.a = 0.65
-	var boop := create_tween()
-	boop.tween_property(_flash, "modulate:a", 0.0, 0.22)
-	await _say("NARRATOR", "BOOP. He slaps the button.")
-
-
 func _title() -> void:
 	_show_title_card()
 	_dialog.visible = false
@@ -432,7 +295,6 @@ func _hold_title() -> void:
 func _show_title_card() -> void:
 	_dialog.visible = false
 	_grandma.visible = false
-	_countdown.visible = false
 	_interior.visible = false
 	_clear_cast()
 	_starfield.visible = false
@@ -450,7 +312,7 @@ func _end_intro() -> void:
 	_skip_hint.visible = false
 	_continue.visible = false
 	await _fade_to(1.0, 0.4)
-	GameFlow.begin_gameplay()
+	GameFlow.start_grandma_call()
 
 
 func _say(speaker: String, text: String) -> void:
@@ -528,65 +390,7 @@ func _hide_decor() -> void:
 	_scratch.visible = false
 
 
-func _show_cast(who: String, at: Vector2, anim: String, badge: String, caption: String, clear: bool = true, animate: bool = true) -> Sprite2D:
-	if clear:
-		_clear_cast()
-	var sprite := Sprite2D.new()
-	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	sprite.centered = false
-	sprite.offset = Vector2(-56, -124)
-	sprite.position = at.round()
-	sprite.scale = CAST_SCALE
-	sprite.name = who
-	_cast_layer.add_child(sprite)
-	var frames := _frames_for(who, anim)
-	if frames.is_empty():
-		frames = _frames_for(who, "idle_down")
-	if not frames.is_empty():
-		sprite.texture = frames[0]
-		if animate and frames.size() > 1:
-			_cast_anim[who] = {"node": sprite, "frames": frames, "index": 0, "accum": 0.0}
-	_vignette_caption.text = caption if badge.is_empty() else "%s\n%s" % [caption, badge]
-	_vignette_caption.visible = true
-	return sprite
-
-
-func _swap_cast(who: String, anim: String) -> void:
-	var sprite := _cast_layer.get_node_or_null(who) as Sprite2D
-	if sprite == null:
-		return
-	var frames := _frames_for(who, anim)
-	if frames.is_empty():
-		return
-	sprite.texture = frames[0]
-	if frames.size() > 1:
-		_cast_anim[who] = {"node": sprite, "frames": frames, "index": 0, "accum": 0.0}
-	else:
-		_cast_anim.erase(who)
-
-
 func _clear_cast() -> void:
-	_cast_anim.clear()
 	for child in _cast_layer.get_children():
 		child.queue_free()
 	_vignette_caption.visible = false
-
-
-func _frames_for(who: String, anim: String) -> Array[Texture2D]:
-	var dir := "%s/%s" % [CAST, who]
-	var single: Array[Texture2D] = []
-	if anim in ["surprised", "laugh", "thumbs_up"]:
-		var one := Frames.load_png("%s/%s_00.png" % [dir, anim])
-		if one:
-			single.append(one)
-		return single
-	if anim == "reach_up_right":
-		var reach := Frames.load_png("%s/reach_up_right_00.png" % dir)
-		if reach:
-			single.append(reach)
-		return single
-	if anim == "fall_right":
-		return Frames.load_seq(dir, anim, 6)
-	if anim.begins_with("walk") or anim.begins_with("idle") or anim.begins_with("talk"):
-		return Frames.load_seq(dir, anim, 8)
-	return Frames.load_seq(dir, anim, 4)

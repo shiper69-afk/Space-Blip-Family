@@ -26,6 +26,10 @@ func _ready() -> void:
 	if beat == "bridge" or beat == "walk":
 		GameFlow.begin_gameplay()
 		return
+	if beat == "grandma":
+		await get_tree().process_frame
+		GameFlow.start_grandma_call()
+		return
 	if not GameFlow.cli_value("capture-png").is_empty():
 		await GameFlow.maybe_capture_and_quit()
 		return

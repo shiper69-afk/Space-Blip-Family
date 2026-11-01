@@ -4,11 +4,11 @@ extends Node
 const SLOT_COUNT := 10
 const START_SCENE := "res://game/start/start_screen.tscn"
 const INTRO_SCENE := "res://game/intro/intro.tscn"
+const GRANDMA_CALL_SCENE := "res://game/intro/grandma_call.tscn"
 const COCKPIT_SCENE := "res://game/rooms/cockpit/room_cockpit.tscn"
 const TITLE := "Are We There Yet? (Galaxy edition)"
 const EPISODE := "Episode 1: Grandma's Calling"
-## Story urgency after the intro. About twenty seconds — not a 20:00 clock, does not tick.
-const STORY_COUNTDOWN := "any second now"
+var mug_stuck := false
 
 var in_game := false
 var in_intro := false
@@ -100,6 +100,13 @@ func new_game() -> void:
 	in_intro = true
 	hide_adventure_gui()
 	get_tree().change_scene_to_file(INTRO_SCENE)
+
+
+func start_grandma_call() -> void:
+	in_intro = true
+	in_game = false
+	hide_adventure_gui()
+	get_tree().change_scene_to_file.call_deferred(GRANDMA_CALL_SCENE)
 
 
 func begin_gameplay() -> void:

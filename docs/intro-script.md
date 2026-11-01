@@ -1,9 +1,13 @@
 > Canon New Game intro. Implementation title card uses the locked game title
 > **Are We There Yet? (Galaxy edition)** (not the script’s old SPACE BLIP FAMILY).
 > Subtitle stays **"Episode 1: Grandma's Calling"**.
-> Owner lock: the leftover Grandma message is already on the screens. The crew
-> has about **twenty seconds** before she calls live — not a 20:00 countdown.
-> When she calls, DavDav runs over and presses the big red button.
+> Live call is canon in [grandma-call-script.md](grandma-call-script.md) (Grandma = **Chaya**).
+> After the flyby, cut **straight to the bridge** (no crew tour, no recorded
+> leftover message, no title before the call). Alan asleep, DavDav next to him,
+> incoming-call alert. ~10 seconds later DavDav hits the red button. Live call
+> is canon in [grandma-call-script.md](grandma-call-script.md) (Grandma = **Chaya**).
+> **Title card last:** Are We There Yet? (Galaxy edition) / Episode 1: Grandma's Calling.
+> No 20:00 countdown / HUD. Grandma calling back is a later beat.
 
 **SPACE BLIP FAMILY: INTRO**
 
@@ -24,7 +28,7 @@ NARRATOR (V.O.)
 NARRATOR (V.O.)
 These are the voyages of The Millennium Mini Van. Her ongoing mission: to explore strange new worlds, to seek out clean bathrooms, and to boldly go wherever Dad swears is "a shortcut."
 
-**INT. MINI VAN, A QUICK TOUR**
+**INT. MINI VAN, A QUICK TOUR** *(cut — not in the New Game path)*
 
 NARRATOR (V.O.)
 Stardate: Tuesday. Day 47 of a trip that was supposed to take three days. The crew rests.
@@ -56,54 +60,16 @@ And the youngest crew member, DavDav, is safely tucked in his...
 NARRATOR (V.O.)
 ...Hm.
 
-**INT. COCKPIT**
+**INT. COCKPIT / LIVE CALL**
 
-*Every screen already holds a still of GRANDMA leaning way too close to her camera, reading glasses on, eyes narrowed. A message was left. The crew sees it.*
+*Cut from flyby to the painted bridge. Alan is asleep in the captain's chair.
+DavDav stands next to him. Incoming-call alert on the main screen. Grandma is
+**not** on the screens yet.*
 
-GRANDMA (recorded message)
-Hello, my darlings! I want to see a clean ship, a hot breakfast, and everyone dressed and SMILING. Especially you, Alan. Grandma always knows.
+*~10 seconds later DavDav runs to the red button. BOOP. Live call.*
 
-SHIP COMPUTER (V.O., overly polite)
-Incoming live call. Grandma will be with you in about twenty seconds. There is no countdown clock. Please use this time to "get presentable."
+Canon line-by-line from here: [grandma-call-script.md](grandma-call-script.md)
+(Grandma = **Chaya**).
 
-*Alan jolts awake. The coffee mug flies and sticks to the console.*
-
-ALAN
-I'M AWAKE! I'M DRIVING! Who's driving?!
-
-*He spots Grandma's leftover face on the screen.*
-
-ALAN
-Oh no. Oh no no no. Not your mother. Not the GRANDMA CALL.
-
-NAOMI (over intercom, completely calm)
-Alan. My mother left a message. She is calling in about twenty seconds. The ship is a disaster, nobody's dressed, and the breakfast synthesizer is making that noise again.
-
-*A sad "bloop... bloop... ploink" sound from the galley.*
-
-NAOMI (V.O.)
-You're the Captain. Captain something.
-
-ALAN (standing, heroic pose, still in pajama pants)
-Fear not, crew! Your Captain has everything under control!
-
-*He trips over a toy rocket.*
-
-NARRATOR (V.O.)
-He does not have everything under control.
-
-*The live call rings. Incoming.*
-
-*DAVDAV — rocket pajamas, cookie crumbs still on him — sprints across the cockpit to the BIG RED BUTTON. Its label reads "DO NOT PRESS. SERIOUSLY. — MOM."*
-
-DAVDAV
-Hi Grandma!
-
-*BOOP. He slaps the button.*
-
-*Freeze frame on Alan mid-fall, DavDav's hand still on the button.*
-
-**TITLE CARD: SPACE BLIP FAMILY**
-*Subtitle: "Episode 1: Grandma's Calling"*
-
-*Fade back to the cockpit. No 20:00 clock. The leftover message is still on the screens. About twenty seconds of story urgency, not a ticking timer. Player gains control of Alan.*
+**Title card last** after freeze-frame: Are We There Yet? (Galaxy edition) /
+Episode 1: Grandma's Calling. Then player control of Alan. No countdown HUD.
