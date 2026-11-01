@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://game/inventory_items/alert_printout/alert_printout.png" id="1_tex"]
+[ext_resource type="Script" path="res://game/inventory_items/alert_printout/inventory_item_alert_printout.gd" id="2_script"]
+
+[node name="ItemAlertPrintout" type="TextureRect"]
+texture_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 0
+texture = ExtResource("1_tex")
+stretch_mode = 5
+script = ExtResource("2_script")
+script_name = "AlertPrintout"
+description = "Alert Printout"
+cursor = 10

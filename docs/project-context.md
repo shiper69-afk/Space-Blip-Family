@@ -1,6 +1,9 @@
-# Space Blip Family — project context
+# Are We There Yet? (Galaxy edition) — project context
 
 Living document for story, cast, tone, and design. Add scenes, puzzle notes, and decisions here as the Project grows. Mark proposals clearly so they can be revised without rewriting canon.
+
+**Game title (canon):** Are We There Yet? (Galaxy edition)  
+**GitHub repo name (unchanged):** [Space-Blip-Family](https://github.com/shiper69-afk/Space-Blip-Family)
 
 ---
 
@@ -21,7 +24,7 @@ A comedy point-and-click adventure about a dysfunctional-but-loving family stuck
 ### Style reference — Space Quest 6
 - **Graphics vibe:** Mid/late-90s adventure look — painted backgrounds, character sprites or puppets, exaggerated expressions, readable hotspots.
 - **Gameplay:** Classic Sierra 3rd-person point-and-click — walk, look, talk, use/give inventory items on hotspots and NPCs.
-- **Comedy:** Sci-fi parody, family chaos, dumb tech that thinks it’s smart, death/fail gags optional and never mean-spirited toward kids.
+- **Comedy:** Sci-fi parody, family chaos, dumb tech that thinks it’s smart. **Comic death is canon** (classic Sierra: always funny, instant restore, PG, never mean toward the kids).
 - **Tone guardrails:** Satire and slapstick over cruelty. DavDav (5) can cause trouble; never punch down. Keep PG–PG-13 unless the user hardens tone later.
 
 ### Design pillars *(proposal)*
@@ -48,7 +51,7 @@ A comedy point-and-click adventure about a dysfunctional-but-loving family stuck
 
 ## Cast / crew bible
 
-Ages and roles below are **canon** from the user. Personality hooks marked **(proposal)** are invented seeds for comedy and puzzles — revise anytime.
+Ages and roles below are **canon** from the user unless marked **(proposal)**. Personality hooks marked **(proposal)** are invented seeds for comedy and puzzles — revise anytime.
 
 | Name | Age | Role (canon) | Personality seed |
 |------|-----|--------------|------------------|
@@ -58,9 +61,11 @@ Ages and roles below are **canon** from the user. Personality hooks marked **(pr
 | **DanDan** | 13 | Head chef | **(proposal)** Culinary ambition trapped in a galley the size of a closet. Invents recipes that require “ingredients” the ship doesn’t have. Competitive with the food synthesizer. |
 | **Eithan** | 11 | Operations | **(proposal)** Systems kid — reads manuals for fun, patches pipes with gum and genius. Speaks in status updates. Quietly the reason anything still works. |
 | **DavDav** | 5 | Just there to have fun and get in trouble | **(proposal)** Chaos engine and comic timer. Pushes buttons, “helps,” hides inventory items in toys. Never mean; always catastrophic in small ways. |
+| **Bela** | **(proposal)** ~6 | Family dog | **(proposal)** The bark-first diplomat. Treats every amber light like a squirrel in the wiring. Joe’s unofficial K9. Professional beggar (`bark` / `beg` frames). Sprite folder: `bela_frames`. |
+| **Cookie** | **(proposal)** ~3 | Family dog | **(proposal)** Softer, snack-oriented, follows whoever last opened the galley. Head-tilts as a future hint machine. Also has `bark` / `beg` frames. Sprite folder: `cookie_frames`. |
 
 ### Casting / control notes
-- **Player character at start:** **TBD — needs user decision.** See [Open questions](#open-questions--tbd). Opening plan below proposes a default so design can proceed.
+- **Player character at start:** **TBD — needs user decision.** The first playable slice starts as **Alan** so rooms can be tested; that is implementation, not a locked PC choice. See [Open questions](#open-questions--tbd). Opening plan below proposes Alan as a default so design can proceed.
 
 ---
 
@@ -72,7 +77,7 @@ The Blip family is mid-trip aboard **The Millennium Mini Van** when a cascade of
 ### Acts *(proposal — skeleton only)*
 | Act | Focus | Status |
 |-----|--------|--------|
-| **Act 1 — Morning on the Mini Van** | Closed-ship tutorial: rooms, inventory, talk, first multi-step puzzle chain. | **Planning (this doc)** |
+| **Act 1 — Morning on the Mini Van** | Closed-ship tutorial: rooms, inventory, talk, first multi-step puzzle chain. | **Planning (this doc)** + playable cockpit/corridor slice |
 | **Act 2 — TBD** | Expand beyond the ship (port? distress call? relatives?). | Open |
 | **Act 3 — TBD** | Climactic family/ship crisis with payoff for each crew role. | Open |
 
@@ -82,8 +87,8 @@ The Blip family is mid-trip aboard **The Millennium Mini Van** when a cascade of
 - Little siblings as both problem and solution (DavDav)
 
 ### Open story decisions
-- What is the **inciting incident** beyond “systems acting up”? (sabotage? warranty voided? wrong destination?)
-- Is there a recurring antagonist (AI, cousin, space HOA, food synthesizer)?
+- **Act 1 → Act 2 hook:** open. Owner is still working on Act 1. Do not propose or lock a hook.
+- Is there a recurring antagonist? (unset)
 - Does the player stick to one PC or **swap crew members** for certain puzzles?
 
 ---
@@ -114,12 +119,12 @@ The Blip family is mid-trip aboard **The Millennium Mini Van** when a cascade of
 | 5 | Family cabin / play corner | **DavDav** “helping.” Has the Flavor Coil inside a toy rocket. Won’t trade without a **Funny Noise Thing** or playtime. | Fetch squeaky valve cap / rattle from corridor maintenance panel. |
 | 6 | Galley reprise | Install Flavor Coil; DanDan rewards with **Breakfast Brick** (usable later) or goodwill + hint. | Use coil on synthesizer. |
 | 7 | Meet Naomi | **Naomi** in engineering crawl / mid-ship. She’s the one who can clear the amber alert for real — but only after power + breakfast + Joe stand-down. | Multi-condition talk unlock; Naomi becomes Act 1 “quest hub.” |
-| 8 | Act 1 button | Full ship “morning green.” New objective appears (distress ping / destination wrong / mysterious thump in cargo). | Hook into Act 2 TBD. |
+| 8 | Act 1 button | Full ship “morning green.” **Act 1 → Act 2 hook is open** — owner is still working on Act 1. Do not lock or invent the hook. | Unlocked. |
 
-### Fail / death comedy *(proposal — optional toggle)*
-- Soft fails preferred: funny close-up, restore, keep inventory.
-- Examples: Alan tastes raw synthesizer paste; Joe “arrests” Alan for unauthorized mug placement; DavDav presses the big red button → lights out for 3 seconds and a quip.
-- Hard death (airlock, etc.) only if tone is approved and always comic + instant restore.
+### Fail / death comedy *(canon)*
+- **Classic Sierra comic death.** Always funny. Instant restore. **PG.** Never mean toward the kids.
+- Inventory and progress stay; the gag plays, then the player is back.
+- Example *shapes* (not locked gags): tasting something you shouldn’t, protocol “arrest,” a button that ends badly for Alan — punchlines land on the captain/tech, not on DavDav or the other kids.
 
 ### Who the player talks to first *(proposal order)*
 Alan (self-barks) → Joe → DanDan → Eithan → DavDav → Naomi (hub resolve).
@@ -132,8 +137,8 @@ Seed list for the **opening ship**. Add rows as rooms come online. Status: `idea
 
 | ID | Location | Purpose in Act 1 | Key hotspots *(proposal)* | Characters often here | Status |
 |----|----------|------------------|---------------------------|------------------------|--------|
-| `R-COCKPIT` | Cockpit / Bridge | Start room; alert; captain fantasy | chair, mug, amber light, nav screen, aft hatch | Alan | outlined |
-| `R-CORRIDOR` | Mid-ship corridor | Hub between rooms; Joe patrol | wall stickers, maintenance panel, badge sticky-spot, door labels | Joe, DavDav (wandering) | outlined |
+| `R-COCKPIT` | Cockpit / Bridge | Start room; alert; captain fantasy | chair, mug, amber light, nav screen, aft hatch | Alan | built (placeholder BG) |
+| `R-CORRIDOR` | Mid-ship corridor | Hub between rooms; Joe patrol | wall stickers, maintenance panel, badge sticky-spot, door labels | Joe, DavDav (wandering) | built (placeholder BG) |
 | `R-GALLEY` | Galley / Kitchen | DanDan’s domain; coil puzzle | synthesizer, fridge, spice rack, fire extinguisher (gag) | DanDan | outlined |
 | `R-OPS` | Ops nook | Eithan’s station; power puzzle | breaker board, manuals pile, gum jar, jumper drawer | Eithan | outlined |
 | `R-CABIN` | Family cabin / bunks | DavDav play + item hide | bunks, toy rocket, blanket fort, nightlight | DavDav; others sleeping-in gag | outlined |
@@ -158,7 +163,7 @@ Seed list for the **opening ship**. Add rows as rooms come online. Status: `idea
 
 ## Gameplay systems notes
 
-High-level, SQ6-inspired. Implementation tech is TBD.
+High-level, SQ6-inspired. Implementation: **Godot 4 + Popochiu** (see Implementation readiness).
 
 ### Camera & control
 - 3rd-person; click-to-move within painted rooms.
@@ -182,7 +187,7 @@ High-level, SQ6-inspired. Implementation tech is TBD.
 ### UI *(proposal)*
 - Inventory tray / grid
 - Save/load early (classic adventure courtesy)
-- Optional death/fail toggle
+- Comic-death restore is **canon** (not a “soft fail only” toggle)
 - Subtitles for barks
 
 ### Accessibility / kindness *(proposal)*
@@ -197,19 +202,22 @@ High-level, SQ6-inspired. Implementation tech is TBD.
 - Characters: exaggerated proportions OK; each needs a clear idle fidget (Joe salute, DanDan tasting air, DavDav spinning).
 - Music: light adventure theme with “sitcom in space” energy; short stingers for fails.
 - Avoid: modern UI chrome that breaks SQ6 nostalgia unless user wants a hybrid.
+- **Owner frames (present):** 80 frames each for Alan (`dad_frames`), Naomi (`mom_frames`), Joe, DanDan, Eithan, DavDav, **Bela**, **Cookie**. Sprites 112×128. Ship: 32 frames in `ship_frames`. Originals live in `assets/art/originals/` (folder names kept as delivered, including the `Charechter` spelling).
 
 ---
 
-## Implementation readiness *(not decided)*
-
-Track here when tech is chosen — do not block story work.
+## Implementation readiness
 
 | Topic | Status |
 |-------|--------|
-| Engine / framework | TBD |
-| Resolution / aspect | TBD |
-| Art pipeline | TBD |
-| Repo structure | Link only so far: https://github.com/shiper69-afk/Space-Blip-Family |
+| Engine / framework | **Locked:** Godot 4 + [Popochiu](https://github.com/carenalgas/popochiu) (2D point-and-click). First slice uses **Godot 4.7** + **Popochiu 2.2.1**. |
+| Verbs / UI | Popochiu **Sierra High-Res** GUI: Walk / Look / Interact (Use) / Talk + inventory popup. SQ6-style. |
+| Target platforms | **Windows + web** export. |
+| Resolution / aspect | Slice uses **640×360** (16:9), pixel-art filter, window 1280×720. Revisit if painted BGs want 4:3. |
+| Art pipeline | Owner PNG frames committed under `assets/art/originals/`. Copies used for Alan/Joe animations under `game/characters/`. Placeholder room backgrounds until painted sets exist. Start-screen loop lives in `assets/art/originals/startscreen/` (not `.gdignore`d, so it exports). |
+| Start / title screen | First scene. Looping owner frames (360 × 12 fps). Title **Are We There Yet? (Galaxy edition)** is **overlay text**, not painted into the art. Buttons: New Game, Load Game (10 slots), Quit. |
+| Save / load | 10 Popochiu slots (`user://save_%d.json`). Esc opens the in-game menu (save / load / title / quit). Esc still skips cutscenes. |
+| Repo structure | Godot project at repo root (`project.godot`). Game content in `game/`. Canon doc in `docs/project-context.md`. |
 
 ---
 
@@ -217,14 +225,12 @@ Track here when tech is chosen — do not block story work.
 
 Decisions that unblock sharper design:
 
-1. **Player character** — Confirm Alan-at-start, or Naomi / kid / swap system?
-2. **Tone hardness** — Soft fails only, or classic comic death?
-3. **Scope of Act 1** — Ship-only vertical slice, or include one exterior / station tease?
-4. **Inciting incident** — What’s the real Act 1 → Act 2 hook?
-5. **Tech stack** — Engine preference (e.g. Godot, Unity, custom, adventure toolkit)?
-6. **Art style fidelity** — Closest to SQ6 VGA/SVGA painted look, or a cleaner modern homage?
-7. **Multi-character puzzles** — Stay single-PC or allow temporary control of Eithan/Joe/etc.?
-8. **Title spelling / branding** — “Space Blip Family” locked? Any logo / tagline?
+1. **Player character** — Confirm Alan-at-start, or Naomi / kid / swap system? (Slice currently plays as Alan.)
+2. **Scope of Act 1** — Ship-only vertical slice, or include one exterior / station tease?
+3. **Act 1 → Act 2 hook** — **Open.** Owner is still working on Act 1. Do not propose or lock a hook.
+4. **Art style fidelity** — Closest to SQ6 VGA/SVGA painted look, or a cleaner modern homage?
+5. **Multi-character puzzles** — Stay single-PC or allow temporary control of Eithan/Joe/etc.?
+6. **Bela / Cookie ages and distinct roles** — Canon family dogs; confirm ages and whether one is “Joe’s K9” vs galley mooch, or just both pets.
 
 ---
 
@@ -237,6 +243,12 @@ Record choices here so the living doc doesn’t argue with itself.
 | 2026-11-01 | Canon crew names, ages, roles locked | Alan, Naomi, Joe, DanDan, Eithan, DavDav; ship = The Millennium Mini Van |
 | 2026-11-01 | Style reference locked | Space Quest 6 graphics & gameplay feel |
 | 2026-11-01 | Opening plan drafted as **proposal** | Alan start; morning systems cascade; see Act 1 section |
+| 2026-11-01 | **Game title locked** | **Are We There Yet? (Galaxy edition)**. GitHub repo may stay `Space-Blip-Family`. |
+| 2026-11-01 | **Tech locked** | **Godot 4 + Popochiu** (2D, SQ6-style verbs, inventory, dialogue). Target **Windows + web**. First slice: Godot 4.7 + Popochiu 2.2.1, Sierra High-Res verb bar. |
+| 2026-11-01 | **Bela and Cookie locked as family dogs** | Canon names + role. Sprite folders `bela_frames` / `cookie_frames` (bark/beg frames). Ages and personality remain **proposals** — owner should confirm. |
+| 2026-11-01 | **Fail style locked: comic death** | Classic Sierra. Always funny, instant restore, PG, never mean toward the kids. |
+| 2026-11-01 | Act 1 → Act 2 hook stays **open** | Owner still working on Act 1. No hook proposed or locked. |
+| 2026-11-01 | Start-screen title is **overlay text** | Not baked into the animated background. Overlay string: **Are We There Yet? (Galaxy edition)**. |
 
 ---
 

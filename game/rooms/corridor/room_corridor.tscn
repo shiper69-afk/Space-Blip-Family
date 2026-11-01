@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://game/rooms/corridor/room_corridor.gd" id="1"]
+[ext_resource type="PackedScene" path="res://game/rooms/corridor/walkable_areas/floor/walkable_area_floor.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://game/rooms/corridor/props/background/prop_background.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://game/rooms/corridor/hotspots/cockpit_hatch/hotspot_cockpit_hatch.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://game/rooms/corridor/hotspots/galley_door/hotspot_galley_door.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://game/rooms/corridor/hotspots/stickers/hotspot_stickers.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://game/characters/joe/character_joe.tscn" id="7"]
+
+[node name="RoomCorridor" type="Node2D"]
+script = ExtResource("1")
+script_name = "Corridor"
+has_player = true
+width = 640
+height = 360
+
+[node name="WalkableAreas" type="Node2D" parent="."]
+
+[node name="Floor" parent="WalkableAreas" instance=ExtResource("2")]
+
+[node name="Props" type="Node2D" parent="."]
+
+[node name="Background" parent="Props" instance=ExtResource("3")]
+
+[node name="Hotspots" type="Node2D" parent="."]
+
+[node name="CockpitHatch" parent="Hotspots" instance=ExtResource("4")]
+position = Vector2(36, 240)
+walk_to_point = Vector2(50, 50)
+look_at_point = Vector2(0, -20)
+interaction_polygon = PackedVector2Array(-32, -90, 32, -90, 32, 70, -32, 70)
+
+[node name="GalleyDoor" parent="Hotspots" instance=ExtResource("5")]
+position = Vector2(604, 240)
+walk_to_point = Vector2(-50, 50)
+look_at_point = Vector2(0, -20)
+interaction_polygon = PackedVector2Array(-32, -90, 32, -90, 32, 70, -32, 70)
+
+[node name="Stickers" parent="Hotspots" instance=ExtResource("6")]
+position = Vector2(220, 140)
+walk_to_point = Vector2(0, 140)
+look_at_point = Vector2(0, -10)
+interaction_polygon = PackedVector2Array(-80, -40, 80, -40, 80, 40, -80, 40)
+
+[node name="Regions" type="Node2D" parent="."]
+
+[node name="Markers" type="Node2D" parent="."]
+
+[node name="Characters" type="Node2D" parent="."]
+
+[node name="CharacterJoe *" parent="Characters" instance=ExtResource("7")]
+position = Vector2(400, 292)
+walk_to_point = Vector2(-50, 0)
+look_at_point = Vector2(0, -40)
