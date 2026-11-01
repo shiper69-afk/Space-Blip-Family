@@ -10,6 +10,11 @@ func _play_idle() -> void:
 	_play_oriented(idle_animation)
 
 
+func _play_talk() -> void:
+	# Looping talk clip for the whole line; Popochiu returns to idle when he stops.
+	_play_oriented(talk_animation)
+
+
 func _play_walk(target_pos: Vector2) -> void:
 	face_direction(target_pos)
 	_play_oriented(walk_animation)

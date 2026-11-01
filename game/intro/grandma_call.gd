@@ -283,7 +283,7 @@ func _play() -> void:
 	await _say("ALAN", "Every call is a gift.")
 	if _skipped:
 		return
-	await _enter("naomi", Vector2(360, 340), "coffee  [placeholder]")
+	await _enter("naomi", Vector2(360, 340), "coffee")
 	if _skipped:
 		return
 	await _say("NAOMI", "Hi, Mom.")
@@ -313,7 +313,7 @@ func _play() -> void:
 	await _say("JOE", "...That toaster was a threat.")
 	if _skipped:
 		return
-	await _enter("dandan", Vector2(430, 400), "frying pan  [placeholder]")
+	await _enter("dandan", Vector2(430, 400), "frying_pan")
 	if _skipped:
 		return
 	await _say("DANDAN", "Hi, Grandma. Did you eat? I'm working on a nebula omelet.")
@@ -337,7 +337,7 @@ func _play() -> void:
 	await _say("NAOMI", "You said it with your eyebrow.")
 	if _skipped:
 		return
-	await _enter("eithan", Vector2(250, 310), "manual  [placeholder]")
+	await _enter("eithan", Vector2(250, 310), "manual")
 	if _skipped:
 		return
 	await _say("EITHAN", "Status update. Call quality is sixty-two percent. Grandma's camera is pointed at the ceiling.")
@@ -671,13 +671,27 @@ func _depth(sprite: Sprite2D) -> void:
 	sprite.z_index = clampi(int(feet_y / 24.0), 1, 22)
 
 
-func _badge(sprite: Sprite2D, text: String) -> void:
-	var tag := Label.new()
-	tag.text = text
-	tag.position = Vector2(-40, -150)
-	tag.add_theme_font_size_override("font_size", 11)
-	tag.add_theme_color_override("font_color", Color(1, 0.92, 0.55, 0.95))
-	sprite.add_child(tag)
+## Painted hand props (game/props). Base PNGs are sized for depth 1.0 next to the
+## 104 px character, so undo the 104/128 frame factor the parent sprite carries.
+const PROP_DIR := "res://game/props"
+const PROP_HAND := {
+	"coffee": Vector2(30, -58),
+	"manual": Vector2(26, -62),
+	"frying_pan": Vector2(34, -52),
+}
+
+
+func _badge(sprite: Sprite2D, prop: String) -> void:
+	var tex := Frames.load_png("%s/%s.png" % [PROP_DIR, prop])
+	if tex == null:
+		return
+	var item := Sprite2D.new()
+	item.name = "Prop"
+	item.texture = tex
+	item.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	item.position = PROP_HAND.get(prop, Vector2(28, -56))
+	item.scale = Vector2.ONE * (128.0 / 104.0)
+	sprite.add_child(item)
 
 
 func _frames_for(who: String, anim: String) -> Array[Texture2D]:
@@ -717,6 +731,7 @@ func _say(speaker: String, text: String) -> void:
 	_dialog.visible = true
 	_continue.visible = false
 	_speaker.text = speaker
+	var talker := _start_talking(speaker)
 	_line.text = text
 	_line.visible_characters = 0
 	_typing = true
@@ -740,6 +755,28 @@ func _say(speaker: String, text: String) -> void:
 	await _wait_for_advance()
 	_line_ready = false
 	_continue.visible = false
+	_stop_talking(talker)
+
+
+## Every speaker on the bridge loops talk_down while their line is up, then idles.
+## "ALAN", "NAOMI (intercom)" -> cast key "alan", "naomi". Chaya uses her own screen.
+func _start_talking(speaker: String) -> String:
+	var who := speaker.split(" ")[0].to_lower()
+	var sprite := _cast.get_node_or_null(who) as Sprite2D
+	if sprite == null:
+		return ""
+	var talk := _frames_for(who, "talk_down")
+	if talk.is_empty():
+		return ""
+	sprite.texture = talk[0]
+	_cast_anim[who] = {"node": sprite, "frames": talk, "index": 0, "accum": 0.0}
+	return who
+
+
+func _stop_talking(who: String) -> void:
+	if who.is_empty() or _cast.get_node_or_null(who) == null:
+		return
+	_swap(who, "idle_down")
 
 
 func _wait_for_advance() -> void:
