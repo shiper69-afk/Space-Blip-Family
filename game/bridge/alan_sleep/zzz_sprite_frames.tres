@@ -1,0 +1,42 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://zfzz2ygb6pzte"]
+
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/zzz_00.png" id="tex_0"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/zzz_01.png" id="tex_1"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/zzz_02.png" id="tex_2"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/zzz_03.png" id="tex_3"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/zzz_04.png" id="tex_4"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/zzz_05.png" id="tex_5"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/zzz_06.png" id="tex_6"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/zzz_07.png" id="tex_7"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_7")
+}],
+"loop": true,
+"name": &"zzz",
+"speed": 6.0
+}]

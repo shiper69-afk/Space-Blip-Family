@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://addons/popochiu/engine/objects/region/popochiu_region.gd" id="1_script"]
+
+[node name="BridgeDepthRegion" type="Area2D"]
+monitorable = false
+script = ExtResource("1_script")
+script_name = "BridgeDepth"
+description = "Bridge depth"
+scaling = true
+scale_top = 1.1
+scale_bottom = 1.7
+interaction_polygon = PackedVector2Array(0, 86.6667, 1024, 86.6667, 1024, 606.6667, 0, 606.6667)
+
+[node name="InteractionPolygon" type="CollisionPolygon2D" parent="."]
+visible = false
+modulate = Color(0, 1, 1, 1)
+polygon = PackedVector2Array(0, 86.6667, 1024, 86.6667, 1024, 606.6667, 0, 606.6667)
