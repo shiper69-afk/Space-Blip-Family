@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://game/rooms/cockpit/regions/perspective/region_perspective.gd" id="1_script"]
+
+[node name="Perspective" type="Area2D"]
+script = ExtResource("1_script")
+script_name = "Perspective"
+description = "Bridge perspective"
+walkable = true
+scaling = true
+scale_top = 0.82
+scale_bottom = 1.06
+interaction_polygon = PackedVector2Array(160, 300, 860, 300, 840, 520, 180, 520)
+
+[node name="InteractionPolygon" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(160, 300, 860, 300, 840, 520, 180, 520)

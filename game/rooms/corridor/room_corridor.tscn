@@ -12,8 +12,8 @@
 script = ExtResource("1")
 script_name = "Corridor"
 has_player = true
-width = 640
-height = 360
+width = 1024
+height = 576
 
 [node name="WalkableAreas" type="Node2D" parent="."]
 
@@ -26,22 +26,22 @@ height = 360
 [node name="Hotspots" type="Node2D" parent="."]
 
 [node name="CockpitHatch" parent="Hotspots" instance=ExtResource("4")]
-position = Vector2(36, 240)
-walk_to_point = Vector2(50, 50)
+position = Vector2(58, 384)
+walk_to_point = Vector2(80, 80)
 look_at_point = Vector2(0, -20)
-interaction_polygon = PackedVector2Array(-32, -90, 32, -90, 32, 70, -32, 70)
+interaction_polygon = PackedVector2Array(-51, -144, 51, -144, 51, 112, -51, 112)
 
 [node name="GalleyDoor" parent="Hotspots" instance=ExtResource("5")]
-position = Vector2(604, 240)
-walk_to_point = Vector2(-50, 50)
+position = Vector2(966, 384)
+walk_to_point = Vector2(-80, 80)
 look_at_point = Vector2(0, -20)
-interaction_polygon = PackedVector2Array(-32, -90, 32, -90, 32, 70, -32, 70)
+interaction_polygon = PackedVector2Array(-51, -144, 51, -144, 51, 112, -51, 112)
 
 [node name="Stickers" parent="Hotspots" instance=ExtResource("6")]
-position = Vector2(220, 140)
-walk_to_point = Vector2(0, 140)
+position = Vector2(352, 224)
+walk_to_point = Vector2(0, 224)
 look_at_point = Vector2(0, -10)
-interaction_polygon = PackedVector2Array(-80, -40, 80, -40, 80, 40, -80, 40)
+interaction_polygon = PackedVector2Array(-128, -64, 128, -64, 128, 64, -128, 64)
 
 [node name="Regions" type="Node2D" parent="."]
 
@@ -50,6 +50,6 @@ interaction_polygon = PackedVector2Array(-80, -40, 80, -40, 80, 40, -80, 40)
 [node name="Characters" type="Node2D" parent="."]
 
 [node name="CharacterJoe *" parent="Characters" instance=ExtResource("7")]
-position = Vector2(400, 292)
-walk_to_point = Vector2(-50, 0)
-look_at_point = Vector2(0, -40)
+position = Vector2(640, 467)
+walk_to_point = Vector2(-80, 0)
+look_at_point = Vector2(0, -64)

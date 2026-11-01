@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://game/rooms/cockpit/hotspots/red_button/hotspot_red_button.gd" id="1_script"]
+
+[node name="RedButton" type="Area2D"]
+script = ExtResource("1_script")
+script_name = "RedButton"
+description = "Big Red Button"
+cursor = 1
+interaction_polygon = PackedVector2Array(-36, -28, 36, -28, 36, 28, -36, 28)
+
+[node name="InteractionPolygon" type="CollisionPolygon2D" parent="."]
+visible = false
+modulate = Color(1, 0, 1, 1)
+polygon = PackedVector2Array(-36, -28, 36, -28, 36, 28, -36, 28)

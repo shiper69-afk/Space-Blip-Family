@@ -7,10 +7,10 @@ var state: Data = load("res://game/rooms/corridor/room_corridor.tres")
 
 
 func _on_room_entered() -> void:
-	C.player.position = Vector2(90, 292)
+	C.player.position = Vector2(144, 467)
 	C.player.face_right()
 	if is_instance_valid(C.Joe):
-		C.Joe.position = Vector2(400, 292)
+		C.Joe.position = Vector2(640, 467)
 		C.Joe.face_left()
 
 

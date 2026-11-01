@@ -9,7 +9,7 @@ func _on_click() -> void:
 func on_look() -> void:
 	await C.player.walk_to_clicked()
 	await C.player.face_clicked()
-	await C.player.say("The family-systems light is stuck on amber. It pulses like it's judging me.")
+	await C.player.say("FAMSYS is still amber. It was amber yesterday. It will be amber after Grandma, too.")
 
 
 func on_talk() -> void:

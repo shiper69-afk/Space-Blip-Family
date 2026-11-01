@@ -3,10 +3,38 @@ extends Node
 
 const SLOT_COUNT := 10
 const START_SCENE := "res://game/start/start_screen.tscn"
+const INTRO_SCENE := "res://game/intro/intro.tscn"
 const COCKPIT_SCENE := "res://game/rooms/cockpit/room_cockpit.tscn"
 const TITLE := "Are We There Yet? (Galaxy edition)"
+const EPISODE := "Episode 1: Grandma's Calling"
+## Story urgency after the intro. About twenty seconds — not a 20:00 clock, does not tick.
+const STORY_COUNTDOWN := "any second now"
 
 var in_game := false
+var in_intro := false
+
+
+func cli_value(name: String) -> String:
+	var prefix := "--%s=" % name
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with(prefix):
+			return arg.substr(prefix.length())
+		if arg == "--%s" % name:
+			return "1"
+	return ""
+
+
+func maybe_capture_and_quit() -> void:
+	var path := cli_value("capture-png")
+	if path.is_empty():
+		return
+	await get_tree().process_frame
+	await get_tree().process_frame
+	await get_tree().create_timer(0.45).timeout
+	var image := get_viewport().get_texture().get_image()
+	if image:
+		image.save_png(path)
+	get_tree().quit()
 
 
 func hide_adventure_gui() -> void:
@@ -17,6 +45,8 @@ func hide_adventure_gui() -> void:
 
 func show_adventure_gui() -> void:
 	_apply_adventure_gui(true)
+	# Win any deferred hide from the title screen when jumping straight to a room.
+	_apply_adventure_gui.call_deferred(true)
 
 
 func _apply_adventure_gui(show: bool) -> void:
@@ -66,6 +96,14 @@ func make_save_description() -> String:
 
 func new_game() -> void:
 	await reset_slice_state()
+	in_game = false
+	in_intro = true
+	hide_adventure_gui()
+	get_tree().change_scene_to_file(INTRO_SCENE)
+
+
+func begin_gameplay() -> void:
+	in_intro = false
 	in_game = true
 	show_adventure_gui()
 	get_tree().change_scene_to_file(COCKPIT_SCENE)
@@ -80,6 +118,7 @@ func save_slot(slot: int) -> void:
 func load_slot(slot: int) -> void:
 	if not slot_exists(slot):
 		return
+	in_intro = false
 	if PopochiuUtils.e.in_room:
 		in_game = true
 		show_adventure_gui()
@@ -109,6 +148,7 @@ func _load_from_title(slot: int) -> void:
 
 func return_to_title() -> void:
 	in_game = false
+	in_intro = false
 	var menu := get_node_or_null("/root/GameMenu")
 	if menu and menu.has_method("close"):
 		menu.close()

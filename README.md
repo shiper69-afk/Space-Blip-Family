@@ -8,6 +8,7 @@ The GitHub repository is still named **Space-Blip-Family**.
 ## Playable slice (this PR)
 
 - **Engine:** Godot **4.7** + [Popochiu](https://github.com/carenalgas/popochiu) **2.2.1**
+- **Display:** **1024×576** base (matches `bridge_v5` and startscreen), stretch `canvas_items` + keep aspect, nearest filter. Default window 1280×720.
 - **Rooms:** Cockpit (`R-COCKPIT`) and mid-ship corridor (`R-CORRIDOR`)
 - **Player:** Alan (Dad / Captain) using the owner `dad_frames`
 - **NPC:** Joe in the corridor using `joe_frames`
@@ -16,7 +17,8 @@ The GitHub repository is still named **Space-Blip-Family**.
 - **Exports targeted:** Windows and web (export from the Godot editor; templates required)
 - **Start screen:** looping owner background (`startscreen` 360 frames). Title **Are We There Yet? (Galaxy edition)** is **text overlaid** on that animation — it is not painted into the art.
 - **Save / load:** 10 slots (timestamp + room). **New Game / Load Game / Quit** on the title screen; **Esc** opens the same slots in-game (Resume / Save / Load / Return to Title / Quit). Esc still skips cutscenes.
-- **Art:** character frames are the repainted 90s owner set (112×128). Room backgrounds in the slice are still placeholders. A painted bridge (`bridge_v5`, 1024×576) is in source art only.
+- **Intro:** New Game plays the skippable canon intro ([docs/intro-script.md](docs/intro-script.md)). Click or Esc skips. Title card is **Are We There Yet? (Galaxy edition)** / Episode 1: Grandma's Calling.
+- **Art:** character frames are the repainted 90s owner set (112×128). The cockpit uses the painted `bridge_v5` (1024×576, blink frames). Corridor background is still a placeholder.
 - **Bela and Cookie** are canon family dogs (frames in `bela_frames` / `cookie_frames`). They are not on stage in this slice.
 
 Living canon: [`docs/project-context.md`](docs/project-context.md)
@@ -46,7 +48,7 @@ Living canon: [`docs/project-context.md`](docs/project-context.md)
 5. **Play**
    - Press **F5** (or the Play button in the top-right)
    - The start screen plays the looping space background with the title drawn on top
-   - **New Game** starts in the cockpit. **Load Game** opens 10 slots. **Quit** exits
+   - **New Game** plays the intro, then the painted bridge with Alan. **Load Game** opens 10 slots (no intro). **Quit** exits
    - In-game, press **Esc** for save / load / return to title
    - Move the mouse to the **top of the window** to show the verb bar
    - **Walk / Look / Talk / Interact** (Interact = Use)
@@ -80,6 +82,7 @@ Owner frames live at:
 
 The eight character sets were **repainted** (smooth 90s style, 112×128 RGBA) and replaced in place. Folder and file names match the original delivery (including the `Charechter` spelling). Do not rename those files.
 
+`bridge/` and `sheets/` are `.gdignore`d source art, same as the character originals. Playable blink copies of `bridge_v5_00` / `01` live under `game/rooms/cockpit/props/background/`.
 `bridge/`, `door/`, `alan_sleep/`, `grandma/`, and `sheets/` are `.gdignore`d source art, same as the character originals. Game-usable frames and scenes are under `game/bridge/` (background, door, Alan's chair intro, depth scale) and `game/characters/grandma/` (viewscreen). The cockpit scene still points at its 640×360 placeholder. How to switch it is in [`docs/project-context.md`](docs/project-context.md).
 
 Working copies used by Alan and Joe animations live under `game/characters/*/frames/` and were updated to the same PNGs. Scene paths are unchanged.
