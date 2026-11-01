@@ -72,12 +72,15 @@ Owner frames live at:
 `assets/art/originals/Charechter Animation/`  
 `assets/art/originals/Non Charechter Animation/ship_frames/`  
 `assets/art/originals/startscreen/`  
-`assets/art/originals/bridge/` (`bridge_v5`, 1024×576, full colour + 256-colour, blink frames 00/01, plus preview)  
+`assets/art/originals/bridge/` (`bridge_v5`, 1024×576, full colour + 256-colour, blink frames 00/01, plus preview; **mugless** `bridge_v5_*_nomug` is the background to use going forward)  
+`assets/art/originals/door/` (pocket-door overlays, mask, sheet, gif)  
+`assets/art/originals/alan_sleep/` (captain's-chair snore / wake, mug, zzz)  
+`assets/art/originals/grandma/` (viewscreen call: talk, idle, judge)  
 `assets/art/originals/sheets/` (character sheets, animation sheets, `*_anims.json`)
 
 The eight character sets were **repainted** (smooth 90s style, 112×128 RGBA) and replaced in place. Folder and file names match the original delivery (including the `Charechter` spelling). Do not rename those files.
 
-`bridge/` and `sheets/` are `.gdignore`d source art, same as the character originals. The cockpit scene still points at its placeholder background.
+`bridge/`, `door/`, `alan_sleep/`, `grandma/`, and `sheets/` are `.gdignore`d source art, same as the character originals. Game-usable frames and scenes are under `game/bridge/` (background, door, Alan's chair intro, depth scale) and `game/characters/grandma/` (viewscreen). The cockpit scene still points at its 640×360 placeholder. How to switch it is in [`docs/project-context.md`](docs/project-context.md).
 
 Working copies used by Alan and Joe animations live under `game/characters/*/frames/` and were updated to the same PNGs. Scene paths are unchanged.
 

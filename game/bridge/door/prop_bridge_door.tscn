@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://game/bridge/door/prop_bridge_door.gd" id="1_script"]
+[ext_resource type="SpriteFrames" path="res://game/bridge/door/door_sprite_frames.tres" id="2_frames"]
+[ext_resource type="Texture2D" path="res://game/bridge/door/frames/door_corridor_bg.png" id="3_corridor"]
+[ext_resource type="Texture2D" path="res://game/bridge/door/frames/door_mask.png" id="4_mask"]
+
+[node name="BridgeDoor" type="Area2D"]
+position = Vector2(180, 48)
+script = ExtResource("1_script")
+script_name = "BridgeDoor"
+description = "Door"
+baseline = 0
+cursor = 1
+walk_to_point = Vector2(29, 177)
+look_at_point = Vector2(29.5, 81.5)
+interaction_polygon = PackedVector2Array(0, 0, 59, 0, 59, 163, 0, 163)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+
+[node name="Door" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+centered = false
+sprite_frames = ExtResource("2_frames")
+animation = &"closed"
+
+[node name="CorridorBg" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+centered = false
+texture = ExtResource("3_corridor")
+
+[node name="Mask" type="Sprite2D" parent="."]
+visible = false
+texture_filter = 1
+centered = false
+texture = ExtResource("4_mask")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="InteractionPolygon" type="CollisionPolygon2D" parent="."]
+visible = false
+modulate = Color(1, 1, 0, 1)
+polygon = PackedVector2Array(0, 0, 59, 0, 59, 163, 0, 163)
+
+[node name="ObstaclePolygon" type="NavigationObstacle2D" parent="."]
+visible = false
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="WalkIn" type="Marker2D" parent="."]
+position = Vector2(29, 177)
+
+[node name="Threshold" type="Marker2D" parent="."]
+position = Vector2(29.5, 171)
+
+[node name="InsideRoom" type="Marker2D" parent="."]
+position = Vector2(49, 211)

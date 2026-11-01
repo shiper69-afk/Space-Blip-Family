@@ -1,0 +1,52 @@
+[gd_resource type="SpriteFrames" load_steps=9 format=3 uid="uid://vkmcjh5mud7sy"]
+
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/mug_prop.png" id="tex_0"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/mug_wake_00.png" id="tex_1"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/mug_wake_01.png" id="tex_2"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/mug_wake_02.png" id="tex_3"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/mug_wake_03.png" id="tex_4"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/mug_wake_04.png" id="tex_5"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/mug_wake_05.png" id="tex_6"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/mug_stuck_console.png" id="tex_7"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_0")
+}],
+"loop": true,
+"name": &"rest",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_6")
+}],
+"loop": false,
+"name": &"fly",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_7")
+}],
+"loop": true,
+"name": &"stuck",
+"speed": 1.0
+}]

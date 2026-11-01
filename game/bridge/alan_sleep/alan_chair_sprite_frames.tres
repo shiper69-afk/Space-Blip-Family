@@ -1,0 +1,71 @@
+[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://tf2d1abx4g4ow"]
+
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_sleep_chair_00.png" id="tex_0"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_sleep_chair_01.png" id="tex_1"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_sleep_chair_02.png" id="tex_2"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_sleep_chair_03.png" id="tex_3"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_sleep_chair_04.png" id="tex_4"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_sleep_chair_05.png" id="tex_5"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_sleep_chair_06.png" id="tex_6"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_sleep_chair_07.png" id="tex_7"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_wake_jolt_00.png" id="tex_8"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_wake_jolt_01.png" id="tex_9"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_wake_jolt_02.png" id="tex_10"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_wake_jolt_03.png" id="tex_11"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_wake_jolt_04.png" id="tex_12"]
+[ext_resource type="Texture2D" path="res://game/bridge/alan_sleep/frames/alan_frames_wake_jolt_05.png" id="tex_13"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_7")
+}],
+"loop": true,
+"name": &"sleep_chair",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("tex_8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_9")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_10")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("tex_13")
+}],
+"loop": false,
+"name": &"wake_jolt",
+"speed": 10.0
+}]
