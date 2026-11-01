@@ -1,0 +1,136 @@
+{
+ "character": "eithan",
+ "frame_size": [
+  112,
+  128
+ ],
+ "baseline_y": 124,
+ "animations": {
+  "dizzy_down": [
+   "eithan_frames_dizzy_down_00.png",
+   "eithan_frames_dizzy_down_01.png"
+  ],
+  "fall_right": [
+   "eithan_frames_fall_right_00.png",
+   "eithan_frames_fall_right_01.png",
+   "eithan_frames_fall_right_02.png",
+   "eithan_frames_fall_right_03.png",
+   "eithan_frames_fall_right_04.png",
+   "eithan_frames_fall_right_05.png"
+  ],
+  "hands_on_hips": [
+   "eithan_frames_hands_on_hips_00.png"
+  ],
+  "idle_down": [
+   "eithan_frames_idle_down_00.png",
+   "eithan_frames_idle_down_01.png",
+   "eithan_frames_idle_down_02.png",
+   "eithan_frames_idle_down_03.png"
+  ],
+  "idle_right": [
+   "eithan_frames_idle_right_00.png",
+   "eithan_frames_idle_right_01.png",
+   "eithan_frames_idle_right_02.png",
+   "eithan_frames_idle_right_03.png"
+  ],
+  "idle_up": [
+   "eithan_frames_idle_up_00.png",
+   "eithan_frames_idle_up_01.png"
+  ],
+  "laugh": [
+   "eithan_frames_laugh_00.png"
+  ],
+  "pickup_right": [
+   "eithan_frames_pickup_right_00.png",
+   "eithan_frames_pickup_right_01.png",
+   "eithan_frames_pickup_right_02.png",
+   "eithan_frames_pickup_right_03.png"
+  ],
+  "point_right": [
+   "eithan_frames_point_right_00.png"
+  ],
+  "reach_up_right": [
+   "eithan_frames_reach_up_right_00.png",
+   "eithan_frames_reach_up_right_01.png"
+  ],
+  "scratch_head_right": [
+   "eithan_frames_scratch_head_right_00.png",
+   "eithan_frames_scratch_head_right_01.png"
+  ],
+  "shrug": [
+   "eithan_frames_shrug_00.png"
+  ],
+  "surprised": [
+   "eithan_frames_surprised_00.png"
+  ],
+  "talk_down": [
+   "eithan_frames_talk_down_00.png",
+   "eithan_frames_talk_down_01.png",
+   "eithan_frames_talk_down_02.png",
+   "eithan_frames_talk_down_03.png",
+   "eithan_frames_talk_down_04.png",
+   "eithan_frames_talk_down_05.png",
+   "eithan_frames_talk_down_06.png",
+   "eithan_frames_talk_down_07.png"
+  ],
+  "talk_right": [
+   "eithan_frames_talk_right_00.png",
+   "eithan_frames_talk_right_01.png",
+   "eithan_frames_talk_right_02.png",
+   "eithan_frames_talk_right_03.png"
+  ],
+  "thumbs_up": [
+   "eithan_frames_thumbs_up_00.png"
+  ],
+  "use_right": [
+   "eithan_frames_use_right_00.png",
+   "eithan_frames_use_right_01.png"
+  ],
+  "walk_down": [
+   "eithan_frames_walk_down_00.png",
+   "eithan_frames_walk_down_01.png",
+   "eithan_frames_walk_down_02.png",
+   "eithan_frames_walk_down_03.png",
+   "eithan_frames_walk_down_04.png",
+   "eithan_frames_walk_down_05.png",
+   "eithan_frames_walk_down_06.png",
+   "eithan_frames_walk_down_07.png"
+  ],
+  "walk_left": [
+   "eithan_frames_walk_left_00.png",
+   "eithan_frames_walk_left_01.png",
+   "eithan_frames_walk_left_02.png",
+   "eithan_frames_walk_left_03.png",
+   "eithan_frames_walk_left_04.png",
+   "eithan_frames_walk_left_05.png",
+   "eithan_frames_walk_left_06.png",
+   "eithan_frames_walk_left_07.png"
+  ],
+  "walk_right": [
+   "eithan_frames_walk_right_00.png",
+   "eithan_frames_walk_right_01.png",
+   "eithan_frames_walk_right_02.png",
+   "eithan_frames_walk_right_03.png",
+   "eithan_frames_walk_right_04.png",
+   "eithan_frames_walk_right_05.png",
+   "eithan_frames_walk_right_06.png",
+   "eithan_frames_walk_right_07.png"
+  ],
+  "walk_up": [
+   "eithan_frames_walk_up_00.png",
+   "eithan_frames_walk_up_01.png",
+   "eithan_frames_walk_up_02.png",
+   "eithan_frames_walk_up_03.png",
+   "eithan_frames_walk_up_04.png",
+   "eithan_frames_walk_up_05.png",
+   "eithan_frames_walk_up_06.png",
+   "eithan_frames_walk_up_07.png"
+  ],
+  "wave_a": [
+   "eithan_frames_wave_a_00.png"
+  ],
+  "wave_b": [
+   "eithan_frames_wave_b_00.png"
+  ]
+ }
+}

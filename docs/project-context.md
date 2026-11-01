@@ -137,7 +137,7 @@ Seed list for the **opening ship**. Add rows as rooms come online. Status: `idea
 
 | ID | Location | Purpose in Act 1 | Key hotspots *(proposal)* | Characters often here | Status |
 |----|----------|------------------|---------------------------|------------------------|--------|
-| `R-COCKPIT` | Cockpit / Bridge | Start room; alert; captain fantasy | chair, mug, amber light, nav screen, aft hatch | Alan | built (placeholder BG) |
+| `R-COCKPIT` | Cockpit / Bridge | Start room; alert; captain fantasy | chair, mug, amber light, nav screen, aft hatch | Alan | built (placeholder BG; painted `bridge_v5` is source art only) |
 | `R-CORRIDOR` | Mid-ship corridor | Hub between rooms; Joe patrol | wall stickers, maintenance panel, badge sticky-spot, door labels | Joe, DavDav (wandering) | built (placeholder BG) |
 | `R-GALLEY` | Galley / Kitchen | DanDan’s domain; coil puzzle | synthesizer, fridge, spice rack, fire extinguisher (gag) | DanDan | outlined |
 | `R-OPS` | Ops nook | Eithan’s station; power puzzle | breaker board, manuals pile, gum jar, jumper drawer | Eithan | outlined |
@@ -202,7 +202,9 @@ High-level, SQ6-inspired. Implementation: **Godot 4 + Popochiu** (see Implementa
 - Characters: exaggerated proportions OK; each needs a clear idle fidget (Joe salute, DanDan tasting air, DavDav spinning).
 - Music: light adventure theme with “sitcom in space” energy; short stingers for fails.
 - Avoid: modern UI chrome that breaks SQ6 nostalgia unless user wants a hybrid.
-- **Owner frames (present):** 80 frames each for Alan (`dad_frames`), Naomi (`mom_frames`), Joe, DanDan, Eithan, DavDav, **Bela**, **Cookie**. Sprites 112×128. Ship: 32 frames in `ship_frames`. Originals live in `assets/art/originals/` (folder names kept as delivered, including the `Charechter` spelling).
+- **Owner frames (repainted):** 80 frames each for Alan (`dad_frames`), Naomi (`mom_frames`), Joe, DanDan, Eithan, DavDav, **Bela**, **Cookie**. Sprites 112×128 RGBA, smooth painted 90s style. Same filenames as the previous set; the PNGs were replaced in place. Ship: 32 frames in `ship_frames`. Originals live in `assets/art/originals/` (folder names kept as delivered, including the `Charechter` spelling). Alan and Joe copies under `game/characters/*/frames/` match those files so existing scene paths stay valid.
+- **Bridge source:** `assets/art/originals/bridge/` — `bridge_v5` cockpit background, 1024×576. Full-colour `bridge_v5_00.png` / `bridge_v5_01.png` (light blink), 256-colour indexed twins (`*_256.png`), and `bridge_v5_preview.png`. `.gdignore`d reference art. The cockpit scene still uses its 640×360 placeholder.
+- **Sheets:** `assets/art/originals/sheets/` — character sheets, animation sheets, per-character `*_anims.json`, and `crew_overview.png` (also `.gdignore`d).
 
 ---
 
@@ -214,7 +216,7 @@ High-level, SQ6-inspired. Implementation: **Godot 4 + Popochiu** (see Implementa
 | Verbs / UI | Popochiu **Sierra High-Res** GUI: Walk / Look / Interact (Use) / Talk + inventory popup. SQ6-style. |
 | Target platforms | **Windows + web** export. |
 | Resolution / aspect | Slice uses **640×360** (16:9), pixel-art filter, window 1280×720. Revisit if painted BGs want 4:3. |
-| Art pipeline | Owner PNG frames committed under `assets/art/originals/`. Copies used for Alan/Joe animations under `game/characters/`. Placeholder room backgrounds until painted sets exist. Start-screen loop lives in `assets/art/originals/startscreen/` (not `.gdignore`d, so it exports). |
+| Art pipeline | Repainted owner PNG frames (112×128 RGBA, same paths) under `assets/art/originals/`. Alan/Joe copies under `game/characters/` match them. Painted bridge `bridge_v5` (1024×576, blink frames 00/01, full colour + 256-colour) and sheets live in `assets/art/originals/bridge/` and `assets/art/originals/sheets/` (`.gdignore`d). In-game room backgrounds are still placeholders. Start-screen loop lives in `assets/art/originals/startscreen/` (not `.gdignore`d, so it exports). |
 | Start / title screen | First scene. Looping owner frames (360 × 12 fps). Title **Are We There Yet? (Galaxy edition)** is **overlay text**, not painted into the art. Buttons: New Game, Load Game (10 slots), Quit. |
 | Save / load | 10 Popochiu slots (`user://save_%d.json`). Esc opens the in-game menu (save / load / title / quit). Esc still skips cutscenes. |
 | Repo structure | Godot project at repo root (`project.godot`). Game content in `game/`. Canon doc in `docs/project-context.md`. |
@@ -249,6 +251,7 @@ Record choices here so the living doc doesn’t argue with itself.
 | 2026-11-01 | **Fail style locked: comic death** | Classic Sierra. Always funny, instant restore, PG, never mean toward the kids. |
 | 2026-11-01 | Act 1 → Act 2 hook stays **open** | Owner still working on Act 1. No hook proposed or locked. |
 | 2026-11-01 | Start-screen title is **overlay text** | Not baked into the animated background. Overlay string: **Are We There Yet? (Galaxy edition)**. |
+| 2026-11-01 | Repainted characters + bridge source art | Eight characters × 80 frames replaced in place (smooth 90s paint, 112×128 RGBA), including Alan/Joe game copies. `bridge_v5` and sheets added under `assets/art/originals/`. Cockpit scene still uses the placeholder background. |
 
 ---
 

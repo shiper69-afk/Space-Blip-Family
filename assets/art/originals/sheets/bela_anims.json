@@ -1,0 +1,99 @@
+{
+ "character": "bela",
+ "frame_size": [
+  112,
+  128
+ ],
+ "baseline_y": 124,
+ "animations": {
+  "bark": [
+   "bela_frames_bark_00.png",
+   "bela_frames_bark_01.png"
+  ],
+  "bark_right": [
+   "bela_frames_bark_right_00.png",
+   "bela_frames_bark_right_01.png"
+  ],
+  "dizzy_down": [
+   "bela_frames_dizzy_down_00.png",
+   "bela_frames_dizzy_down_01.png"
+  ],
+  "fall_right": [
+   "bela_frames_fall_right_00.png",
+   "bela_frames_fall_right_01.png",
+   "bela_frames_fall_right_02.png",
+   "bela_frames_fall_right_03.png",
+   "bela_frames_fall_right_04.png",
+   "bela_frames_fall_right_05.png"
+  ],
+  "happy": [
+   "bela_frames_happy_00.png",
+   "bela_frames_happy_01.png"
+  ],
+  "head_tilt": [
+   "bela_frames_head_tilt_00.png"
+  ],
+  "idle_down": [
+   "bela_frames_idle_down_00.png",
+   "bela_frames_idle_down_01.png",
+   "bela_frames_idle_down_02.png",
+   "bela_frames_idle_down_03.png"
+  ],
+  "idle_right": [
+   "bela_frames_idle_right_00.png",
+   "bela_frames_idle_right_01.png",
+   "bela_frames_idle_right_02.png",
+   "bela_frames_idle_right_03.png"
+  ],
+  "idle_up": [
+   "bela_frames_idle_up_00.png",
+   "bela_frames_idle_up_01.png"
+  ],
+  "jump": [
+   "bela_frames_jump_00.png"
+  ],
+  "lie_down": [
+   "bela_frames_lie_down_00.png"
+  ],
+  "walk_down": [
+   "bela_frames_walk_down_00.png",
+   "bela_frames_walk_down_01.png",
+   "bela_frames_walk_down_02.png",
+   "bela_frames_walk_down_03.png",
+   "bela_frames_walk_down_04.png",
+   "bela_frames_walk_down_05.png",
+   "bela_frames_walk_down_06.png",
+   "bela_frames_walk_down_07.png"
+  ],
+  "walk_left": [
+   "bela_frames_walk_left_00.png",
+   "bela_frames_walk_left_01.png",
+   "bela_frames_walk_left_02.png",
+   "bela_frames_walk_left_03.png",
+   "bela_frames_walk_left_04.png",
+   "bela_frames_walk_left_05.png",
+   "bela_frames_walk_left_06.png",
+   "bela_frames_walk_left_07.png"
+  ],
+  "walk_right": [
+   "bela_frames_walk_right_00.png",
+   "bela_frames_walk_right_01.png",
+   "bela_frames_walk_right_02.png",
+   "bela_frames_walk_right_03.png",
+   "bela_frames_walk_right_04.png",
+   "bela_frames_walk_right_05.png",
+   "bela_frames_walk_right_06.png",
+   "bela_frames_walk_right_07.png"
+  ],
+  "walk_up": [
+   "bela_frames_walk_up_00.png",
+   "bela_frames_walk_up_01.png",
+   "bela_frames_walk_up_02.png",
+   "bela_frames_walk_up_03.png",
+   "bela_frames_walk_up_04.png",
+   "bela_frames_walk_up_05.png",
+   "bela_frames_walk_up_06.png",
+   "bela_frames_walk_up_07.png"
+  ]
+ }
+}

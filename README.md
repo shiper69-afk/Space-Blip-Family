@@ -16,7 +16,7 @@ The GitHub repository is still named **Space-Blip-Family**.
 - **Exports targeted:** Windows and web (export from the Godot editor; templates required)
 - **Start screen:** looping owner background (`startscreen` 360 frames). Title **Are We There Yet? (Galaxy edition)** is **text overlaid** on that animation — it is not painted into the art.
 - **Save / load:** 10 slots (timestamp + room). **New Game / Load Game / Quit** on the title screen; **Esc** opens the same slots in-game (Resume / Save / Load / Return to Title / Quit). Esc still skips cutscenes.
-- **Placeholder:** room backgrounds are simple stand-ins. Character frames are owner art.
+- **Art:** character frames are the repainted 90s owner set (112×128). Room backgrounds in the slice are still placeholders. A painted bridge (`bridge_v5`, 1024×576) is in source art only.
 - **Bela and Cookie** are canon family dogs (frames in `bela_frames` / `cookie_frames`). They are not on stage in this slice.
 
 Living canon: [`docs/project-context.md`](docs/project-context.md)
@@ -67,15 +67,19 @@ Living canon: [`docs/project-context.md`](docs/project-context.md)
 
 ## Art
 
-Owner frames are stored untouched at:
+Owner frames live at:
 
 `assets/art/originals/Charechter Animation/`  
 `assets/art/originals/Non Charechter Animation/ship_frames/`  
-`assets/art/originals/startscreen/`
+`assets/art/originals/startscreen/`  
+`assets/art/originals/bridge/` (`bridge_v5`, 1024×576, full colour + 256-colour, blink frames 00/01, plus preview)  
+`assets/art/originals/sheets/` (character sheets, animation sheets, `*_anims.json`)
 
-Folder names match the zip (including the original `Charechter` spelling). Do not rename those files.
+The eight character sets were **repainted** (smooth 90s style, 112×128 RGBA) and replaced in place. Folder and file names match the original delivery (including the `Charechter` spelling). Do not rename those files.
 
-Working copies used by Alan and Joe animations live under `game/characters/*/frames/`.
+`bridge/` and `sheets/` are `.gdignore`d source art, same as the character originals. The cockpit scene still points at its placeholder background.
+
+Working copies used by Alan and Joe animations live under `game/characters/*/frames/` and were updated to the same PNGs. Scene paths are unchanged.
 
 ## License notes
 
