@@ -110,10 +110,10 @@ New Game plays the skippable space intro in [intro-script.md](intro-script.md), 
 - **Title card (canon):** **Are We There Yet? (Galaxy edition)** / Episode 1: Grandma's Calling.
 - Skip: Esc skips the remaining cinematic. LMB / Space / Enter advances lines.
 - After the flyby, cut **straight to the bridge** (no crew tour, no recorded leftover, no title before the call): **Alan asleep**, **DavDav next to him**, incoming-call alert. ~10 seconds later DavDav hits the red button; **Chaya** appears only then.
-- Door order: Naomi + coffee after “Every call is a gift”; Joe after “Kids! Bridge!”; DanDan + frying pan; Eithan after Naomi’s eyebrow line (full script, no gap).
+- Door order: Naomi after “Every call is a gift”; Joe after “Kids! Bridge!”; DanDan; Eithan after Naomi’s eyebrow line (full script, no gap). Walk-ins are **empty-handed** (no coffee / manual / frying pan graphics or placeholder labels). Spoken lines that mention a prop stay as dialogue.
+- Speakers (Alan, Naomi, Joe, DanDan, Eithan, DavDav) loop sheet **talk** mouth poses (`talk_down` frames 0/3/4/7 from the 8-frame sheet; `talk_right` 4-frame) while their line is up, then idle. Chaya stays on the viewscreen.
 - **Title card last:** Are We There Yet? (Galaxy edition) / Episode 1: Grandma's Calling.
 - After the call: CALL ENDED, alarms, DavDav “Red means yes”, Naomi’s orders, Alan trips. **No 20:00 countdown / HUD.** Grandma calling back is a later beat. Player controls Alan.
-- Walk-in props (Jack): Naomi holds coffee, Eithan the manual, DanDan the frying pan. Props stay attached while they move.
 
 ### First 15–20 minutes — beat sheet *(proposal)*
 
@@ -300,6 +300,8 @@ Record choices here so the living doc doesn’t argue with itself.
 | 2026-11-01 | Repainted characters + bridge source art | Eight characters × 80 frames replaced in place (smooth 90s paint, 112×128 RGBA), including Alan/Joe game copies. `bridge_v5` and sheets added under `assets/art/originals/`. Cockpit scene still uses the placeholder background. |
 | 2026-11-01 | Bridge door, mugless background, Alan chair intro, depth curve | Game resources under `game/bridge/`. Background going forward is `bridge_v5_*_nomug`. Live cockpit stays the 640×360 placeholder until hotspots and the walk polygon are retuned. See [Using the painted bridge](#using-the-painted-bridge). |
 | 2026-11-01 | Grandma is a viewscreen character | Video call only, on the bridge glass. Frames and `grandma_viewscreen.tscn` live under `game/characters/grandma/`. Source art in `assets/art/originals/grandma/` (`.gdignore`d). Cockpit scene unchanged. |
+| 2026-11-01 | Grandma-call walk-ins empty-handed | No coffee / manual / frying pan sprites or placeholder labels. Dialogue that mentions a prop stays. |
+| 2026-11-01 | Grandma-call speakers use sheet talk loops | Alan, Naomi, Joe, DanDan, Eithan, DavDav play `talk_down` (8) / `talk_right` (4) while a line types/displays, then idle. Chaya stays on the viewscreen. |
 
 ---
 

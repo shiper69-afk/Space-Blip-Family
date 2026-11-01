@@ -1,6 +1,7 @@
 # Grandma Chaya call script (full, from Shiper)
 NOTE: Title card in game must be "Are We There Yet? (Galaxy edition)" / "Episode 1: Grandma's Calling" (not SPACE BLIP FAMILY).
 NOTE: No 20:00 / 19:59 countdown and no Ship Computer “Grandma will call back in twenty minutes.” Grandma calling back is a later beat.
+NOTE: Walk-ins are empty-handed (no coffee / manual / frying pan graphics). Stage directions about holding those stay in this script; they are not staged. Spoken lines that mention a prop (e.g. “put that book down”) stay as dialogue.
 
 INT. COCKPIT, CONTINUOUS
 

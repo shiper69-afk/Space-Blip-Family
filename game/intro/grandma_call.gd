@@ -13,6 +13,7 @@ const SLEEP_FPS := 6.0
 const WAKE_FPS := 10.0
 const DOOR_FPS := 12.0
 const CAST_FPS := 8.0
+const TALK_FPS := 12.0
 const ALAN_SLEEP := Vector2(462, 70)
 const DOOR_POS := Vector2(180, 48)
 const WALK_IN := Vector2(209, 225)
@@ -22,13 +23,6 @@ const DAV_START := Vector2(400, 305)
 const CHAYA_DIR := "res://game/characters/grandma/frames"
 const CHAYA_POS := Vector2(599, 40)
 const CHAYA_FPS := 8.0
-const PROP_DIR := "res://game/props"
-const PROP_LOCAL := 128.0 / 104.0
-const PROP_OFFSET := {
-	"coffee": Vector2(18, -50),
-	"manual": Vector2(16, -62),
-	"frying_pan": Vector2(26, -32),
-}
 
 var _skipped := false
 var _finished := false
@@ -183,8 +177,9 @@ func _process(delta: float) -> void:
 	for name: String in _cast_anim.keys():
 		var data: Dictionary = _cast_anim[name]
 		data.accum += delta
-		if data.accum >= 1.0 / CAST_FPS:
-			data.accum -= 1.0 / CAST_FPS
+		var fps: float = float(data.get("fps", CAST_FPS))
+		if data.accum >= 1.0 / fps:
+			data.accum -= 1.0 / fps
 			data.index = (data.index + 1) % data.frames.size()
 			(data.node as Sprite2D).texture = data.frames[data.index]
 			_depth(data.node)
@@ -286,7 +281,7 @@ func _play() -> void:
 	await _say("ALAN", "Every call is a gift.")
 	if _skipped:
 		return
-	await _enter("naomi", Vector2(360, 340), "coffee")
+	await _enter("naomi", Vector2(360, 340))
 	if _skipped:
 		return
 	await _say("NAOMI", "Hi, Mom.")
@@ -304,7 +299,7 @@ func _play() -> void:
 	await _say("ALAN", "Kids! Bridge! Grandma's on the line!")
 	if _skipped:
 		return
-	await _enter("joe", Vector2(300, 380), "", 0.55)
+	await _enter("joe", Vector2(300, 380), 0.55)
 	if _skipped:
 		return
 	await _say("JOE", "Who authorized an outside call? This is a breach of protocol!")
@@ -316,7 +311,7 @@ func _play() -> void:
 	await _say("JOE", "...That toaster was a threat.")
 	if _skipped:
 		return
-	await _enter("dandan", Vector2(430, 400), "frying_pan")
+	await _enter("dandan", Vector2(430, 400))
 	if _skipped:
 		return
 	await _say("DANDAN", "Hi, Grandma. Did you eat? I'm working on a nebula omelet.")
@@ -340,7 +335,7 @@ func _play() -> void:
 	await _say("NAOMI", "You said it with your eyebrow.")
 	if _skipped:
 		return
-	await _enter("eithan", Vector2(250, 310), "manual")
+	await _enter("eithan", Vector2(250, 310))
 	if _skipped:
 		return
 	await _say("EITHAN", "Status update. Call quality is sixty-two percent. Grandma's camera is pointed at the ceiling.")
@@ -512,13 +507,11 @@ func _wake_alan() -> void:
 	_spawn("alan", Vector2(512, 268), "surprised")
 
 
-func _enter(who: String, dest: Vector2, extra: String, speed := 0.85) -> void:
+func _enter(who: String, dest: Vector2, speed := 0.85) -> void:
 	await _open_door()
 	if _skipped:
 		return
 	var sprite := _spawn(who, WALK_IN, "walk_right")
-	if extra != "":
-		_attach_prop(sprite, extra)
 	var walk := create_tween()
 	walk.set_trans(Tween.TRANS_SINE)
 	walk.set_ease(Tween.EASE_IN_OUT)
@@ -620,13 +613,9 @@ func _spawn(who: String, at: Vector2, anim: String) -> Sprite2D:
 	sprite.position = at.round()
 	sprite.name = who
 	_cast.add_child(sprite)
-	var frames := _frames_for(who, anim)
-	if frames.is_empty():
-		frames = _frames_for(who, "idle_down")
-	if not frames.is_empty():
-		sprite.texture = frames[0]
-		if frames.size() > 1:
-			_cast_anim[who] = {"node": sprite, "frames": frames, "index": 0, "accum": 0.0}
+	_swap(who, anim)
+	if sprite.texture == null:
+		_swap(who, "idle_down")
 	_depth(sprite)
 	return sprite
 
@@ -638,12 +627,26 @@ func _swap(who: String, anim: String) -> void:
 	var frames := _frames_for(who, anim)
 	if frames.is_empty():
 		return
+	_remember_facing(sprite, anim)
 	sprite.texture = frames[0]
 	if frames.size() > 1:
-		_cast_anim[who] = {"node": sprite, "frames": frames, "index": 0, "accum": 0.0}
+		_cast_anim[who] = {
+			"node": sprite, "frames": frames, "index": 0, "accum": 0.0, "fps": CAST_FPS
+		}
 	else:
 		_cast_anim.erase(who)
 	_depth(sprite)
+
+
+func _remember_facing(sprite: Sprite2D, anim: String) -> void:
+	var facing := "down"
+	for dir in ["down", "right", "left", "up"]:
+		if anim.ends_with("_" + dir):
+			facing = dir
+			break
+	if anim.begins_with("walk_") or anim.begins_with("idle_") or anim.begins_with("talk_"):
+		sprite.set_meta("facing", facing)
+		sprite.set_meta("rest_anim", "idle_%s" % facing)
 
 
 func _depth(sprite: Sprite2D) -> void:
@@ -651,25 +654,6 @@ func _depth(sprite: Sprite2D) -> void:
 	var s := clampf(0.0011538 * feet_y + 1.0, 1.10, 1.70) * (104.0 / 128.0)
 	sprite.scale = Vector2(s, s)
 	sprite.z_index = clampi(int(feet_y / 24.0), 1, 22)
-
-
-func _attach_prop(holder: Sprite2D, prop: String) -> void:
-	if holder.get_node_or_null("HeldProp") != null:
-		return
-	var tex := Frames.load_png("%s/%s.png" % [PROP_DIR, prop])
-	if tex == null:
-		return
-	var spr := Sprite2D.new()
-	spr.name = "HeldProp"
-	spr.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-	spr.centered = true
-	spr.texture = tex
-	spr.z_index = 1
-	# Props are painted for a 104px sprite at depth 1.0. Characters use that
-	# curve times 104/128, so local 128/104 makes world scale = clamp only.
-	spr.scale = Vector2(PROP_LOCAL, PROP_LOCAL)
-	spr.position = PROP_OFFSET.get(prop, Vector2(16, -48))
-	holder.add_child(spr)
 
 
 func _frames_for(who: String, anim: String) -> Array[Texture2D]:
@@ -736,25 +720,53 @@ func _say(speaker: String, text: String) -> void:
 	_stop_talking(talker)
 
 
-## Every speaker on the bridge loops talk_down while their line is up, then idles.
-## "ALAN", "NAOMI (intercom)" -> cast key "alan", "naomi". Chaya uses her own screen.
+## Bridge speakers loop sheet talk frames (mouth, not the shrug gesture) for the
+## whole line, then return to idle. Chaya stays on the viewscreen.
+## "ALAN", "NAOMI (intercom)" -> cast key "alan", "naomi".
 func _start_talking(speaker: String) -> String:
 	var who := speaker.split(" ")[0].to_lower()
+	if who in ["chaya", "narrator", "ship"]:
+		return ""
 	var sprite := _cast.get_node_or_null(who) as Sprite2D
 	if sprite == null:
 		return ""
-	var talk := _frames_for(who, "talk_down")
+	var facing: String = sprite.get_meta("facing", "down")
+	var talk := _mouth_loop(_frames_for(who, "talk_%s" % facing))
+	if talk.size() < 2:
+		talk = _mouth_loop(_frames_for(who, "talk_down"))
 	if talk.is_empty():
 		return ""
-	sprite.texture = talk[0]
-	_cast_anim[who] = {"node": sprite, "frames": talk, "index": 0, "accum": 0.0}
+	# Start on an open-mouth pose so talking is visible on the first frame.
+	var start := 1 if talk.size() > 1 else 0
+	sprite.texture = talk[start]
+	_cast_anim[who] = {
+		"node": sprite, "frames": talk, "index": start, "accum": 0.0, "fps": TALK_FPS
+	}
+	_depth(sprite)
 	return who
 
 
+## 8-frame sheet talk_down is closed, shrug, closed, open, open, closed, shrug, open.
+## Keep the mouth poses; drop the shrug (indices 1 and 6). talk_right (4) is already a mouth loop.
+func _mouth_loop(frames: Array[Texture2D]) -> Array[Texture2D]:
+	if frames.size() < 8:
+		return frames
+	var mouth: Array[Texture2D] = []
+	mouth.append(frames[0])
+	mouth.append(frames[3])
+	mouth.append(frames[4])
+	mouth.append(frames[7])
+	return mouth
+
+
 func _stop_talking(who: String) -> void:
-	if who.is_empty() or _cast.get_node_or_null(who) == null:
+	if who.is_empty():
 		return
-	_swap(who, "idle_down")
+	var sprite := _cast.get_node_or_null(who) as Sprite2D
+	if sprite == null:
+		return
+	var rest: String = sprite.get_meta("rest_anim", "idle_down")
+	_swap(who, rest)
 
 
 func _wait_for_advance() -> void:

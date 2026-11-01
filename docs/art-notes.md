@@ -20,11 +20,11 @@ Playable copies live under `game/`. Full zip tree under `assets/art/originals/ja
 - Mug patch `bridge_v5_mugpatch.png` at **(500, 135)** if the armrest mug needs restoring; live scene uses the flying mug instead.
 - Depth: `scale = clamp(0.0011538 * feet_y + 1.0, 1.10, 1.70)` for a **104px** sprite. Game sprites are 112×128, so that scale is multiplied by `104/128`.
 
-## Bridge props (`game/props/`)
-Jack painted coffee (14×14), manual (21×22), frying pan (32×27), plus `@2x`/`@4x`.
-Naomi carries coffee, Eithan the manual, DanDan the frying pan; sprites are children of the walker so they stay attached.
-Depth: props are sized for scale `clamp(0.0011538 * feet_y + 1.0, 1.10, 1.70)` against a 104px sprite. When parented under a 112×128 cast sprite, local scale is `128/104`.
-Alan still trips on the painted floor rocket (no placeholder label). Unique walk-in clothes still missing.
+## Walk-ins
+Naomi, Joe, DanDan, and Eithan walk in **empty-handed** (no coffee / manual / frying pan sprites, no placeholder labels). Spoken lines that mention a prop stay in dialogue (e.g. Chaya “put that book down”). Stage directions about holding coffee, a manual, or a pan are not staged.
+Alan still trips on the painted floor rocket. Unique walk-in clothes still missing.
+
+Cast talk loops use the 80-frame sheet ranges: `talk_down` is **8** frames (closed / shrug / closed / open / open / closed / shrug / open). Speakers play the **mouth** poses (0, 3, 4, 7), not the shrug, while their line types/displays, then idle. `talk_right` is **4** (already a mouth loop). Chaya stays on the viewscreen.
 
 Chaya uses the viewscreen frames (`talk_down` / `idle` / `judge` at (599, 40)).
 Canon dialogue is complete in [grandma-call-script.md](grandma-call-script.md) (DanDan/Eithan gap filled). No 20:00 countdown.
