@@ -1,0 +1,64 @@
+{
+ "character": "grandma",
+ "frame_size": [
+  145,
+  89
+ ],
+ "frame_size_2x": [
+  290,
+  178
+ ],
+ "viewscreen_rect_on_bridge_v5": {
+  "x": 599,
+  "y": 40,
+  "w": 145,
+  "h": 89
+ },
+ "place_at": [
+  599,
+  40
+ ],
+ "viewscreen_quad_on_bridge_v5": [
+  [
+   599,
+   47
+  ],
+  [
+   744,
+   40
+  ],
+  [
+   744,
+   129
+  ],
+  [
+   599,
+   121
+  ]
+ ],
+ "mask": "layers/grandma_screen_mask.png (and _2x)",
+ "note": "screen glass is a perspective trapezoid (top edge slopes 47->40, bottom 121->129); frames are RGBA, alpha=mask, outside the glass is transparent. layers/ holds bust + bg separately",
+ "fps_suggest": 8,
+ "animations": {
+  "talk_down": [
+   "grandma_frames_talk_down_00.png",
+   "grandma_frames_talk_down_01.png",
+   "grandma_frames_talk_down_02.png",
+   "grandma_frames_talk_down_03.png",
+   "grandma_frames_talk_down_04.png",
+   "grandma_frames_talk_down_05.png",
+   "grandma_frames_talk_down_06.png",
+   "grandma_frames_talk_down_07.png"
+  ],
+  "idle": [
+   "grandma_frames_idle_00.png",
+   "grandma_frames_idle_01.png"
+  ],
+  "judge": [
+   "grandma_frames_judge_00.png",
+   "grandma_frames_judge_01.png",
+   "grandma_frames_judge_02.png",
+   "grandma_frames_judge_03.png"
+  ]
+ }
+}

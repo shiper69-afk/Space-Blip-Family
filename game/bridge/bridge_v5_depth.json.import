@@ -1,0 +1,11 @@
+[remap]
+
+importer="keep"
+type="Resource"
+uid="uid://9bgt0ty5b0ijr"
+
+[deps]
+
+source_file="res://game/bridge/bridge_v5_depth.json"
+
+[params]
