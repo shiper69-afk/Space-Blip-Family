@@ -14,6 +14,8 @@ The GitHub repository is still named **Space-Blip-Family**.
 - **Verbs:** Walk / Look / Talk / Interact (Use) — Sierra-style top bar
 - **Puzzle:** amber-alert hotspot in the cockpit → **Alert Printout** → give it to Joe
 - **Exports targeted:** Windows and web (export from the Godot editor; templates required)
+- **Start screen:** looping owner background (`startscreen` 360 frames). Title **Are We There Yet? (Galaxy edition)** is **text overlaid** on that animation — it is not painted into the art.
+- **Save / load:** 10 slots (timestamp + room). **New Game / Load Game / Quit** on the title screen; **Esc** opens the same slots in-game (Resume / Save / Load / Return to Title / Quit). Esc still skips cutscenes.
 - **Placeholder:** room backgrounds are simple stand-ins. Character frames are owner art.
 - **Bela and Cookie** are canon family dogs (frames in `bela_frames` / `cookie_frames`). They are not on stage in this slice.
 
@@ -38,11 +40,14 @@ Living canon: [`docs/project-context.md`](docs/project-context.md)
    - The first open imports textures. Wait until the spinner in the bottom-right stops.
 
 4. **If Popochiu asks to set up**
-   - This project is already set up (Sierra High-Res GUI, Alan as the player, Cockpit as the main scene)
+   - This project is already set up (Sierra High-Res GUI, Alan as the player, start screen as the main scene)
    - If a setup wizard appears, close it. Do not recreate rooms.
 
 5. **Play**
    - Press **F5** (or the Play button in the top-right)
+   - The start screen plays the looping space background with the title drawn on top
+   - **New Game** starts in the cockpit. **Load Game** opens 10 slots. **Quit** exits
+   - In-game, press **Esc** for save / load / return to title
    - Move the mouse to the **top of the window** to show the verb bar
    - **Walk / Look / Talk / Interact** (Interact = Use)
    - Left-click uses the selected verb. Right-click cycles verbs
@@ -65,7 +70,8 @@ Living canon: [`docs/project-context.md`](docs/project-context.md)
 Owner frames are stored untouched at:
 
 `assets/art/originals/Charechter Animation/`  
-`assets/art/originals/Non Charechter Animation/ship_frames/`
+`assets/art/originals/Non Charechter Animation/ship_frames/`  
+`assets/art/originals/startscreen/`
 
 Folder names match the zip (including the original `Charechter` spelling). Do not rename those files.
 

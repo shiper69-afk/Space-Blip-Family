@@ -214,7 +214,9 @@ High-level, SQ6-inspired. Implementation: **Godot 4 + Popochiu** (see Implementa
 | Verbs / UI | Popochiu **Sierra High-Res** GUI: Walk / Look / Interact (Use) / Talk + inventory popup. SQ6-style. |
 | Target platforms | **Windows + web** export. |
 | Resolution / aspect | Slice uses **640×360** (16:9), pixel-art filter, window 1280×720. Revisit if painted BGs want 4:3. |
-| Art pipeline | Owner PNG frames committed under `assets/art/originals/`. Copies used for Alan/Joe animations under `game/characters/`. Placeholder room backgrounds until painted sets exist. |
+| Art pipeline | Owner PNG frames committed under `assets/art/originals/`. Copies used for Alan/Joe animations under `game/characters/`. Placeholder room backgrounds until painted sets exist. Start-screen loop lives in `assets/art/originals/startscreen/` (not `.gdignore`d, so it exports). |
+| Start / title screen | First scene. Looping owner frames (360 × 12 fps). Title **Are We There Yet? (Galaxy edition)** is **overlay text**, not painted into the art. Buttons: New Game, Load Game (10 slots), Quit. |
+| Save / load | 10 Popochiu slots (`user://save_%d.json`). Esc opens the in-game menu (save / load / title / quit). Esc still skips cutscenes. |
 | Repo structure | Godot project at repo root (`project.godot`). Game content in `game/`. Canon doc in `docs/project-context.md`. |
 
 ---
@@ -246,6 +248,7 @@ Record choices here so the living doc doesn’t argue with itself.
 | 2026-11-01 | **Bela and Cookie locked as family dogs** | Canon names + role. Sprite folders `bela_frames` / `cookie_frames` (bark/beg frames). Ages and personality remain **proposals** — owner should confirm. |
 | 2026-11-01 | **Fail style locked: comic death** | Classic Sierra. Always funny, instant restore, PG, never mean toward the kids. |
 | 2026-11-01 | Act 1 → Act 2 hook stays **open** | Owner still working on Act 1. No hook proposed or locked. |
+| 2026-11-01 | Start-screen title is **overlay text** | Not baked into the animated background. Overlay string: **Are We There Yet? (Galaxy edition)**. |
 
 ---
 

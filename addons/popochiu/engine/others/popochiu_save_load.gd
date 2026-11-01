@@ -14,7 +14,7 @@ const SAVE_GAME_PATH := "user://save_%d.json"
 func count_saves() -> int:
 	var saves := 0
 	
-	for i in range(1, 5):
+	for i in range(1, 11):
 		if FileAccess.file_exists(SAVE_GAME_PATH % i):
 			saves += 1
 	
@@ -24,7 +24,7 @@ func count_saves() -> int:
 func get_saves_descriptions() -> Dictionary:
 	var saves := {}
 	
-	for i in range(1, 5):
+	for i in range(1, 11):
 		if FileAccess.file_exists(SAVE_GAME_PATH % i):
 			var opened := FileAccess.open(SAVE_GAME_PATH % i, FileAccess.READ)
 			if not opened:
