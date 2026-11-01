@@ -13,7 +13,7 @@ const SLEEP_FPS := 6.0
 const WAKE_FPS := 10.0
 const DOOR_FPS := 12.0
 const CAST_FPS := 8.0
-const TALK_FPS := 12.0
+const TALK_FPS := 8.0
 const ALAN_SLEEP := Vector2(462, 70)
 const DOOR_POS := Vector2(180, 48)
 const WALK_IN := Vector2(209, 225)
@@ -628,6 +628,7 @@ func _swap(who: String, anim: String) -> void:
 	if frames.is_empty():
 		return
 	_remember_facing(sprite, anim)
+	sprite.flip_h = false
 	sprite.texture = frames[0]
 	if frames.size() > 1:
 		_cast_anim[who] = {
@@ -674,7 +675,14 @@ func _frames_for(who: String, anim: String) -> Array[Texture2D]:
 		return reach
 	if anim == "fall_right":
 		return Frames.load_seq(dir, anim, 6)
-	if anim.begins_with("walk") or anim.begins_with("idle") or anim.begins_with("talk"):
+	if anim.begins_with("talk"):
+		if anim == "talk_up":
+			var up := Frames.load_seq(dir, "idle_up", 4)
+			if up.is_empty():
+				up = Frames.load_seq(dir, "talk_up", 4)
+			return up
+		return Frames.load_seq(dir, anim, 4)
+	if anim.begins_with("walk") or anim.begins_with("idle"):
 		return Frames.load_seq(dir, anim, 8)
 	return Frames.load_seq(dir, anim, 4)
 
@@ -720,9 +728,9 @@ func _say(speaker: String, text: String) -> void:
 	_stop_talking(talker)
 
 
-## Bridge speakers loop sheet talk frames (mouth, not the shrug gesture) for the
-## whole line, then return to idle. Chaya stays on the viewscreen.
-## "ALAN", "NAOMI (intercom)" -> cast key "alan", "naomi".
+## Jack mouth loops: talk_down / talk_right / talk_left are closed-half-open-half
+## at 8 fps (frame 00 = idle, only the mouth changes). talk_up holds idle_up.
+## Chaya stays on the viewscreen. "ALAN" -> cast key "alan".
 func _start_talking(speaker: String) -> String:
 	var who := speaker.split(" ")[0].to_lower()
 	if who in ["chaya", "narrator", "ship"]:
@@ -731,32 +739,18 @@ func _start_talking(speaker: String) -> String:
 	if sprite == null:
 		return ""
 	var facing: String = sprite.get_meta("facing", "down")
-	var talk := _mouth_loop(_frames_for(who, "talk_%s" % facing))
+	var talk := _frames_for(who, "talk_%s" % facing)
 	if talk.size() < 2:
-		talk = _mouth_loop(_frames_for(who, "talk_down"))
+		talk = _frames_for(who, "talk_down")
 	if talk.is_empty():
 		return ""
-	# Start on an open-mouth pose so talking is visible on the first frame.
-	var start := 1 if talk.size() > 1 else 0
-	sprite.texture = talk[start]
+	sprite.flip_h = false
+	sprite.texture = talk[0]
 	_cast_anim[who] = {
-		"node": sprite, "frames": talk, "index": start, "accum": 0.0, "fps": TALK_FPS
+		"node": sprite, "frames": talk, "index": 0, "accum": 0.0, "fps": TALK_FPS
 	}
 	_depth(sprite)
 	return who
-
-
-## 8-frame sheet talk_down is closed, shrug, closed, open, open, closed, shrug, open.
-## Keep the mouth poses; drop the shrug (indices 1 and 6). talk_right (4) is already a mouth loop.
-func _mouth_loop(frames: Array[Texture2D]) -> Array[Texture2D]:
-	if frames.size() < 8:
-		return frames
-	var mouth: Array[Texture2D] = []
-	mouth.append(frames[0])
-	mouth.append(frames[3])
-	mouth.append(frames[4])
-	mouth.append(frames[7])
-	return mouth
 
 
 func _stop_talking(who: String) -> void:

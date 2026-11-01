@@ -67,17 +67,23 @@
    "joe_frames_talk_down_00.png",
    "joe_frames_talk_down_01.png",
    "joe_frames_talk_down_02.png",
-   "joe_frames_talk_down_03.png",
-   "joe_frames_talk_down_04.png",
-   "joe_frames_talk_down_05.png",
-   "joe_frames_talk_down_06.png",
-   "joe_frames_talk_down_07.png"
+   "joe_frames_talk_down_03.png"
+  ],
+  "talk_left": [
+   "joe_frames_talk_left_00.png",
+   "joe_frames_talk_left_01.png",
+   "joe_frames_talk_left_02.png",
+   "joe_frames_talk_left_03.png"
   ],
   "talk_right": [
    "joe_frames_talk_right_00.png",
    "joe_frames_talk_right_01.png",
    "joe_frames_talk_right_02.png",
    "joe_frames_talk_right_03.png"
+  ],
+  "talk_up": [
+   "joe_frames_idle_up_00.png",
+   "joe_frames_idle_up_01.png"
   ],
   "thumbs_up": [
    "joe_frames_thumbs_up_00.png"

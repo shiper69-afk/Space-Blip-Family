@@ -67,17 +67,23 @@
    "mom_frames_talk_down_00.png",
    "mom_frames_talk_down_01.png",
    "mom_frames_talk_down_02.png",
-   "mom_frames_talk_down_03.png",
-   "mom_frames_talk_down_04.png",
-   "mom_frames_talk_down_05.png",
-   "mom_frames_talk_down_06.png",
-   "mom_frames_talk_down_07.png"
+   "mom_frames_talk_down_03.png"
+  ],
+  "talk_left": [
+   "mom_frames_talk_left_00.png",
+   "mom_frames_talk_left_01.png",
+   "mom_frames_talk_left_02.png",
+   "mom_frames_talk_left_03.png"
   ],
   "talk_right": [
    "mom_frames_talk_right_00.png",
    "mom_frames_talk_right_01.png",
    "mom_frames_talk_right_02.png",
    "mom_frames_talk_right_03.png"
+  ],
+  "talk_up": [
+   "mom_frames_idle_up_00.png",
+   "mom_frames_idle_up_01.png"
   ],
   "thumbs_up": [
    "mom_frames_thumbs_up_00.png"

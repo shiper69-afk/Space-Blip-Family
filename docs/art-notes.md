@@ -24,7 +24,7 @@ Playable copies live under `game/`. Full zip tree under `assets/art/originals/ja
 Naomi, Joe, DanDan, and Eithan walk in **empty-handed** (no coffee / manual / frying pan sprites, no placeholder labels). Spoken lines that mention a prop stay in dialogue (e.g. Chaya “put that book down”). Stage directions about holding coffee, a manual, or a pan are not staged.
 Alan still trips on the painted floor rocket. Unique walk-in clothes still missing.
 
-Cast talk loops use the 80-frame sheet ranges: `talk_down` is **8** frames (closed / shrug / closed / open / open / closed / shrug / open). Speakers play the **mouth** poses (0, 3, 4, 7), not the shrug, while their line types/displays, then idle. `talk_right` is **4** (already a mouth loop). Chaya stays on the viewscreen.
+Cast talk loops use Jack’s mouth frames (112×128): `talk_down` / `talk_right` / `talk_left` are **4** frames (closed / half / open / half). Frame 00 matches `idle_*_00`; only the mouth changes. `talk_left` is `talk_right` mirrored. `talk_up` holds `idle_up`. Loop at 8 fps while a line types/displays, then idle. Old 8-frame gesture talk sheets are not used. Chaya stays on the viewscreen.
 
 Chaya uses the viewscreen frames (`talk_down` / `idle` / `judge` at (599, 40)).
 Canon dialogue is complete in [grandma-call-script.md](grandma-call-script.md) (DanDan/Eithan gap filled). No 20:00 countdown.
