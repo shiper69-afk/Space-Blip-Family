@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://game/rooms/cockpit/room_cockpit.gd" id="1"]
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/walkable_areas/floor/walkable_area_floor.tscn" id="2"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/hotspots/grandma_screen/hotspot_grandma_screen.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/hotspots/red_button/hotspot_red_button.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/countdown_hud.tscn" id="10"]
+[ext_resource type="PackedScene" path="res://game/rooms/cockpit/regions/perspective/region_perspective.tscn" id="11"]
 
 [node name="RoomCockpit" type="Node2D"]
 script = ExtResource("1")
@@ -65,6 +66,8 @@ look_at_point = Vector2(0, -10)
 interaction_polygon = PackedVector2Array(-36, -28, 36, -28, 36, 28, -36, 28)
 
 [node name="Regions" type="Node2D" parent="."]
+
+[node name="Perspective" parent="Regions" instance=ExtResource("11")]
 
 [node name="Markers" type="Node2D" parent="."]
 

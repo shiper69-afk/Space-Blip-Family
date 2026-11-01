@@ -21,7 +21,18 @@ func _on_room_entered() -> void:
 func _on_room_transition_finished() -> void:
 	# Intro already told the leftover-message / twenty-seconds beat.
 	# No extra first-visit line — Popochiu speech clipped on the 1024×576 bridge.
-	if GameFlow.cli_value("intro-beat") == "bridge" or not GameFlow.cli_value("capture-png").is_empty():
+	var beat := GameFlow.cli_value("intro-beat")
+	if beat == "walk":
+		await _demo_walk()
+		return
+	if GameFlow.cli_value("auto-new-game") or GameFlow.cli_value("quit-after"):
+		var hold := float(GameFlow.cli_value("quit-after"))
+		if hold <= 0.0:
+			hold = 2.4
+		await get_tree().create_timer(hold).timeout
+		GameFlow.quit_game()
+		return
+	if beat == "bridge" or not GameFlow.cli_value("capture-png").is_empty():
 		GameFlow.show_adventure_gui()
 		if is_instance_valid(PopochiuUtils.e.gui):
 			var menu := PopochiuUtils.e.gui.get_node_or_null("SierraMenu") as Control
@@ -29,3 +40,14 @@ func _on_room_transition_finished() -> void:
 				menu.show()
 				menu.set_process_input(false)
 		await GameFlow.maybe_capture_and_quit()
+
+
+func _demo_walk() -> void:
+	C.player.can_move = true
+	C.player.position = Vector2(512, 400)
+	C.player.face_right()
+	await C.player.walk(Vector2(760, 410))
+	await C.player.walk(Vector2(260, 410))
+	await C.player.walk(Vector2(500, 478))
+	await C.player.walk(Vector2(500, 348))
+	await C.player.idle()

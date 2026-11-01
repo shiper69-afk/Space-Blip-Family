@@ -223,7 +223,7 @@ High-level, SQ6-inspired. Implementation: **Godot 4 + Popochiu** (see Implementa
 | Resolution / aspect | Slice uses **1024×576** (16:9, matches `bridge_v5` and startscreen frames). Stretch `canvas_items` + `keep`, nearest filter. Default window 1280×720. |
 | Art pipeline | Repainted owner PNG frames (112×128 RGBA, same paths) under `assets/art/originals/`. Alan/Joe copies under `game/characters/` match them. Painted bridge `bridge_v5` (1024×576, blink frames 00/01) is the playable cockpit background (`game/rooms/cockpit/props/background/`). Corridor BG is still a placeholder. Start-screen loop lives in `assets/art/originals/startscreen/` (not `.gdignore`d, so it exports). |
 | Start / title screen | First scene. Looping owner frames (360 × 12 fps). Title **Are We There Yet? (Galaxy edition)** is **overlay text**, not painted into the art. Buttons: New Game, Load Game (10 slots), Quit. **New Game → skippable intro → painted bridge.** |
-| Intro | Canon script in [docs/intro-script.md](intro-script.md). Ship uses `ship_frames`. Cast tour uses existing character sprites. No voice audio. Click or Esc skips. |
+| Intro | Canon script in [docs/intro-script.md](intro-script.md). Ship uses `ship_frames`. Cast tour uses existing character sprites. No voice audio. LMB / Space / Enter advances (first press finishes a typing line). Esc skips the whole intro. |
 | Save / load | 10 Popochiu slots (`user://save_%d.json`). Esc opens the in-game menu (save / load / title / quit). Esc still skips the intro and cutscenes. |
 | Repo structure | Godot project at repo root (`project.godot`). Game content in `game/`. Canon docs in `docs/project-context.md` and `docs/intro-script.md`. |
 
@@ -258,10 +258,11 @@ Record choices here so the living doc doesn’t argue with itself.
 | 2026-11-01 | Act 1 → Act 2 hook stays **open** | Owner still working on Act 1. No hook proposed or locked. |
 | 2026-11-01 | Start-screen title is **overlay text** | Not baked into the animated background. Overlay string: **Are We There Yet? (Galaxy edition)**. |
 | 2026-11-01 | Repainted characters + bridge source art | Eight characters × 80 frames replaced in place (smooth 90s paint, 112×128 RGBA), including Alan/Joe game copies. `bridge_v5` and sheets added under `assets/art/originals/`. |
-| 2026-11-01 | **Canon intro shipped** | New Game plays [intro-script.md](intro-script.md). Skippable (click/Esc). Title card uses **Are We There Yet? (Galaxy edition)** + Episode 1: Grandma's Calling. |
+| 2026-11-01 | **Canon intro shipped** | New Game plays [intro-script.md](intro-script.md). LMB / Space / Enter advances (first press finishes a typing line). Esc skips the whole intro. Title card uses **Are We There Yet? (Galaxy edition)** + Episode 1: Grandma's Calling. |
 | 2026-11-01 | Painted bridge is the playable cockpit | `bridge_v5` 1024×576 blink frames. Hotspots and walkable area remapped. Player is Alan. |
 | 2026-11-01 | Grandma call is **~20 seconds**, not 20:00 | Leftover message is already on the screens. When she calls, DavDav runs and hits the red button. HUD: **any second now**. Does not tick. |
 | 2026-11-01 | Display locked to **1024×576** | Matches painted bridge and startscreen. Stretch keep + nearest. Sierra verb bar shrunk; `experimental_scale_gui` off. |
+| 2026-11-01 | Alan walk + intro quality pass | Walk clips no longer restart every physics frame. Intro is click-advanced, nearest-filtered, tweened flyby. |
 
 ---
 

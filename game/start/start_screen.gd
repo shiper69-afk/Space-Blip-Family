@@ -23,11 +23,15 @@ func _ready() -> void:
 	if beat == "flyby" or beat == "title":
 		get_tree().change_scene_to_file(GameFlow.INTRO_SCENE)
 		return
-	if beat == "bridge":
+	if beat == "bridge" or beat == "walk":
 		GameFlow.begin_gameplay()
 		return
 	if not GameFlow.cli_value("capture-png").is_empty():
 		await GameFlow.maybe_capture_and_quit()
+		return
+	if GameFlow.cli_value("auto-new-game"):
+		await get_tree().create_timer(1.3).timeout
+		await _on_new_game()
 
 
 func _on_new_game() -> void:
