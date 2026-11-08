@@ -26,6 +26,6 @@ npm run preview
 
 ## Start screen
 
-Original frames stay in `assets/art/originals/startscreen/` (1024×576, 360 frames, 12 fps). The upscale is `assets/hd/startscreen/start-bg.mp4` (and `start-poster.png`): RGB Lanczos to 1920×1080, packed as one H.264 loop so the repo is not 360 loose 1080p PNGs. This machine has no GPU, so Real-ESRGAN was not used. The title is drawn on top, as in the Godot screen. **Start Game** opens an “Episode 1 coming soon” card. **Load Game** shows ten empty slots.
+The menu is a procedural canvas (rotating Earth, orbiting planets, galaxies, crossing ships) with **Start Game** and **Load Game**. Start Game opens an “Episode 1 coming soon” card. Load Game shows ten empty slots. There is no Quit control. Original frames remain in `assets/art/originals/startscreen/`. The episode card still uses `assets/hd/startscreen/`.
 
 Design notes still live in `docs/`.
