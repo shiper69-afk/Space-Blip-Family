@@ -8,10 +8,10 @@ script_name = "Perspective"
 description = "Bridge perspective"
 walkable = true
 scaling = true
-scale_top = 0.82
-scale_bottom = 1.06
-interaction_polygon = PackedVector2Array(160, 300, 860, 300, 840, 520, 180, 520)
+scale_top = 1.008
+scale_bottom = 1.341
+interaction_polygon = PackedVector2Array(70, 564, 50, 470, 44, 380, 80, 300, 130, 250, 170, 228, 190, 214, 252, 214, 310, 222, 420, 220, 470, 208, 680, 208, 750, 228, 820, 255, 900, 290, 980, 330, 1008, 400, 1000, 480, 950, 564)
 
 [node name="InteractionPolygon" type="CollisionPolygon2D" parent="."]
 visible = false
-polygon = PackedVector2Array(160, 300, 860, 300, 840, 520, 180, 520)
+polygon = PackedVector2Array(70, 564, 50, 470, 44, 380, 80, 300, 130, 250, 170, 228, 190, 214, 252, 214, 310, 222, 420, 220, 470, 208, 680, 208, 750, 228, 820, 255, 900, 290, 980, 330, 1008, 400, 1000, 480, 950, 564)

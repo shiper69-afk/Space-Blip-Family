@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="Script" path="res://game/rooms/cockpit/room_cockpit.gd" id="1"]
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/walkable_areas/floor/walkable_area_floor.tscn" id="2"]
@@ -10,6 +10,11 @@
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/hotspots/grandma_screen/hotspot_grandma_screen.tscn" id="8"]
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/hotspots/red_button/hotspot_red_button.tscn" id="9"]
 [ext_resource type="PackedScene" path="res://game/rooms/cockpit/regions/perspective/region_perspective.tscn" id="11"]
+[ext_resource type="PackedScene" path="res://game/characters/eithan/character_eithan.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://game/characters/joe/character_joe.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://game/characters/naomi/character_naomi.tscn" id="14"]
+[ext_resource type="PackedScene" path="res://game/characters/davdav/character_davdav.tscn" id="15"]
+[ext_resource type="PackedScene" path="res://game/characters/dandan/character_dandan.tscn" id="16"]
 
 [node name="RoomCockpit" type="Node2D"]
 script = ExtResource("1")
@@ -71,3 +76,28 @@ interaction_polygon = PackedVector2Array(-36, -28, 36, -28, 36, 28, -36, 28)
 [node name="Markers" type="Node2D" parent="."]
 
 [node name="Characters" type="Node2D" parent="."]
+
+[node name="CharacterEithan *" parent="Characters" instance=ExtResource("12")]
+position = Vector2(250, 310)
+walk_to_point = Vector2(0, 44)
+look_at_point = Vector2(0, -56)
+
+[node name="CharacterJoe *" parent="Characters" instance=ExtResource("13")]
+position = Vector2(300, 380)
+walk_to_point = Vector2(48, 24)
+look_at_point = Vector2(0, -56)
+
+[node name="CharacterNaomi *" parent="Characters" instance=ExtResource("14")]
+position = Vector2(360, 340)
+walk_to_point = Vector2(0, 40)
+look_at_point = Vector2(0, -56)
+
+[node name="CharacterDavDav *" parent="Characters" instance=ExtResource("15")]
+position = Vector2(860, 368)
+walk_to_point = Vector2(56, 16)
+look_at_point = Vector2(0, -48)
+
+[node name="CharacterDanDan *" parent="Characters" instance=ExtResource("16")]
+position = Vector2(430, 400)
+walk_to_point = Vector2(-16, 32)
+look_at_point = Vector2(0, -56)

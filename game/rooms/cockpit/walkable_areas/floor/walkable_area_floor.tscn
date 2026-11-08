@@ -3,16 +3,14 @@
 [ext_resource type="Script" path="res://game/rooms/cockpit/walkable_areas/floor/walkable_area_floor.gd" id="1_script"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_floor"]
-vertices = PackedVector2Array(200, 336, 820, 336, 790, 492, 220, 492)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(200, 336, 820, 336, 790, 492, 220, 492)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(70, 564, 50, 470, 44, 380, 80, 300, 130, 250, 170, 228, 190, 214, 252, 214, 310, 222, 420, 220, 470, 208, 680, 208, 750, 228, 820, 255, 900, 290, 980, 330, 1008, 400, 1000, 480, 950, 564), PackedVector2Array(790, 250, 820, 315, 940, 325, 998, 280, 990, 210, 920, 180, 800, 190), PackedVector2Array(16, 340, 124, 340, 124, 248, 16, 248), PackedVector2Array(148, 460, 246, 460, 246, 384, 148, 384), PackedVector2Array(298, 572, 396, 572, 396, 484, 298, 484), PackedVector2Array(598, 572, 692, 572, 692, 490, 598, 490), PackedVector2Array(776, 460, 878, 460, 878, 390, 776, 390), PackedVector2Array(900, 340, 1012, 340, 1012, 248, 900, 248)])
 agent_radius = 0.0
 
 [node name="Floor" type="Node2D"]
 script = ExtResource("1_script")
 script_name = "Floor"
 description = "Floor"
-interaction_polygon = [PackedVector2Array(200, 336, 820, 336, 790, 492, 220, 492)]
+interaction_polygon = Array[PackedVector2Array]([PackedVector2Array(70, 564, 50, 470, 44, 380, 80, 300, 130, 250, 170, 228, 190, 214, 252, 214, 310, 222, 420, 220, 470, 208, 680, 208, 750, 228, 820, 255, 900, 290, 980, 330, 1008, 400, 1000, 480, 950, 564), PackedVector2Array(790, 250, 820, 315, 940, 325, 998, 280, 990, 210, 920, 180, 800, 190), PackedVector2Array(16, 340, 124, 340, 124, 248, 16, 248), PackedVector2Array(148, 460, 246, 460, 246, 384, 148, 384), PackedVector2Array(298, 572, 396, 572, 396, 484, 298, 484), PackedVector2Array(598, 572, 692, 572, 692, 490, 598, 490), PackedVector2Array(776, 460, 878, 460, 878, 390, 776, 390), PackedVector2Array(900, 340, 1012, 340, 1012, 248, 900, 248)])
 
 [node name="Perimeter" type="NavigationRegion2D" parent="."]
 visible = false
