@@ -17,7 +17,7 @@ func _on_click() -> void:
 func on_look() -> void:
 	await C.player.walk_to_clicked()
 	await C.player.face_clicked()
-	await C.player.say("Joe. Sixteen. Head of security. The badge is bigger than the hallway.")
+	await C.player.say("Joe. Sixteen. Head of security. The badge is bigger than the bridge.")
 
 
 func on_talk() -> void:

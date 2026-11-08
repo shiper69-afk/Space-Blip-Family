@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://game/characters/dandan/character_dandan_state.gd" id="1"]
+
+[resource]
+resource_name = "DanDan"
+script = ExtResource("1")
+script_name = "DanDan"
+scene = "res://game/characters/dandan/character_dandan.tscn"

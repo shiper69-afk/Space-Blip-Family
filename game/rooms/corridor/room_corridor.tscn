@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://game/rooms/corridor/room_corridor.gd" id="1"]
 [ext_resource type="PackedScene" path="res://game/rooms/corridor/walkable_areas/floor/walkable_area_floor.tscn" id="2"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" path="res://game/rooms/corridor/hotspots/cockpit_hatch/hotspot_cockpit_hatch.tscn" id="4"]
 [ext_resource type="PackedScene" path="res://game/rooms/corridor/hotspots/galley_door/hotspot_galley_door.tscn" id="5"]
 [ext_resource type="PackedScene" path="res://game/rooms/corridor/hotspots/stickers/hotspot_stickers.tscn" id="6"]
-[ext_resource type="PackedScene" path="res://game/characters/joe/character_joe.tscn" id="7"]
 
 [node name="RoomCorridor" type="Node2D"]
 script = ExtResource("1")
@@ -48,8 +47,3 @@ interaction_polygon = PackedVector2Array(-128, -64, 128, -64, 128, 64, -128, 64)
 [node name="Markers" type="Node2D" parent="."]
 
 [node name="Characters" type="Node2D" parent="."]
-
-[node name="CharacterJoe *" parent="Characters" instance=ExtResource("7")]
-position = Vector2(640, 467)
-walk_to_point = Vector2(-80, 0)
-look_at_point = Vector2(0, -64)

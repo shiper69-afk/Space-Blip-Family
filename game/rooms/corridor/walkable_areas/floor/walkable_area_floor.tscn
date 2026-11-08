@@ -3,16 +3,16 @@
 [ext_resource type="Script" path="res://game/rooms/corridor/walkable_areas/floor/walkable_area_floor.gd" id="1_script"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_floor"]
-vertices = PackedVector2Array(64, 368, 960, 368, 960, 560, 64, 560)
+vertices = PackedVector2Array(12, 414, 1012, 414, 1012, 568, 12, 568)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(64, 368, 960, 368, 960, 560, 64, 560)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(12, 414, 1012, 414, 1012, 568, 12, 568)])
 agent_radius = 0.0
 
 [node name="Floor" type="Node2D"]
 script = ExtResource("1_script")
 script_name = "Floor"
 description = "Floor"
-interaction_polygon = [PackedVector2Array(64, 368, 960, 368, 960, 560, 64, 560)]
+interaction_polygon = [PackedVector2Array(12, 414, 1012, 414, 1012, 568, 12, 568)]
 
 [node name="Perimeter" type="NavigationRegion2D" parent="."]
 visible = false

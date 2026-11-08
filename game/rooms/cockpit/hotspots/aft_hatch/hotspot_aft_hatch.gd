@@ -4,7 +4,7 @@ extends PopochiuHotspot
 
 func on_look() -> void:
 	await C.player.face_clicked()
-	await C.player.say("Aft hatch. Mid-ship corridor. Joe is probably patrolling a five-meter hallway.")
+	await C.player.say("Aft hatch. Mid-ship corridor. Joe's still up here, so the hallway can wait.")
 
 
 func on_talk() -> void:

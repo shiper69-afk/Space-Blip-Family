@@ -443,7 +443,7 @@ visible = false
 polygon = PackedVector2Array(-28, -108, 28, -108, 28, 4, -28, 4)
 
 [node name="ScalingPolygon" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0)
+polygon = PackedVector2Array(-16, -10, 16, -10, 16, 8, -16, 8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
