@@ -14,6 +14,11 @@
   height: 100%;
   object-fit: contain;
   background: #000;
+  opacity: 1;
+  transition: opacity 0.75s linear;
+}
+.intro-cutscene video.is-out {
+  opacity: 0;
 }
 .intro-cutscene .intro-skip {
   position: absolute;
