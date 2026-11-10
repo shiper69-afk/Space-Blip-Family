@@ -15,9 +15,6 @@
   object-fit: contain;
   background: #000;
 }
-.intro-cutscene video.is-idle {
-  visibility: hidden;
-}
 .intro-cutscene .intro-skip {
   position: absolute;
   right: 16px;

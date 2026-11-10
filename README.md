@@ -26,6 +26,6 @@ npm run preview
 
 ## Start screen
 
-The menu is a procedural canvas (rotating Earth, orbiting planets, galaxies, crossing ships) with **Start Game** and **Load Game**. Start Game plays `assets/hd/intro/intro-1.mp4` then `intro-2.mp4` (fitted inside the 1920×1080 frame, with sound), then the “Episode 1 coming soon” card. Click, Esc, or Space skips the intro. Load Game shows ten empty slots. There is no Quit control. Original frames remain in `assets/art/originals/startscreen/`. The episode card still uses `assets/hd/startscreen/`.
+The menu is a procedural canvas (rotating Earth, orbiting planets, galaxies, crossing ships) with **Start Game** and **Load Game**. Start Game plays `assets/hd/intro/intro-2.mp4` (fitted inside the 1920×1080 frame, with sound), then the “Episode 1 coming soon” card. Click, Esc, or Space skips the intro. Load Game shows ten empty slots. There is no Quit control. Original frames remain in `assets/art/originals/startscreen/`. The episode card still uses `assets/hd/startscreen/`.
 
 Design notes still live in `docs/`.
