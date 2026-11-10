@@ -1,6 +1,7 @@
 import '@fontsource/bungee/400.css';
 import '@fontsource/space-mono/400.css';
 import '@fontsource/space-mono/700.css';
+import { playIntro } from '../intro/playIntro';
 import { startSpaceView } from '../space/view';
 import './start-screen.css';
 
@@ -51,6 +52,8 @@ export function mountStartScreen(hooks: StartHooks): () => void {
   let selected = 0;
   let loadOpen = false;
   let disposed = false;
+  let introPlaying = false;
+  let stopIntro: (() => void) | null = null;
 
   const select = (i: number) => {
     selected = (i + buttons.length) % buttons.length;
@@ -72,8 +75,14 @@ export function mountStartScreen(hooks: StartHooks): () => void {
       window.setTimeout(() => btn.classList.remove('pressed'), 180);
       select(buttons.indexOf(btn));
     }
-    if (action === 'start') hooks.onStart();
-    else if (action === 'load') setLoad(true);
+    if (action === 'start') {
+      if (introPlaying) return;
+      introPlaying = true;
+      stopIntro = playIntro(() => {
+        stopIntro = null;
+        if (!disposed) hooks.onStart();
+      });
+    } else if (action === 'load') setLoad(true);
   };
 
   const onClick = (event: Event) => {
@@ -91,7 +100,7 @@ export function mountStartScreen(hooks: StartHooks): () => void {
   });
 
   const onKey = (e: KeyboardEvent) => {
-    if (disposed || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (disposed || introPlaying || e.metaKey || e.ctrlKey || e.altKey) return;
     if (loadOpen) {
       if (e.key === 'Escape' || e.key === 'Enter' || e.key === 'Backspace') {
         e.preventDefault();
@@ -125,6 +134,8 @@ export function mountStartScreen(hooks: StartHooks): () => void {
   return () => {
     if (disposed) return;
     disposed = true;
+    stopIntro?.();
+    stopIntro = null;
     stopSpace();
     window.removeEventListener('keydown', onKey);
     buttons.forEach((b) => {

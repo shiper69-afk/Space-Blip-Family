@@ -1,0 +1,127 @@
+{
+ "x": 462,
+ "y": 70,
+ "w": 144,
+ "h": 134,
+ "layer_note": "draw ABOVE bridge (chair is in bridge bg); no chair front layer needed. use /workspace/bridge/bridge_v5_00_nomug.png (armrest mug painted out; patch layer bridge_v5_mugpatch.png at 500,135). Yoke is baked into each frame at a fixed spot (bridge ~531,150).",
+ "sleep_chair": {
+  "frames": [
+   "alan_frames_sleep_chair_00.png",
+   "alan_frames_sleep_chair_01.png",
+   "alan_frames_sleep_chair_02.png",
+   "alan_frames_sleep_chair_03.png",
+   "alan_frames_sleep_chair_04.png",
+   "alan_frames_sleep_chair_05.png",
+   "alan_frames_sleep_chair_06.png",
+   "alan_frames_sleep_chair_07.png"
+  ],
+  "fps": 6,
+  "loop": true,
+  "mug_sprite": "mug_prop.png",
+  "mug_pos": [
+   [
+    534,
+    133
+   ],
+   [
+    534,
+    132
+   ],
+   [
+    534,
+    132
+   ],
+   [
+    534,
+    132
+   ],
+   [
+    534,
+    133
+   ],
+   [
+    534,
+    134
+   ],
+   [
+    534,
+    134
+   ],
+   [
+    534,
+    134
+   ]
+  ],
+  "zzz": {
+   "frames": [
+    "zzz_00.png",
+    "zzz_01.png",
+    "zzz_02.png",
+    "zzz_03.png",
+    "zzz_04.png",
+    "zzz_05.png",
+    "zzz_06.png",
+    "zzz_07.png"
+   ],
+   "x": 540,
+   "y": 66,
+   "fps": 6
+  }
+ },
+ "wake_jolt": {
+  "frames": [
+   "alan_frames_wake_jolt_00.png",
+   "alan_frames_wake_jolt_01.png",
+   "alan_frames_wake_jolt_02.png",
+   "alan_frames_wake_jolt_03.png",
+   "alan_frames_wake_jolt_04.png",
+   "alan_frames_wake_jolt_05.png"
+  ],
+  "fps": 10,
+  "loop": false,
+  "mug_path": [
+   {
+    "x": 534,
+    "y": 133,
+    "rot": 0,
+    "sprite": "mug_wake_00.png"
+   },
+   {
+    "x": 546,
+    "y": 107,
+    "rot": -28,
+    "sprite": "mug_wake_01.png"
+   },
+   {
+    "x": 559,
+    "y": 94,
+    "rot": -56,
+    "sprite": "mug_wake_02.png"
+   },
+   {
+    "x": 572,
+    "y": 93,
+    "rot": -84,
+    "sprite": "mug_wake_03.png"
+   },
+   {
+    "x": 585,
+    "y": 104,
+    "rot": -112,
+    "sprite": "mug_wake_04.png"
+   },
+   {
+    "x": 598,
+    "y": 128,
+    "rot": -25,
+    "sprite": "mug_wake_05.png"
+   }
+  ],
+  "final_prop": {
+   "sprite": "mug_stuck_console.png",
+   "x": 598,
+   "y": 128
+  },
+  "line": "I'M AWAKE! I'M DRIVING!"
+ }
+}
