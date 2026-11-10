@@ -22,17 +22,6 @@ export class EpisodeScene extends Phaser.Scene {
   private line = 0;
   private auto?: Phaser.Time.TimerEvent;
   private alanAwake = false;
-  private asleep = false;
-  private manualDy = -110;
-  private mugFlying = false;
-  private face: Record<string, 'down' | 'left' | 'right'> = {
-    alan: 'down',
-    naomi: 'down',
-    joe: 'down',
-    dandan: 'down',
-    eithan: 'down',
-    davdav: 'down',
-  };
 
   private bridge!: Phaser.GameObjects.Image;
   private dim!: Phaser.GameObjects.Rectangle;
@@ -54,20 +43,10 @@ export class EpisodeScene extends Phaser.Scene {
   private chaya!: Phaser.GameObjects.Sprite;
   private chayaBg!: Phaser.GameObjects.Image;
   private door!: Phaser.GameObjects.Sprite;
-  private pan!: Phaser.GameObjects.Image;
-  private mug!: Phaser.GameObjects.Image;
-  private manual!: Phaser.GameObjects.Image;
-  private zzzJoe!: Phaser.GameObjects.Sprite;
-  private zzzDan!: Phaser.GameObjects.Sprite;
-  private zzzEithan!: Phaser.GameObjects.Sprite;
   private zzzAlan!: Phaser.GameObjects.Sprite;
 
-  private button!: Phaser.GameObjects.Arc;
-  private buttonLabel!: Phaser.GameObjects.Text;
   private incoming!: Phaser.GameObjects.Container;
   private callEnded!: Phaser.GameObjects.Text;
-  private fort!: Phaser.GameObjects.Container;
-  private crumbs!: Phaser.GameObjects.Container;
   private sock!: Phaser.GameObjects.Container;
   private sandwich!: Phaser.GameObjects.Container;
   private laundry!: Phaser.GameObjects.Container;
@@ -79,11 +58,6 @@ export class EpisodeScene extends Phaser.Scene {
   preload(): void {
     this.load.image('bridge0', STILLS.bridge0);
     this.load.image('bridge1', STILLS.bridge1);
-    this.load.image('prop-pan', STILLS.pan);
-    this.load.image('prop-coffee', STILLS.coffee);
-    this.load.image('prop-manual', STILLS.manual);
-    this.load.image('prop-mug', STILLS.mug);
-    this.load.image('prop-mug-stuck', STILLS.mugStuck);
     this.load.image('grandma-bg', STILLS.grandmaBg);
     for (const [key, anim] of Object.entries(CAST_ANIMS)) {
       anim.urls.forEach((url, index) => this.load.image(`${key}-${index}`, url));
@@ -134,19 +108,6 @@ export class EpisodeScene extends Phaser.Scene {
   }
 
   update(): void {
-    if (this.dandan.visible) this.pan.setPosition(this.dandan.x + 40, this.dandan.y - 100).setVisible(true).setDepth(9);
-    else this.pan.setVisible(false);
-    if (this.eithan.visible) this.manual.setPosition(this.eithan.x + 8, this.eithan.y + this.manualDy).setVisible(true).setDepth(9);
-    else this.manual.setVisible(false);
-    if (!this.alanAwake && this.alanSleep.visible && !this.mugFlying) {
-      const index = this.alanSleep.anims.currentFrame?.index ?? 0;
-      const bob = [133, 132, 132, 132, 133, 134, 134, 134];
-      this.mug.setPosition(534 * S, bob[index % bob.length] * S);
-    }
-    const snooze = this.asleep && this.mode === 'script';
-    this.zzzJoe.setPosition(this.joe.x, this.joe.y - 230).setVisible(snooze && this.joe.visible);
-    this.zzzDan.setPosition(this.dandan.x + 10, this.dandan.y - 230).setVisible(snooze && this.dandan.visible);
-    this.zzzEithan.setPosition(this.eithan.x, this.eithan.y - 240).setVisible(snooze && this.eithan.visible);
     this.zzzAlan.setPosition(540 * S, 66 * S).setOrigin(0, 0).setScale(S).setVisible(this.alanSleep.visible && !this.alanAwake);
   }
 
@@ -166,7 +127,7 @@ export class EpisodeScene extends Phaser.Scene {
       .setVisible(false)
       .setDepth(8);
     this.alan = make('alan-idle', 960, 640);
-    this.davdav = make('davdav-idle', DOOR_FEET_X, DOOR_FEET_Y, S);
+    this.davdav = make('davdav-idle', 960, 760, S * 1.35);
     this.chayaBg = this.add
       .image(SCREEN_X, SCREEN_Y, 'grandma-bg')
       .setOrigin(0, 0)
@@ -190,32 +151,11 @@ export class EpisodeScene extends Phaser.Scene {
       .setScale(S)
       .setDepth(4);
 
-    this.pan = this.add.image(0, 0, 'prop-pan').setScale(1.15).setVisible(false);
-    this.mug = this.add.image(534 * S, 133 * S, 'prop-mug').setOrigin(0, 0).setScale(S).setVisible(false).setDepth(9);
-    this.manual = this.add.image(0, 0, 'prop-manual').setScale(1.2).setVisible(false);
-    const zzz = (x: number, y: number) => this.add.sprite(x, y, 'zzz-0').setScale(1.4).setVisible(false).setDepth(10);
-    this.zzzJoe = zzz(0, 0);
-    this.zzzDan = zzz(0, 0);
-    this.zzzEithan = zzz(0, 0);
-    this.zzzAlan = zzz(0, 0);
-    for (const sprite of [this.zzzJoe, this.zzzDan, this.zzzEithan, this.zzzAlan]) sprite.play('zzz');
+    this.zzzAlan = this.add.sprite(540 * S, 66 * S, 'zzz-0').setOrigin(0, 0).setScale(S).setVisible(false).setDepth(10);
+    this.zzzAlan.play('zzz');
   }
 
   private buildPlaceholders(): void {
-    this.button = this.add.circle(1688, 700, 48, 0xc41818).setStrokeStyle(6, 0xffe9b0).setVisible(false).setDepth(7);
-    this.button.setName('placeholder-big-red-button');
-    this.buttonLabel = this.add
-      .text(1688, 612, 'DO NOT PRESS.\nSERIOUSLY. — MOM.', {
-        fontFamily: FONT,
-        fontSize: '18px',
-        color: '#ffe9b0',
-        align: 'center',
-      })
-      .setOrigin(0.5)
-      .setVisible(false)
-      .setDepth(7);
-    this.buttonLabel.setName('placeholder-big-red-button-label');
-
     const incomingBg = this.add.rectangle(0, 0, 500, 150, 0x120818, 0.92).setStrokeStyle(4, 0xff5fa8);
     const incomingText = this.add
       .text(0, 0, 'INCOMING CALL: GRANDMA ❤️ ❤️ ❤️', {
@@ -235,17 +175,6 @@ export class EpisodeScene extends Phaser.Scene {
       .setVisible(false)
       .setDepth(7);
     this.callEnded.setName('placeholder-call-ended');
-
-    const fortBg = this.add.rectangle(0, 0, 220, 90, 0x243056, 0.9).setStrokeStyle(3, 0x9eb4ff);
-    const fortLabel = this.add.text(0, 0, 'BLANKET FORT', { fontFamily: FONT, fontSize: '20px', color: '#d5e2ff' }).setOrigin(0.5);
-    this.fort = this.add.container(430, 860, [fortBg, fortLabel]).setVisible(false).setDepth(4);
-    this.fort.setName('placeholder-blanket-fort');
-
-    this.crumbs = this.add.container(0, 0).setDepth(4).setVisible(false);
-    this.crumbs.setName('placeholder-cookie-crumbs');
-    for (let i = 0; i < 8; i += 1) {
-      this.crumbs.add(this.add.circle(260 + i * 42, 900 - (i % 3) * 10, 5, 0xd8b07a));
-    }
 
     const sockShape = this.add.ellipse(0, -8, 54, 28, 0x6b4a32).setAngle(-20);
     const sockLabel = this.add.text(0, 22, 'SOCK', { fontFamily: FONT, fontSize: '16px', color: '#f0d2b0' }).setOrigin(0.5);
@@ -392,11 +321,7 @@ export class EpisodeScene extends Phaser.Scene {
     if (this.chaya.visible && this.chaya.anims.currentAnim?.key === 'chaya-talk') this.chaya.play('chaya-idle');
     const id = name ? ids[name] : undefined;
     const sprite = name ? map[name] : undefined;
-    if (sprite?.visible && id) sprite.play(`${id}-talk-${this.face[id] ?? 'down'}`);
-  }
-
-  private look(id: string, sprite: Phaser.GameObjects.Sprite, targetX: number): void {
-    this.face[id] = sprite.x < targetX - 24 ? 'right' : 'left';
+    if (sprite?.visible && id) sprite.play(`${id}-talk-down`);
   }
 
   private openDoor(): void {
@@ -409,9 +334,9 @@ export class EpisodeScene extends Phaser.Scene {
     });
   }
 
-  private enter(id: string, sprite: Phaser.GameObjects.Sprite, x: number, y: number, walk: string, idle: string): void {
+  private enter(sprite: Phaser.GameObjects.Sprite, x: number, y: number, walk: string, idle: string): void {
     this.openDoor();
-    sprite.setVisible(true).setPosition(DOOR_FEET_X, DOOR_FEET_Y).setScale(S).setFlipX(false).setDepth(8);
+    sprite.setVisible(true).setPosition(DOOR_FEET_X, DOOR_FEET_Y).setScale(S).setFlipX(x < DOOR_FEET_X).setDepth(8);
     sprite.play(walk);
     this.tweens.add({
       targets: sprite,
@@ -419,67 +344,32 @@ export class EpisodeScene extends Phaser.Scene {
       y,
       scale: S * 1.35,
       duration: 900,
-      onComplete: () => {
-        sprite.play(idle);
-        this.look(id, sprite, SCREEN_X + SCREEN_W / 2);
-      },
+      onComplete: () => sprite.play(idle),
     });
   }
 
   private run(action: string): void {
     switch (action) {
-      case 'loc-quarters':
-        this.location.setText('INT. MINI VAN — A QUICK TOUR');
-        break;
-      case 'loc-cockpit':
-        this.asleep = false;
+      case 'opening':
         this.location.setText('INT. COCKPIT');
         this.joe.setVisible(false);
         this.dandan.setVisible(false);
         this.eithan.setVisible(false);
         this.naomi.setVisible(false);
-        this.fort.setVisible(false);
-        this.crumbs.setVisible(false);
-        this.button.setVisible(true);
-        this.buttonLabel.setVisible(true);
+        this.alan.setVisible(false);
+        this.alanSleep.setVisible(true).play('alan-sleep');
+        this.davdav.setPosition(960, 720).setScale(S * 1.35).setVisible(true).play('davdav-idle');
         break;
-      case 'crew-rest':
-        this.asleep = true;
-        break;
-      case 'joe-sleep':
-        this.joe.setVisible(true).play('joe-idle');
-        break;
-      case 'dandan-sleep':
-        this.dandan.setVisible(true).play('dandan-idle');
-        break;
-      case 'eithan-sleep':
-        this.eithan.setVisible(true).play('eithan-idle');
-        break;
-      case 'naomi-up':
-        this.naomi.setPosition(700, 720).setVisible(true).play('naomi-idle');
-        break;
-      case 'alan-snore':
-        if (!this.alanAwake) this.alanSleep.setVisible(true).play('alan-sleep');
-        this.mug.setVisible(!this.alanAwake);
-        break;
-      case 'empty-bed':
-        this.fort.setVisible(true);
-        this.crumbs.setVisible(true);
-        break;
-      case 'davdav-creep':
-        this.face.davdav = 'right';
-        this.davdav.setPosition(DOOR_FEET_X, DOOR_FEET_Y).setScale(S).setVisible(true).play('davdav-walk');
+      case 'davdav-run':
+        this.davdav.play('davdav-walk');
         this.tweens.add({
           targets: this.davdav,
-          x: 1560,
-          duration: 1600,
+          x: 1240,
+          y: 520,
+          scale: S * 1.15,
+          duration: 700,
           onComplete: () => this.davdav.play('davdav-idle'),
         });
-        break;
-      case 'davdav-look':
-        this.look('davdav', this.davdav, SCREEN_X);
-        this.davdav.play('davdav-idle');
-        this.tweens.add({ targets: this.davdav, y: this.davdav.y - 16, yoyo: true, duration: 280 });
         break;
       case 'davdav-wave':
         this.davdav.play('davdav-wave');
@@ -488,12 +378,11 @@ export class EpisodeScene extends Phaser.Scene {
         this.incoming.setVisible(true).setAlpha(1);
         this.tweens.add({ targets: this.incoming, alpha: 0.45, yoyo: true, repeat: 4, duration: 140 });
         break;
-      case 'press-button':
-        this.tweens.add({ targets: this.button, scale: 0.86, yoyo: true, duration: 90 });
+      case 'press-console':
+        this.tweens.add({ targets: this.davdav, y: this.davdav.y - 18, yoyo: true, duration: 90 });
         this.incoming.setVisible(false);
         this.chayaBg.setVisible(true);
         this.chaya.setVisible(true).setPosition(SCREEN_X, SCREEN_Y).play('chaya-talk');
-        this.look('davdav', this.davdav, SCREEN_X);
         break;
       case 'grandma-lean':
         this.chaya.play('chaya-idle');
@@ -512,14 +401,11 @@ export class EpisodeScene extends Phaser.Scene {
         break;
       case 'alan-jolt':
         this.alanAwake = true;
-        this.mugFlying = true;
         this.alanSleep.setVisible(true).play('alan-jolt');
         this.alanSleep.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
           this.alanSleep.setVisible(false);
-          this.alan.setVisible(true).setPosition(960, 640).play('alan-idle');
-          this.face.alan = 'right';
+          this.alan.setVisible(true).setPosition(960, 700).play('alan-idle');
         });
-        this.flyMug();
         break;
       case 'alan-call':
         this.tweens.add({ targets: this.alan, scale: BODY * 1.06, yoyo: true, duration: 140 });
@@ -529,20 +415,17 @@ export class EpisodeScene extends Phaser.Scene {
         this.cameras.main.shake(420, 0.0025);
         break;
       case 'naomi-enter':
-        this.enter('naomi', this.naomi, 860, 760, 'naomi-walk', 'naomi-idle');
+        this.enter(this.naomi, 1180, 740, 'naomi-walk', 'naomi-idle');
         break;
       case 'joe-enter':
-        this.enter('joe', this.joe, 520, FLOOR, 'joe-walk', 'joe-idle');
+        this.enter(this.joe, 760, 800, 'joe-walk', 'joe-idle');
         break;
       case 'dandan-enter':
-        this.enter('dandan', this.dandan, 700, FLOOR, 'dandan-walk', 'dandan-idle');
+        this.enter(this.dandan, 980, 900, 'dandan-walk', 'dandan-idle');
         break;
       case 'eithan-enter':
-        this.enter('eithan', this.eithan, 1100, FLOOR, 'eithan-walk', 'eithan-idle');
+        this.enter(this.eithan, 1420, 860, 'eithan-walk', 'eithan-idle');
         this.closeDoor();
-        break;
-      case 'eithan-book':
-        this.manualDy = -110;
         break;
       case 'show-mess':
         this.sock.setVisible(true);
@@ -560,16 +443,9 @@ export class EpisodeScene extends Phaser.Scene {
         break;
       case 'alarms':
         this.tweens.add({ targets: this.alarm, alpha: 0.38, yoyo: true, repeat: 7, duration: 90 });
-        for (const [id, sprite] of [
-          ['joe', this.joe],
-          ['dandan', this.dandan],
-          ['naomi', this.naomi],
-          ['eithan', this.eithan],
-          ['alan', this.alan],
-        ] as const) {
+        for (const sprite of [this.joe, this.dandan, this.naomi, this.eithan, this.alan]) {
           if (!sprite.visible) continue;
-          this.look(id, sprite, this.davdav.x);
-          const toward = Math.sign(this.davdav.x - sprite.x) * 28;
+          const toward = Math.sign(this.davdav.x - sprite.x) * 20;
           this.tweens.add({ targets: sprite, x: sprite.x + toward, duration: 500 });
         }
         break;
@@ -585,26 +461,6 @@ export class EpisodeScene extends Phaser.Scene {
       default:
         break;
     }
-  }
-
-  private flyMug(): void {
-    const path: [number, number, number, string][] = [
-      [534, 133, 0, 'mug-wake-0'],
-      [546, 107, -28, 'mug-wake-1'],
-      [559, 94, -56, 'mug-wake-2'],
-      [572, 93, -84, 'mug-wake-3'],
-      [585, 104, -112, 'mug-wake-4'],
-      [598, 128, -25, 'mug-wake-5'],
-    ];
-    let step = 0;
-    const hop = () => {
-      const [x, y, rot, key] = path[step];
-      this.mug.setTexture(key).setPosition(x * S, y * S).setAngle(rot).setVisible(true);
-      step += 1;
-      if (step < path.length) this.time.delayedCall(80, hop);
-      else this.mug.setTexture('prop-mug-stuck').setAngle(0).setPosition(598 * S, 128 * S);
-    };
-    hop();
   }
 
   private endCardShow(): void {

@@ -52,25 +52,14 @@ export const CAST_ANIMS = {
   zzz: load(import.meta.glob('../../assets/art/originals/Charechter Animation/alan_sleep/zzz_*.png', { eager: true, query: '?url', import: 'default' }), 6, -1),
   'door-open': load(import.meta.glob('../../assets/art/originals/Charechter Animation/door/door_open_0*.png', { eager: true, query: '?url', import: 'default' }), 12, 0),
   'door-close': load(import.meta.glob('../../assets/art/originals/Charechter Animation/door/door_close_0*.png', { eager: true, query: '?url', import: 'default' }), 12, 0),
-  'mug-wake': load(import.meta.glob('../../assets/art/originals/Charechter Animation/alan_sleep/mug_wake_*.png', { eager: true, query: '?url', import: 'default' }), 10, 0),
 };
 
 import bridge0 from '../../assets/art/originals/bridge/bridge_v5_00_nomug.png';
 import bridge1 from '../../assets/art/originals/bridge/bridge_v5_01_nomug.png';
-import panUrl from '../../assets/art/originals/Charechter Animation/props/frying_pan@4x.png';
-import coffeeUrl from '../../assets/art/originals/Charechter Animation/props/coffee@4x.png';
-import manualUrl from '../../assets/art/originals/Charechter Animation/props/manual@4x.png';
-import mugUrl from '../../assets/art/originals/Charechter Animation/alan_sleep/mug_prop.png';
-import mugStuckUrl from '../../assets/art/originals/Charechter Animation/alan_sleep/mug_stuck_console.png';
 import grandmaBgUrl from '../../assets/art/originals/Charechter Animation/grandma/layers/grandma_bg_2x.png';
 
 export const STILLS = {
   bridge0,
   bridge1,
-  pan: panUrl,
-  coffee: coffeeUrl,
-  manual: manualUrl,
-  mug: mugUrl,
-  mugStuck: mugStuckUrl,
   grandmaBg: grandmaBgUrl,
 };

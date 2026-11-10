@@ -6,31 +6,10 @@ export type ScriptLine = {
 
 /** Episode 1 opening. Spoken lines are verbatim; stage directions are actions. */
 export const EPISODE_SCRIPT: ScriptLine[] = [
-  { speaker: 'CAPTION', text: 'INT. MINI VAN — A QUICK TOUR', action: 'loc-quarters' },
-  {
-    speaker: 'Narrator',
-    text: 'Stardate: Tuesday. Day 47 of a trip that was supposed to take three days. The crew rests.',
-    action: 'crew-rest',
-  },
-  { action: 'joe-sleep' },
-  { speaker: 'Joe (sleep-talking)', text: 'Halt... state your snack...' },
-  { action: 'dandan-sleep' },
-  { speaker: 'DanDan (mumbling)', text: 'A pinch of nebula... no... two pinches...' },
-  { action: 'eithan-sleep' },
-  { action: 'naomi-up' },
-  { speaker: 'Naomi', text: 'Not today. I am not reading you today.' },
-  { action: 'alan-snore' },
-  { speaker: 'Narrator', text: 'And the youngest crew member, DavDav, is safely tucked in his...' },
-  { action: 'empty-bed' },
-  { speaker: 'Narrator', text: '...Hm.' },
-
-  { speaker: 'CAPTION', text: 'INT. COCKPIT', action: 'loc-cockpit' },
-  { action: 'davdav-creep' },
-  { speaker: 'DavDav (whispering)', text: 'It’s red. Red means... yes.' },
+  { speaker: 'CAPTION', text: 'INT. COCKPIT', action: 'opening' },
   { action: 'incoming-call' },
-  { action: 'davdav-look' },
-  { speaker: 'DavDav', text: 'Hi Grandma!' },
-  { action: 'press-button' },
+  { speaker: 'DavDav', text: 'Hi Grandma!', action: 'davdav-run' },
+  { action: 'press-console' },
   {
     speaker: 'Chaya',
     text: 'Hello? HELLO? Is this thing on? Naomi, your father set this up, and I don’t trust it.',
@@ -118,7 +97,7 @@ export const EPISODE_SCRIPT: ScriptLine[] = [
     text: 'Grandma will call back in twenty minutes! Have a wonderful day!',
   },
   { action: 'alarms' },
-  { speaker: 'DavDav', text: '...Red means yes.' },
+  { speaker: 'DavDav', text: '...I answered it.' },
   {
     speaker: 'Naomi',
     text: 'Okay. Joe, lock down the laundry. DanDan, breakfast. Eithan, figure out why the synthesizer sounds like it’s dying. Alan—',
