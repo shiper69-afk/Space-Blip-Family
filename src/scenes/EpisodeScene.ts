@@ -4,7 +4,14 @@ import { EPISODE_SCRIPT, type ScriptLine } from '../episode/script';
 import { FONT, HEIGHT, WIDTH } from '../theme';
 
 const BODY = 2.05;
-const FLOOR = 980;
+const FLOOR = 820;
+const S = WIDTH / 1024;
+const SCREEN_X = 599 * S;
+const SCREEN_Y = 40 * S;
+const SCREEN_W = 145 * S;
+const SCREEN_H = 89 * S;
+const DOOR_FEET_X = 209 * S;
+const DOOR_FEET_Y = 225 * S;
 
 type Mode = 'banner' | 'script' | 'end';
 
@@ -16,7 +23,16 @@ export class EpisodeScene extends Phaser.Scene {
   private auto?: Phaser.Time.TimerEvent;
   private alanAwake = false;
   private asleep = false;
-  private manualDy = -150;
+  private manualDy = -110;
+  private mugFlying = false;
+  private face: Record<string, 'down' | 'left' | 'right'> = {
+    alan: 'down',
+    naomi: 'down',
+    joe: 'down',
+    dandan: 'down',
+    eithan: 'down',
+    davdav: 'down',
+  };
 
   private bridge!: Phaser.GameObjects.Image;
   private dim!: Phaser.GameObjects.Rectangle;
@@ -36,6 +52,8 @@ export class EpisodeScene extends Phaser.Scene {
   private eithan!: Phaser.GameObjects.Sprite;
   private davdav!: Phaser.GameObjects.Sprite;
   private chaya!: Phaser.GameObjects.Sprite;
+  private chayaBg!: Phaser.GameObjects.Image;
+  private door!: Phaser.GameObjects.Sprite;
   private pan!: Phaser.GameObjects.Image;
   private mug!: Phaser.GameObjects.Image;
   private manual!: Phaser.GameObjects.Image;
@@ -64,6 +82,9 @@ export class EpisodeScene extends Phaser.Scene {
     this.load.image('prop-pan', STILLS.pan);
     this.load.image('prop-coffee', STILLS.coffee);
     this.load.image('prop-manual', STILLS.manual);
+    this.load.image('prop-mug', STILLS.mug);
+    this.load.image('prop-mug-stuck', STILLS.mugStuck);
+    this.load.image('grandma-bg', STILLS.grandmaBg);
     for (const [key, anim] of Object.entries(CAST_ANIMS)) {
       anim.urls.forEach((url, index) => this.load.image(`${key}-${index}`, url));
     }
@@ -117,12 +138,16 @@ export class EpisodeScene extends Phaser.Scene {
     else this.pan.setVisible(false);
     if (this.eithan.visible) this.manual.setPosition(this.eithan.x + 8, this.eithan.y + this.manualDy).setVisible(true).setDepth(9);
     else this.manual.setVisible(false);
-    if (!this.alanAwake && this.alanSleep.visible) this.mug.setPosition(this.alanSleep.x + 20, this.alanSleep.y - 70);
+    if (!this.alanAwake && this.alanSleep.visible && !this.mugFlying) {
+      const index = this.alanSleep.anims.currentFrame?.index ?? 0;
+      const bob = [133, 132, 132, 132, 133, 134, 134, 134];
+      this.mug.setPosition(534 * S, bob[index % bob.length] * S);
+    }
     const snooze = this.asleep && this.mode === 'script';
     this.zzzJoe.setPosition(this.joe.x, this.joe.y - 230).setVisible(snooze && this.joe.visible);
     this.zzzDan.setPosition(this.dandan.x + 10, this.dandan.y - 230).setVisible(snooze && this.dandan.visible);
     this.zzzEithan.setPosition(this.eithan.x, this.eithan.y - 240).setVisible(snooze && this.eithan.visible);
-    this.zzzAlan.setPosition(this.alanSleep.x + 30, this.alanSleep.y - 200).setVisible(this.alanSleep.visible && !this.alanAwake);
+    this.zzzAlan.setPosition(540 * S, 66 * S).setOrigin(0, 0).setScale(S).setVisible(this.alanSleep.visible && !this.alanAwake);
   }
 
   private buildCast(): void {
@@ -134,17 +159,39 @@ export class EpisodeScene extends Phaser.Scene {
     this.dandan = make('dandan-idle', 560, FLOOR);
     this.eithan = make('eithan-idle', 780, FLOOR - 10);
     this.naomi = make('naomi-idle', 700, 700);
-    this.alanSleep = make('alan-sleep', 980, 640, 2.2);
-    this.alan = make('alan-idle', 980, 640);
-    this.davdav = make('davdav-idle', 200, FLOOR, 1.7);
-    this.chaya = this.add.sprite(1425, 230, 'chaya-talk-0').setScale(1.35).setVisible(false).setDepth(6);
-    const mask = this.make.graphics({ x: 0, y: 0 }, false);
-    mask.fillStyle(0xffffff);
-    mask.fillRect(1165, 70, 520, 290);
-    this.chaya.setMask(mask.createGeometryMask());
+    this.alanSleep = this.add
+      .sprite(462 * S, 70 * S, 'alan-sleep-0')
+      .setOrigin(0, 0)
+      .setScale(S)
+      .setVisible(false)
+      .setDepth(8);
+    this.alan = make('alan-idle', 960, 640);
+    this.davdav = make('davdav-idle', DOOR_FEET_X, DOOR_FEET_Y, S);
+    this.chayaBg = this.add
+      .image(SCREEN_X, SCREEN_Y, 'grandma-bg')
+      .setOrigin(0, 0)
+      .setDisplaySize(SCREEN_W, SCREEN_H)
+      .setVisible(false)
+      .setDepth(5);
+    this.chayaBg.setName('grandma-viewscreen-bg');
+    this.chaya = this.add
+      .sprite(SCREEN_X, SCREEN_Y, 'chaya-idle-0')
+      .setOrigin(0, 0)
+      .setDisplaySize(SCREEN_W, SCREEN_H)
+      .setVisible(false)
+      .setDepth(6);
+    const screenMask = this.make.graphics({ x: 0, y: 0 }, false);
+    screenMask.fillStyle(0xffffff);
+    screenMask.fillRect(SCREEN_X, SCREEN_Y, SCREEN_W, SCREEN_H);
+    this.chaya.setMask(screenMask.createGeometryMask());
+    this.door = this.add
+      .sprite(180 * S, 48 * S, 'door-open-0')
+      .setOrigin(0, 0)
+      .setScale(S)
+      .setDepth(4);
 
     this.pan = this.add.image(0, 0, 'prop-pan').setScale(1.15).setVisible(false);
-    this.mug = this.add.image(0, 0, 'prop-coffee').setScale(1.5).setVisible(false).setDepth(9);
+    this.mug = this.add.image(534 * S, 133 * S, 'prop-mug').setOrigin(0, 0).setScale(S).setVisible(false).setDepth(9);
     this.manual = this.add.image(0, 0, 'prop-manual').setScale(1.2).setVisible(false);
     const zzz = (x: number, y: number) => this.add.sprite(x, y, 'zzz-0').setScale(1.4).setVisible(false).setDepth(10);
     this.zzzJoe = zzz(0, 0);
@@ -179,11 +226,11 @@ export class EpisodeScene extends Phaser.Scene {
         wordWrap: { width: 460 },
       })
       .setOrigin(0.5);
-    this.incoming = this.add.container(1425, 210, [incomingBg, incomingText]).setVisible(false).setDepth(7);
+    this.incoming = this.add.container(SCREEN_X + SCREEN_W / 2, SCREEN_Y + SCREEN_H / 2, [incomingBg, incomingText]).setVisible(false).setDepth(7);
     this.incoming.setName('placeholder-incoming-call');
 
     this.callEnded = this.add
-      .text(1425, 300, 'CALL ENDED', { fontFamily: FONT, fontSize: '36px', color: '#ff5a5a' })
+      .text(SCREEN_X + SCREEN_W / 2, SCREEN_Y + SCREEN_H + 18, 'CALL ENDED', { fontFamily: FONT, fontSize: '28px', color: '#ff5a5a' })
       .setOrigin(0.5)
       .setVisible(false)
       .setDepth(7);
@@ -330,28 +377,52 @@ export class EpisodeScene extends Phaser.Scene {
       DavDav: this.davdav,
       Chaya: this.chaya,
     };
-    const anim: Record<string, string> = {
-      Alan: 'alan-talk',
-      Naomi: 'naomi-talk',
-      Joe: 'joe-talk',
-      DanDan: 'dandan-talk',
-      Eithan: 'eithan-talk',
-      DavDav: 'davdav-talk',
-      Chaya: 'chaya-talk',
+    const ids: Record<string, string> = {
+      Alan: 'alan',
+      Naomi: 'naomi',
+      Joe: 'joe',
+      DanDan: 'dandan',
+      Eithan: 'eithan',
+      DavDav: 'davdav',
     };
+    if (name === 'Chaya' && this.chaya.visible) {
+      this.chaya.play('chaya-talk');
+      return;
+    }
+    if (this.chaya.visible && this.chaya.anims.currentAnim?.key === 'chaya-talk') this.chaya.play('chaya-idle');
+    const id = name ? ids[name] : undefined;
     const sprite = name ? map[name] : undefined;
-    const key = name ? anim[name] : undefined;
-    if (sprite?.visible && key) sprite.play(key);
+    if (sprite?.visible && id) sprite.play(`${id}-talk-${this.face[id] ?? 'down'}`);
   }
 
-  private enter(sprite: Phaser.GameObjects.Sprite, x: number, walk: string, idle: string): void {
-    sprite.setVisible(true).setX(120).setFlipX(false).setDepth(8);
+  private look(id: string, sprite: Phaser.GameObjects.Sprite, targetX: number): void {
+    this.face[id] = sprite.x < targetX - 24 ? 'right' : 'left';
+  }
+
+  private openDoor(): void {
+    this.door.setVisible(true).play('door-open');
+  }
+
+  private closeDoor(): void {
+    this.time.delayedCall(700, () => {
+      if (this.door.anims.currentAnim?.key !== 'door-open' || !this.door.anims.isPlaying) this.door.play('door-close');
+    });
+  }
+
+  private enter(id: string, sprite: Phaser.GameObjects.Sprite, x: number, y: number, walk: string, idle: string): void {
+    this.openDoor();
+    sprite.setVisible(true).setPosition(DOOR_FEET_X, DOOR_FEET_Y).setScale(S).setFlipX(false).setDepth(8);
     sprite.play(walk);
     this.tweens.add({
       targets: sprite,
       x,
+      y,
+      scale: S * 1.35,
       duration: 900,
-      onComplete: () => sprite.play(idle),
+      onComplete: () => {
+        sprite.play(idle);
+        this.look(id, sprite, SCREEN_X + SCREEN_W / 2);
+      },
     });
   }
 
@@ -396,7 +467,8 @@ export class EpisodeScene extends Phaser.Scene {
         this.crumbs.setVisible(true);
         break;
       case 'davdav-creep':
-        this.davdav.setPosition(180, FLOOR).setVisible(true).play('davdav-walk');
+        this.face.davdav = 'right';
+        this.davdav.setPosition(DOOR_FEET_X, DOOR_FEET_Y).setScale(S).setVisible(true).play('davdav-walk');
         this.tweens.add({
           targets: this.davdav,
           x: 1560,
@@ -405,6 +477,7 @@ export class EpisodeScene extends Phaser.Scene {
         });
         break;
       case 'davdav-look':
+        this.look('davdav', this.davdav, SCREEN_X);
         this.davdav.play('davdav-idle');
         this.tweens.add({ targets: this.davdav, y: this.davdav.y - 16, yoyo: true, duration: 280 });
         break;
@@ -418,47 +491,55 @@ export class EpisodeScene extends Phaser.Scene {
       case 'press-button':
         this.tweens.add({ targets: this.button, scale: 0.86, yoyo: true, duration: 90 });
         this.incoming.setVisible(false);
-        this.chaya.setVisible(true).setY(230).play('chaya-talk');
+        this.chayaBg.setVisible(true);
+        this.chaya.setVisible(true).setPosition(SCREEN_X, SCREEN_Y).play('chaya-talk');
+        this.look('davdav', this.davdav, SCREEN_X);
         break;
       case 'grandma-lean':
         this.chaya.play('chaya-idle');
-        this.tweens.add({ targets: this.chaya, y: 250, duration: 400 });
+        this.tweens.add({ targets: this.chaya, y: SCREEN_Y + 12, duration: 400 });
         break;
       case 'grandma-chin':
-        this.tweens.add({ targets: this.chaya, y: 390, duration: 500 });
+        this.tweens.add({ targets: this.chaya, y: SCREEN_Y + SCREEN_H * 0.42, duration: 500 });
         break;
       case 'grandma-reset':
         this.chaya.play('chaya-talk');
-        this.tweens.add({ targets: this.chaya, y: 230, duration: 400 });
+        this.tweens.add({ targets: this.chaya, y: SCREEN_Y, duration: 400 });
         break;
       case 'chaya-sigh':
       case 'chaya-jab':
         this.chaya.play('chaya-judge');
-        this.tweens.add({ targets: this.chaya, scale: 1.5, yoyo: true, duration: 160 });
         break;
       case 'alan-jolt':
         this.alanAwake = true;
-        this.alanSleep.setVisible(false);
-        this.alan.setVisible(true).setPosition(this.alanSleep.x, this.alanSleep.y).play('alan-jolt');
-        this.tweens.add({ targets: this.mug, x: 1180, y: 460, duration: 420 });
+        this.mugFlying = true;
+        this.alanSleep.setVisible(true).play('alan-jolt');
+        this.alanSleep.once(Phaser.Animations.Events.ANIMATION_COMPLETE, () => {
+          this.alanSleep.setVisible(false);
+          this.alan.setVisible(true).setPosition(960, 640).play('alan-idle');
+          this.face.alan = 'right';
+        });
+        this.flyMug();
         break;
       case 'alan-call':
         this.tweens.add({ targets: this.alan, scale: BODY * 1.06, yoyo: true, duration: 140 });
         break;
       case 'footsteps':
+        this.openDoor();
         this.cameras.main.shake(420, 0.0025);
         break;
       case 'naomi-enter':
-        this.enter(this.naomi, 900, 'naomi-walk', 'naomi-idle');
+        this.enter('naomi', this.naomi, 860, 760, 'naomi-walk', 'naomi-idle');
         break;
       case 'joe-enter':
-        this.enter(this.joe, 520, 'joe-walk', 'joe-idle');
+        this.enter('joe', this.joe, 520, FLOOR, 'joe-walk', 'joe-idle');
         break;
       case 'dandan-enter':
-        this.enter(this.dandan, 700, 'dandan-walk', 'dandan-idle');
+        this.enter('dandan', this.dandan, 700, FLOOR, 'dandan-walk', 'dandan-idle');
         break;
       case 'eithan-enter':
-        this.enter(this.eithan, 1160, 'eithan-walk', 'eithan-idle');
+        this.enter('eithan', this.eithan, 1100, FLOOR, 'eithan-walk', 'eithan-idle');
+        this.closeDoor();
         break;
       case 'eithan-book':
         this.manualDy = -110;
@@ -474,12 +555,20 @@ export class EpisodeScene extends Phaser.Scene {
       case 'call-ended':
         this.chaya.stop();
         this.chaya.setTint(0x9aa0b0);
+        this.chayaBg.setTint(0x9aa0b0);
         this.callEnded.setVisible(true);
         break;
       case 'alarms':
         this.tweens.add({ targets: this.alarm, alpha: 0.38, yoyo: true, repeat: 7, duration: 90 });
-        for (const sprite of [this.joe, this.dandan, this.naomi, this.eithan, this.alan]) {
+        for (const [id, sprite] of [
+          ['joe', this.joe],
+          ['dandan', this.dandan],
+          ['naomi', this.naomi],
+          ['eithan', this.eithan],
+          ['alan', this.alan],
+        ] as const) {
           if (!sprite.visible) continue;
+          this.look(id, sprite, this.davdav.x);
           const toward = Math.sign(this.davdav.x - sprite.x) * 28;
           this.tweens.add({ targets: sprite, x: sprite.x + toward, duration: 500 });
         }
@@ -496,6 +585,26 @@ export class EpisodeScene extends Phaser.Scene {
       default:
         break;
     }
+  }
+
+  private flyMug(): void {
+    const path: [number, number, number, string][] = [
+      [534, 133, 0, 'mug-wake-0'],
+      [546, 107, -28, 'mug-wake-1'],
+      [559, 94, -56, 'mug-wake-2'],
+      [572, 93, -84, 'mug-wake-3'],
+      [585, 104, -112, 'mug-wake-4'],
+      [598, 128, -25, 'mug-wake-5'],
+    ];
+    let step = 0;
+    const hop = () => {
+      const [x, y, rot, key] = path[step];
+      this.mug.setTexture(key).setPosition(x * S, y * S).setAngle(rot).setVisible(true);
+      step += 1;
+      if (step < path.length) this.time.delayedCall(80, hop);
+      else this.mug.setTexture('prop-mug-stuck').setAngle(0).setPosition(598 * S, 128 * S);
+    };
+    hop();
   }
 
   private endCardShow(): void {
