@@ -81,7 +81,7 @@ CHAYA: Comb your hair. What's left of it.
 
 *She jabs at her screen.*
 
-CHAYA: How do I hang up? Where's the... Frank! How do I hang up this thing? FRAAANK?
+CHAYA: How do I hang up? Where's the... Simon! How do I hang up this thing? SIMOOON?
 
 *Her face freezes mid-shout. "CALL ENDED."*
 

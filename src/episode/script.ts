@@ -90,7 +90,7 @@ export const EPISODE_SCRIPT: ScriptLine[] = [
   { speaker: 'Alan', text: 'Yes, Chaya?' },
   { speaker: 'Chaya', text: 'Comb your hair. What’s left of it.' },
   { action: 'chaya-jab' },
-  { speaker: 'Chaya', text: 'How do I hang up? Where’s the... Frank! How do I hang up this thing? FRAAANK?' },
+  { speaker: 'Chaya', text: 'How do I hang up? Where’s the... Simon! How do I hang up this thing? SIMOOON?' },
   { action: 'call-ended' },
   {
     speaker: 'Ship Computer',

@@ -6,10 +6,19 @@ import { FONT, HEIGHT, WIDTH } from '../theme';
 const BODY = 2.05;
 const FLOOR = 820;
 const S = WIDTH / 1024;
+/** Viewscreen glass on bridge_v5, measured in the 1024×576 painting. */
+const SCREEN_QUAD: readonly [number, number][] = [
+  [599, 47],
+  [744, 40],
+  [744, 129],
+  [599, 121],
+];
 const SCREEN_X = 599 * S;
 const SCREEN_Y = 40 * S;
 const SCREEN_W = 145 * S;
 const SCREEN_H = 89 * S;
+const SCREEN_CX = 671.5 * S;
+const SCREEN_CY = 84.25 * S;
 const DOOR_FEET_X = 209 * S;
 const DOOR_FEET_Y = 225 * S;
 
@@ -46,7 +55,8 @@ export class EpisodeScene extends Phaser.Scene {
   private zzzAlan!: Phaser.GameObjects.Sprite;
 
   private incoming!: Phaser.GameObjects.Container;
-  private callEnded!: Phaser.GameObjects.Text;
+  private callEnded!: Phaser.GameObjects.Container;
+  private screenMask!: Phaser.Display.Masks.GeometryMask;
   private sock!: Phaser.GameObjects.Container;
   private sandwich!: Phaser.GameObjects.Container;
   private laundry!: Phaser.GameObjects.Container;
@@ -137,10 +147,9 @@ export class EpisodeScene extends Phaser.Scene {
       .setDisplaySize(SCREEN_W, SCREEN_H)
       .setVisible(false)
       .setDepth(6);
-    const screenMask = this.make.graphics({ x: 0, y: 0 }, false);
-    screenMask.fillStyle(0xffffff);
-    screenMask.fillRect(SCREEN_X, SCREEN_Y, SCREEN_W, SCREEN_H);
-    this.chaya.setMask(screenMask.createGeometryMask());
+    this.screenMask = this.makeScreenMask();
+    this.chayaBg.setMask(this.screenMask);
+    this.chaya.setMask(this.screenMask);
     this.door = this.add
       .sprite(180 * S, 48 * S, 'door-open-0')
       .setOrigin(0, 0)
@@ -151,25 +160,53 @@ export class EpisodeScene extends Phaser.Scene {
     this.zzzAlan.play('zzz');
   }
 
+  private makeScreenMask(): Phaser.Display.Masks.GeometryMask {
+    const glass = this.make.graphics({ x: 0, y: 0 }, false);
+    glass.fillStyle(0xffffff);
+    glass.beginPath();
+    glass.moveTo(SCREEN_QUAD[0][0] * S, SCREEN_QUAD[0][1] * S);
+    for (let i = 1; i < SCREEN_QUAD.length; i += 1) glass.lineTo(SCREEN_QUAD[i][0] * S, SCREEN_QUAD[i][1] * S);
+    glass.closePath();
+    glass.fillPath();
+    return glass.createGeometryMask();
+  }
+
+  private fillScreen(color: number, alpha: number): Phaser.GameObjects.Graphics {
+    const glass = this.add.graphics();
+    glass.fillStyle(color, alpha);
+    glass.beginPath();
+    glass.moveTo(SCREEN_QUAD[0][0] * S, SCREEN_QUAD[0][1] * S);
+    for (let i = 1; i < SCREEN_QUAD.length; i += 1) glass.lineTo(SCREEN_QUAD[i][0] * S, SCREEN_QUAD[i][1] * S);
+    glass.closePath();
+    glass.fillPath();
+    return glass;
+  }
+
   private buildPlaceholders(): void {
-    const incomingBg = this.add.rectangle(SCREEN_W / 2, SCREEN_H / 2, SCREEN_W, SCREEN_H, 0x120818, 0.94).setStrokeStyle(3, 0xff5fa8);
+    const incomingFill = this.fillScreen(0x120818, 0.96);
     const incomingText = this.add
-      .text(SCREEN_W / 2, SCREEN_H / 2, 'INCOMING CALL:\nGRANDMA ❤️ ❤️ ❤️', {
+      .text(SCREEN_CX, SCREEN_CY, 'INCOMING CALL:\nGRANDMA ❤️ ❤️ ❤️', {
         fontFamily: FONT,
-        fontSize: '18px',
+        fontSize: '20px',
         color: '#ffd0e6',
         align: 'center',
-        wordWrap: { width: SCREEN_W - 12 },
+        wordWrap: { width: 230 },
       })
       .setOrigin(0.5);
-    this.incoming = this.add.container(SCREEN_X, SCREEN_Y, [incomingBg, incomingText]).setVisible(false).setDepth(7);
+    this.incoming = this.add.container(0, 0, [incomingFill, incomingText]).setVisible(false).setDepth(7);
+    this.incoming.setMask(this.screenMask);
     this.incoming.setName('placeholder-incoming-call');
 
-    this.callEnded = this.add
-      .text(SCREEN_X + SCREEN_W / 2, SCREEN_Y + SCREEN_H + 18, 'CALL ENDED', { fontFamily: FONT, fontSize: '28px', color: '#ff5a5a' })
-      .setOrigin(0.5)
-      .setVisible(false)
-      .setDepth(7);
+    const endedFill = this.fillScreen(0x120818, 0.72);
+    const endedText = this.add
+      .text(SCREEN_CX, SCREEN_CY, 'CALL ENDED', {
+        fontFamily: FONT,
+        fontSize: '22px',
+        color: '#ff5a5a',
+      })
+      .setOrigin(0.5);
+    this.callEnded = this.add.container(0, 0, [endedFill, endedText]).setVisible(false).setDepth(7);
+    this.callEnded.setMask(this.screenMask);
     this.callEnded.setName('placeholder-call-ended');
 
     const sockShape = this.add.ellipse(0, -8, 54, 28, 0x6b4a32).setAngle(-20);
@@ -236,28 +273,45 @@ export class EpisodeScene extends Phaser.Scene {
       this.leave();
       return;
     }
-    this.auto?.remove(false);
-    this.line += 1;
-    this.present();
+    if (!this.box.visible) return;
+    this.standTalkers();
+    this.hideLine();
+    this.showFrom(this.line + 1);
   }
 
   private begin(): void {
     this.mode = 'script';
     this.tweens.add({ targets: [this.banner, this.dim], alpha: 0, duration: 280, onComplete: () => this.banner.setVisible(false) });
-    this.line = 0;
-    this.present();
+    this.showFrom(0);
   }
 
-  private present(): void {
-    const line = EPISODE_SCRIPT[this.line];
-    if (!line || line.action === 'end') {
-      if (line?.action) this.run(line.action);
-      this.endCardShow();
-      return;
+  /** Run actions automatically, and stop on the next spoken line. */
+  private showFrom(index: number): void {
+    let i = index;
+    while (i < EPISODE_SCRIPT.length) {
+      const line = EPISODE_SCRIPT[i];
+      if (line.action === 'end') {
+        this.line = i;
+        this.endCardShow();
+        return;
+      }
+      if (line.action) this.run(line.action);
+      if (line.speaker === 'CAPTION' && line.text) this.location.setText(line.text);
+      if (line.text && line.speaker && line.speaker !== 'CAPTION') {
+        this.line = i;
+        this.showLine(line);
+        return;
+      }
+      i += 1;
     }
-    this.standTalkers();
-    if (line.action) this.run(line.action);
-    this.showLine(line);
+    this.line = i;
+    this.endCardShow();
+  }
+
+  private hideLine(): void {
+    this.box.setVisible(false);
+    this.nameText.setVisible(false);
+    this.body.setVisible(false);
   }
 
   private showLine(line: ScriptLine): void {

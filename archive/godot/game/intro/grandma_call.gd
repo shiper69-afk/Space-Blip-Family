@@ -392,7 +392,7 @@ func _play() -> void:
 	await _say("CHAYA", "Comb your hair. What's left of it.")
 	if _skipped:
 		return
-	await _say("CHAYA", "How do I hang up? Where's the... Frank! How do I hang up this thing? FRAAANK?")
+	await _say("CHAYA", "How do I hang up? Where's the... Simon! How do I hang up this thing? SIMOOON?")
 	if _skipped:
 		return
 	_end_call_screen()
