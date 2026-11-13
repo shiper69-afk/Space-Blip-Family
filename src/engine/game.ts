@@ -116,6 +116,7 @@ export class Blip implements Game {
       return;
     }
     if (!this.debugOn) return;
+    this.stack[this.stack.length - 1]?.debug?.(ctx);
     ctx.save();
     ctx.strokeStyle = 'rgba(80, 220, 255, 0.85)';
     ctx.lineWidth = 2;

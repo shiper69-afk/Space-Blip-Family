@@ -37,6 +37,8 @@ export type Scene = {
   enter(game: Game): void;
   update?(dt: number): void;
   exit?(): void;
+  /** Drawn after the world when the debug overlay is on. */
+  debug?(ctx: CanvasRenderingContext2D): void;
 };
 
 export type InputState = {
