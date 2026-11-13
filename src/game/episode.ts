@@ -68,7 +68,7 @@ function wrap(ctx: CanvasRenderingContext2D, text: string, width: number): strin
   return lines;
 }
 
-export function episodeScene(backToStart: () => void): Scene {
+export function episodeScene(backToStart: () => void, onFinished: () => void = backToStart): Scene {
   const clips = new Map<string, Clip>();
   const tweens: Tween[] = [];
   const actors: Record<string, Sprite> = {};
@@ -605,7 +605,7 @@ export function episodeScene(backToStart: () => void): Scene {
         }
         if (mode === 'end') {
           leaving = true;
-          backToStart();
+          onFinished();
           return;
         }
         if (!boxOn) return;
