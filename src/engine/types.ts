@@ -24,6 +24,7 @@ export type Game = {
   readonly height: number;
   readonly input: InputState;
   readonly assets: AssetBank;
+  readonly camera: { x: number; y: number };
   add(node: Node): void;
   remove(node: Node): void;
   replace(scene: Scene): void;

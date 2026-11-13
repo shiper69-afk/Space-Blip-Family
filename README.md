@@ -26,6 +26,6 @@ npm run preview
 
 ## Start screen
 
-The menu is a procedural canvas (rotating Earth, orbiting planets, galaxies, crossing ships) with **Start Game** and **Load Game**. Start Game plays `assets/hd/intro/intro-2.mp4`, fades to black, then fades in `intro-scene-2.mp4` (both fitted inside the 1920×1080 frame, with sound). Click, Esc, or Space skips the intro. A title card, **Episode 1: Grandma is calling**. The bridge cutscene itself is the next step; the card returns to the menu for now. Load Game shows ten empty slots. There is no Quit control.
+The menu is a procedural canvas (rotating Earth, orbiting planets, galaxies, crossing ships) with **Start Game** and **Load Game**. Start Game plays `assets/hd/intro/intro-2.mp4`, fades to black, then fades in `intro-scene-2.mp4` (both fitted inside the 1920×1080 frame, with sound). Click, Esc, or Space skips the intro. A title card, **Episode 1: Grandma is calling**, then the opening scene on the bridge. Load Game shows ten empty slots. There is no Quit control.
 
 Design notes still live in `docs/`.

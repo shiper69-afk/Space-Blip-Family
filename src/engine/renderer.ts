@@ -42,12 +42,12 @@ export class Renderer {
     this.canvas.height = Math.round(HEIGHT * this.dpr);
   }
 
-  draw(nodes: Node[], debug: (ctx: CanvasRenderingContext2D) => void): void {
+  draw(nodes: Node[], camera: { x: number; y: number }, debug: (ctx: CanvasRenderingContext2D) => void): void {
     const ctx = this.ctx;
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    ctx.setTransform(this.dpr, 0, 0, this.dpr, -camera.x * this.dpr, -camera.y * this.dpr);
     ctx.imageSmoothingEnabled = true;
 
     const visible = nodes.filter((node) => node.visible);

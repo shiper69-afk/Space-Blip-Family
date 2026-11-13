@@ -13,6 +13,7 @@ export class Blip implements Game {
   private readonly renderer: Renderer;
   private readonly nodes: Node[] = [];
   private readonly stack: Scene[] = [];
+  readonly camera = { x: 0, y: 0 };
   private loading = 0;
   private debugOn = false;
   private acc = 0;
@@ -101,7 +102,7 @@ export class Blip implements Game {
       this.frames = 0;
       this.fpsStamp = now;
     }
-    this.renderer.draw(this.nodes, (ctx) => this.drawHud(ctx));
+    this.renderer.draw(this.nodes, this.camera, (ctx) => this.drawHud(ctx));
   };
 
   private drawHud(ctx: CanvasRenderingContext2D): void {
